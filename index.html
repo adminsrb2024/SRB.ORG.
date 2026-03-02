@@ -26,6 +26,13 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 .card{ background:var(--card-bg); border-radius:16px; padding:20px; box-shadow: var(--shadow); margin-bottom:20px; }
 .card-title { font-size: 16px; color: var(--text); font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
 .card-title i { color: var(--primary); }
+
+/* Notice Board Style */
+.notice-card { background: #fff3cd; border-left: 5px solid #ff9800; }
+.notice-title { font-weight: 700; color: #856404; margin-bottom: 5px; display: flex; justify-content: space-between; }
+.notice-content { font-size: 14px; color: #856404; line-height: 1.5; }
+.notice-time { font-size: 10px; color: #b38f00; margin-top: 8px; text-align: right; }
+
 .hero-card { background: linear-gradient(135deg, #fff 0%, #fff5f5 100%); border-left: 5px solid var(--primary); }
 .hero-stats { display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee; }
 .stat-item { text-align: center; width: 100%; }
@@ -39,17 +46,15 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 .dash-title { font-weight: 600; font-size: 14px; }
 .form-group { margin-bottom: 15px; }
 .form-label { display: block; margin-bottom: 6px; font-size: 12px; color: var(--text-light); font-weight: 600; }
-input, select{ width:100%; padding:14px; border:2px solid #f0f0f0; border-radius:10px; background: #fafafa; font-size: 14px; }
-input:focus, select:focus { border-color: var(--primary); outline: none; }
+input, select, textarea{ width:100%; padding:14px; border:2px solid #f0f0f0; border-radius:10px; background: #fafafa; font-size: 14px; }
+input:focus, select:focus, textarea:focus { border-color: var(--primary); outline: none; }
 button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color:white; font-size:15px; font-weight: 700; cursor:pointer; box-shadow: 0 8px 20px rgba(215, 25, 32, 0.3); display: flex; align-items: center; justify-content: center; gap: 8px; }
-button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary); border-radius:8px; background: white; color:var(--primary); font-size:14px; font-weight: 600; cursor:pointer; margin-top:5px; }
 .donor-card { display: flex; align-items: center; background: white; padding: 15px; border-radius: 12px; margin-bottom: 12px; border: 1px solid #eee; }
 .donor-avatar { width: 50px; height: 50px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 800; font-size: 16px; margin-right: 15px; }
 .donor-info h4 { font-size: 15px; margin-bottom: 4px; }
 .donor-info p { font-size: 12px; color: var(--text-light); }
 .donor-call-btn { margin-left: auto; background: #25D366; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; }
 
-/* Request Card Style */
 .request-card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px; border-left: 5px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 .req-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .req-blood { font-size: 18px; font-weight: 800; color: var(--primary); }
@@ -57,8 +62,6 @@ button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary);
 .req-patient { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
 .req-loc { font-size: 12px; color: #666; margin-bottom: 10px; }
 .req-call-btn { background: #25D366; color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
-.status-pending { color: #e67e22; font-size: 10px; font-weight: 700; text-transform: uppercase; }
-.status-done { color: #27ae60; font-size: 10px; font-weight: 700; text-transform: uppercase; }
 
 .footer{ position:fixed; bottom:0; left:0; width:100%; background: white; padding:12px 20px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; z-index: 99; }
 .dev-comp { font-size: 13px; color: var(--text); font-weight: 700; }
@@ -77,11 +80,11 @@ button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary);
 .loader { width: 30px; height: 30px; border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-top: 20px; }
 .hidden {display:none}
 
-/* Admin Table Style */
 .admin-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
 .admin-table th, .admin-table td { padding: 8px; border: 1px solid #eee; text-align: left; }
 .admin-table th { background: #f9f9f9; }
 .del-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
+.save-btn { background: #27ae60; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
 </style>
 </head>
 <body>
@@ -122,6 +125,17 @@ button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary);
     
     <!-- HOME -->
     <div id="home" class="container">
+      
+      <!-- NOTICE BOARD SECTION -->
+      <div id="noticeDisplay" class="card notice-card" style="display:none;">
+        <div class="card-title" style="color:#856404; margin-bottom:10px;">
+          <span><i class="fas fa-bullhorn"></i> Notice</span>
+          <span id="noticeTitleHeader"></span>
+        </div>
+        <div id="noticeBodyContent" class="notice-content"></div>
+        <div id="noticeTime" class="notice-time"></div>
+      </div>
+
       <div class="card hero-card">
         <div class="card-title"><i class="fas fa-heartbeat"></i> Welcome</div>
         <div class="hero-stats">
@@ -261,7 +275,19 @@ button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary);
           <button onclick="logoutAdmin()" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Logout</button>
         </div>
         
-        <p style="font-size:14px; font-weight:600; margin-top:20px;">Manage Donors</p>
+        <!-- NOTICE POST SECTION -->
+        <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-bottom:20px;">
+          <h4 style="margin-bottom:10px; font-size:14px;"><i class="fas fa-bullhorn"></i> Publish Notice</h4>
+          <div class="form-group" style="margin-bottom:5px;">
+            <input type="text" id="noticeTitle" placeholder="Notice Title" style="background:white;">
+          </div>
+          <div class="form-group">
+            <textarea id="noticeContent" rows="3" placeholder="Write notice details..." style="background:white;"></textarea>
+          </div>
+          <button class="primary-btn" style="padding:10px;" onclick="publishNotice()">Publish Notice</button>
+        </div>
+
+        <p style="font-size:14px; font-weight:600;">Manage Donors</p>
         <div style="overflow-x:auto;">
           <table class="admin-table" id="adminDonorTable">
             <thead><tr><th>Name</th><th>Blood</th><th>Phone</th><th>Action</th></tr></thead>
@@ -293,7 +319,6 @@ button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary);
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRwaHBtdWdmZmxjb25xZXJxZ2Z0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0Mzc4MDEsImV4cCI6MjA4ODAxMzgwMX0.JwRqpO5wRoZXd6UCAuFYXDeOkwqOjdco60ilevkG8qM';
     const supabase_client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // Check if running locally
     if (window.location.protocol === 'file:') {
         document.getElementById('splash').innerHTML = '<h2 style="padding:20px; text-align:center; color:red;">Please upload to GitHub Pages to run.</h2>';
         throw new Error("Local file blocked");
@@ -304,6 +329,7 @@ button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary);
       document.getElementById("app").classList.remove("hidden");
       loadDashboardStats();
       loadPublicRequests();
+      loadNotices(); // Load Notice on start
     }, 1000);
 
     // --- GENERAL FUNCTIONS ---
@@ -393,7 +419,6 @@ button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary);
     async function loadPublicRequests() {
         const container = document.getElementById("publicRequestList");
         container.innerHTML = "Loading...";
-        // Show pending requests only, sorted by latest
         const { data, error } = await supabase_client.from('requests').select('*').eq('status', 'Pending').order('created_at', { ascending: false });
         
         container.innerHTML = "";
@@ -413,6 +438,50 @@ button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary);
                   </div>`;
             });
         }
+    }
+
+    // --- NOTICE LOGIC ---
+    async function loadNotices() {
+        const { data, error } = await supabase_client
+            .from('notices')
+            .select('*')
+            .order('created_at', { ascending: false })
+            .limit(1); // Get only the latest notice
+
+        if (data && data.length > 0) {
+            const notice = data[0];
+            const display = document.getElementById('noticeDisplay');
+            document.getElementById('noticeTitleHeader').innerText = notice.title;
+            document.getElementById('noticeBodyContent').innerText = notice.content;
+            document.getElementById('noticeTime').innerText = new Date(notice.created_at).toLocaleString();
+            display.style.display = 'block';
+        } else {
+            document.getElementById('noticeDisplay').style.display = 'none';
+        }
+    }
+
+    async function publishNotice() {
+        const title = document.getElementById('noticeTitle').value;
+        const content = document.getElementById('noticeContent').value;
+
+        if(!title || !content) { alert("Write title and content"); return; }
+
+        const btn = event.target;
+        btn.disabled = true; btn.innerHTML = "Publishing...";
+
+        // Delete old notices before posting new one (Optional: keeps only latest)
+        // Or just insert to keep history. Let's keep history for now.
+        
+        const { error } = await supabase_client.from('notices').insert([{ title, content }]);
+        
+        if(error) { alert("Error publishing!"); }
+        else { 
+            alert("Notice Published!"); 
+            document.getElementById('noticeTitle').value = "";
+            document.getElementById('noticeContent').value = "";
+            loadNotices(); 
+        }
+        btn.disabled = false; btn.innerHTML = "Publish Notice";
     }
 
     // --- ADMIN LOGIC ---
@@ -466,7 +535,7 @@ button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary);
                 <td>${r.patient_name}</td><td>${r.blood_group}</td><td>${r.contact}</td>
                 <td>
                     <button class='del-btn' onclick="deleteRequest('${r.id}')" style="margin-bottom:5px;">Delete</button>
-                    <button onclick="markDone('${r.id}')" style="background:#27ae60; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Done</button>
+                    <button class='save-btn' onclick="markDone('${r.id}')">Done</button>
                 </td>
             </tr>`;
         });
