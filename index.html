@@ -55,11 +55,14 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .donor-info p { font-size: 12px; color: var(--text-light); }
 .donor-call-btn { margin-left: auto; background: #25D366; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; }
 
+/* Request Card Style Updated */
 .request-card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px; border-left: 5px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 .req-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .req-blood { font-size: 18px; font-weight: 800; color: var(--primary); }
 .req-date { font-size: 11px; color: #999; }
 .req-patient { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.req-details { font-size: 12px; color: #666; margin-bottom: 5px; display: flex; gap: 10px; }
+.req-details span { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
 .req-loc { font-size: 12px; color: #666; margin-bottom: 10px; }
 .req-call-btn { background: #25D366; color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
 
@@ -125,8 +128,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     
     <!-- HOME -->
     <div id="home" class="container">
-      
-      <!-- NOTICE BOARD SECTION -->
+      <!-- NOTICE BOARD -->
       <div id="noticeDisplay" class="card notice-card" style="display:none;">
         <div class="card-title" style="color:#856404; margin-bottom:10px;">
           <span><i class="fas fa-bullhorn"></i> Notice</span>
@@ -188,7 +190,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <div id="bloodRequests" class="container hidden">
       <div class="card">
         <div class="card-title"><i class="fas fa-hand-holding-medical"></i> Current Blood Needs</div>
-        <p style="font-size:12px; color:#666; margin-bottom:15px;">People who need blood urgently. Please contact them if you can help.</p>
+        <p style="font-size:12px; color:#666; margin-bottom:15px;">People who need blood urgently.</p>
       </div>
       <div id="publicRequestList">Loading...</div>
     </div>
@@ -197,10 +199,23 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <div id="requestBlood" class="container hidden">
       <div class="card">
         <div class="card-title"><i class="fas fa-notes-medical"></i> Post Request</div>
+        
         <div class="form-group">
           <label class="form-label">Patient Name</label>
           <input id="reqName" placeholder="Full Name">
         </div>
+
+        <!-- NEW FIELDS START -->
+        <div class="form-group">
+          <label class="form-label">Hemoglobin Level</label>
+          <input id="reqHemoglobin" placeholder="e.g., 8.5 g/dL">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Patient Problem</label>
+          <textarea id="reqProblem" rows="2" placeholder="e.g., Dengue, Accident, Surgery"></textarea>
+        </div>
+        <!-- NEW FIELDS END -->
+
         <div class="form-group">
           <label class="form-label">Blood Group</label>
           <select id="reqBlood">
@@ -298,7 +313,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         <p style="font-size:14px; font-weight:600; margin-top:20px;">Manage Requests</p>
         <div style="overflow-x:auto;">
           <table class="admin-table" id="adminReqTable">
-            <thead><tr><th>Patient</th><th>Blood</th><th>Contact</th><th>Action</th></tr></thead>
+            <thead><tr><th>Patient</th><th>Problem</th><th>Action</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -329,7 +344,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       document.getElementById("app").classList.remove("hidden");
       loadDashboardStats();
       loadPublicRequests();
-      loadNotices(); // Load Notice on start
+      loadNotices();
     }, 1000);
 
     // --- GENERAL FUNCTIONS ---
@@ -399,12 +414,20 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         const location = document.getElementById("reqLocation").value;
         const contact = document.getElementById("reqContact").value;
         const required_date = document.getElementById("reqDate").value;
+        
+        // NEW FIELDS RETRIEVE
+        const hemoglobin = document.getElementById("reqHemoglobin").value;
+        const problem = document.getElementById("reqProblem").value;
+
         if(!patient_name || !contact || !location) { alert("Fill all fields"); return; }
 
         const btn = event.target;
         btn.disabled = true; btn.innerHTML = "Posting...";
         
-        const { error } = await supabase_client.from('requests').insert([{ patient_name, blood_group, location, contact, required_date }]);
+        // INSERT NEW FIELDS
+        const { error } = await supabase_client.from('requests').insert([{ 
+            patient_name, blood_group, location, contact, required_date, hemoglobin, problem 
+        }]);
         
         if(error) { alert("Error!"); }
         else { 
@@ -426,6 +449,11 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No pending blood requests right now.</div>";
         } else {
             data.forEach(r => {
+                // DISPLAY NEW FIELDS
+                let detailsHtml = '';
+                if(r.hemoglobin) detailsHtml += `<span>Hb: ${r.hemoglobin}</span>`;
+                if(r.problem) detailsHtml += `<span>Problem: ${r.problem}</span>`;
+                
                 container.innerHTML += `
                   <div class="request-card">
                     <div class="req-header">
@@ -433,6 +461,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
                       <span class="req-date">${r.required_date || 'ASAP'}</span>
                     </div>
                     <div class="req-patient">${r.patient_name}</div>
+                    <div class="req-details">${detailsHtml}</div>
                     <div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div>
                     <a href="tel:${r.contact}" class="req-call-btn"><i class="fas fa-phone-alt"></i> Call Now</a>
                   </div>`;
@@ -442,11 +471,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
     // --- NOTICE LOGIC ---
     async function loadNotices() {
-        const { data, error } = await supabase_client
-            .from('notices')
-            .select('*')
-            .order('created_at', { ascending: false })
-            .limit(1); // Get only the latest notice
+        const { data, error } = await supabase_client.from('notices').select('*').order('created_at', { ascending: false }).limit(1);
 
         if (data && data.length > 0) {
             const notice = data[0];
@@ -468,9 +493,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
         const btn = event.target;
         btn.disabled = true; btn.innerHTML = "Publishing...";
-
-        // Delete old notices before posting new one (Optional: keeps only latest)
-        // Or just insert to keep history. Let's keep history for now.
         
         const { error } = await supabase_client.from('notices').insert([{ title, content }]);
         
@@ -513,7 +535,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     }
 
     async function loadAdminData() {
-        // Load Donors Table
         const dTable = document.querySelector('#adminDonorTable tbody');
         dTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
         const { data: donors } = await supabase_client.from('donors').select('*').order('created_at', { ascending: false });
@@ -525,14 +546,13 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             </tr>`;
         });
 
-        // Load Requests Table
         const rTable = document.querySelector('#adminReqTable tbody');
         rTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
         const { data: requests } = await supabase_client.from('requests').select('*').order('created_at', { ascending: false });
         rTable.innerHTML = "";
         requests.forEach(r => {
             rTable.innerHTML += `<tr>
-                <td>${r.patient_name}</td><td>${r.blood_group}</td><td>${r.contact}</td>
+                <td>${r.patient_name}</td><td>${r.problem || '-'}</td><td>${r.contact}</td>
                 <td>
                     <button class='del-btn' onclick="deleteRequest('${r.id}')" style="margin-bottom:5px;">Delete</button>
                     <button class='save-btn' onclick="markDone('${r.id}')">Done</button>
