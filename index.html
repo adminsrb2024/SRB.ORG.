@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* Previous CSS remains the same */
+/* CSS STYLES */
 :root {
   --primary: #d71920; --primary-dark: #9b0d12; --primary-light: #ffebee;
   --text: #2c3e50; --text-light: #7f8c8d; --bg: #f4f6f9;
@@ -15,9 +15,13 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif}
 body{background:var(--bg);padding-bottom:90px; color: var(--text);}
+
+/* ANIMATIONS */
 @keyframes fadeIn { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
-@keyframes slideIn { from{transform:translateX(-100%)} to{transform:translateX(0)} }
 @keyframes pulse { 0%{transform:scale(1); box-shadow:0 0 0 0 rgba(215, 25, 32, 0.4)} 70%{transform:scale(1.05); box-shadow:0 0 0 10px rgba(215, 25, 32, 0)} 100%{transform:scale(1)} }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* HEADER */
 .header{
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color:white; padding:15px 20px; position:fixed; width: 100%; top:0; z-index:100;
@@ -25,57 +29,72 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 }
 .header-left { display: flex; align-items: center; gap: 12px; }
 .menuBtn{ font-size:22px; cursor:pointer; transition: 0.3s; padding: 5px; }
-.menuBtn:hover { transform: scale(1.1); }
-.header-logo{ width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.header-logo{ width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); }
 .header-title { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
 .header-subtitle { font-size: 10px; opacity: 0.9; font-weight: 400; }
+
+/* CONTAINERS */
 .main-container{padding-top:70px; padding-bottom: 20px;}
 .container{padding:15px; animation: fadeIn 0.6s ease;}
 .container.hidden{display:none}
 .card{ background:var(--card-bg); border-radius:16px; padding:20px; box-shadow: var(--shadow); margin-bottom:20px; border: 1px solid rgba(0,0,0,0.02); }
 .card-title { font-size: 16px; color: var(--text); font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
 .card-title i { color: var(--primary); }
+
+/* HERO */
 .hero-card { background: linear-gradient(135deg, #fff 0%, #fff5f5 100%); border-left: 5px solid var(--primary); position: relative; overflow: hidden; }
 .hero-card::after { content: "\f055"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; right: -10px; bottom: -10px; font-size: 100px; color: rgba(215, 25, 32, 0.05); }
 .hero-stats { display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee; }
 .stat-item { text-align: center; }
 .stat-num { font-size: 20px; font-weight: 800; color: var(--primary); }
 .stat-label { font-size: 10px; color: var(--text-light); text-transform: uppercase; }
+
+/* GRID */
 .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-.dash-card { background: white; padding: 18px 15px; border-radius: 16px; text-align: center; box-shadow: var(--shadow); cursor: pointer; transition: 0.3s; position: relative; overflow: hidden; }
+.dash-card { background: white; padding: 18px 15px; border-radius: 16px; text-align: center; box-shadow: var(--shadow); cursor: pointer; transition: 0.3s; }
 .dash-card:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-.dash-card:active { transform: scale(0.98); }
 .dash-icon { width: 45px; height: 45px; background: var(--primary-light); color: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 10px; transition: 0.3s; }
 .dash-card:hover .dash-icon { background: var(--primary); color: white; }
 .dash-title { font-weight: 600; font-size: 14px; color: var(--text); }
 .dash-desc { font-size: 10px; color: var(--text-light); margin-top: 3px; }
+
+/* FORMS */
 .form-group { margin-bottom: 15px; }
 .form-label { display: block; margin-bottom: 6px; font-size: 12px; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 input, select, textarea{ width:100%; padding:14px; border:2px solid #f0f0f0; border-radius:10px; transition: 0.3s; background: #fafafa; font-size: 14px; color: var(--text); }
 input:focus, select:focus, textarea:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(215, 25, 32, 0.05); }
 button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color:white; font-size:15px; font-weight: 700; cursor:pointer; box-shadow: 0 8px 20px rgba(215, 25, 32, 0.3); transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
 button.primary-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 25px rgba(215, 25, 32, 0.4); }
+
+/* DONOR LIST */
 .donor-card { display: flex; align-items: center; background: white; padding: 15px; border-radius: 12px; margin-bottom: 12px; border: 1px solid #eee; transition: 0.3s; }
 .donor-card:hover { border-color: var(--primary); }
 .donor-avatar { width: 50px; height: 50px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 800; font-size: 16px; margin-right: 15px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .donor-info h4 { font-size: 15px; margin-bottom: 4px; color: var(--text); }
 .donor-info p { font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 4px; }
 .donor-call-btn { margin-left: auto; background: #25D366; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3); }
+
+/* INFO TABLE */
 .info-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
 .info-table th, .info-table td { padding: 12px; text-align: left; border-bottom: 1px solid #f0f0f0; }
 .info-table th { background: #fafafa; color: var(--text); font-weight: 600; }
 .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-weight: 700; font-size: 11px; background: var(--primary-light); color: var(--primary); }
+
+/* ELIGIBILITY */
 .check-list { list-style: none; }
 .check-list li { display: flex; align-items: flex-start; margin-bottom: 12px; font-size: 13px; color: var(--text-light); line-height: 1.5; }
 .check-list li i { color: #25D366; margin-right: 10px; margin-top: 3px; font-size: 12px; }
 .fail-list li i { color: var(--primary); }
+
+/* FOOTER */
 .footer{ position:fixed; bottom:0; left:0; width:100%; background: white; text-align:center; padding:12px 20px; border-top: 1px solid #eee; box-shadow: 0 -5px 20px rgba(0,0,0,0.03); display: flex; justify-content: space-between; align-items: center; z-index: 99; }
 .footer-left { text-align: left; }
 .footer-right { text-align: right; }
-.footer span { display: block; }
 .dev-name { font-size: 11px; color: var(--text-light); font-weight: 500; }
 .dev-comp { font-size: 13px; color: var(--text); font-weight: 700; }
 .hotline-link { background: var(--primary); color: white; padding: 6px 12px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; }
+
+/* MENU */
 .overlay{ position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:998; display:none; backdrop-filter: blur(3px); }
 .menu{ position:fixed; left:-300px; top:0; width:280px; height:100%; background:white; transition:.3s ease-in-out; z-index:999; box-shadow: 5px 0 30px rgba(0,0,0,0.1); }
 .menu.active{left:0}
@@ -85,14 +104,15 @@ button.primary-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 25px r
 .menu a{ display:flex; align-items: center; padding:16px 25px; color:#444; text-decoration:none; transition: 0.2s; font-weight: 500; font-size: 14px; }
 .menu a i { margin-right: 15px; color: #aaa; width: 20px; font-size: 16px; }
 .menu a:hover { background: #fff5f5; color: var(--primary); }
-.menu a:hover i { color: var(--primary); }
+
+/* SPLASH SCREEN */
 #splash { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background: white; z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; }
 .splash-logo-container { width: 130px; height: 130px; border-radius: 50%; background: white; padding: 5px; box-shadow: 0 10px 40px rgba(215, 25, 32, 0.3); margin-bottom: 25px; animation: pulse 2s infinite; }
 .splash-logo { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 .splash-text { font-size: 22px; color: var(--primary); font-weight: 800; letter-spacing: -0.5px; }
 .splash-sub { font-size: 12px; color: var(--text-light); margin-top: 5px; margin-bottom: 30px; }
 .loader { width: 30px; height: 30px; border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
 .hidden {display:none}
 .mb-10 { margin-bottom: 10px; }
 </style>
@@ -148,9 +168,7 @@ button.primary-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 25px r
 <div id="home" class="container">
   <div class="card hero-card">
     <div class="card-title"><i class="fas fa-heartbeat"></i> Welcome</div>
-    <p style="font-size: 14px; color: #666; line-height: 1.6;">
-      Every drop counts. Join our mission to save lives by donating blood today.
-    </p>
+    <p style="font-size: 14px; color: #666; line-height: 1.6;">Every drop counts. Join our mission to save lives by donating blood today.</p>
     <div class="hero-stats">
       <div class="stat-item">
         <div class="stat-num" id="statDonors">Loading...</div>
@@ -284,22 +302,18 @@ button.primary-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 25px r
 <div id="eligibility" class="container hidden">
   <div class="card">
     <div class="card-title"><i class="fas fa-clipboard-check"></i> Who Can Donate?</div>
-    <p style="font-size:13px; color:#666; margin-bottom:15px;">Please ensure you meet the following criteria before donating.</p>
     <h4 style="color:#28a745; font-size:14px; margin-bottom:10px;"><i class="fas fa-check"></i> You CAN Donate If:</h4>
     <ul class="check-list">
       <li><i class="fas fa-check"></i> You are between 18-60 years old.</li>
       <li><i class="fas fa-check"></i> Your weight is at least 45 kg.</li>
       <li><i class="fas fa-check"></i> Your hemoglobin level is above 12.5 g/dL.</li>
       <li><i class="fas fa-check"></i> You have not donated blood in the last 3 months.</li>
-      <li><i class="fas fa-check"></i> Blood pressure and pulse rate are normal.</li>
     </ul>
     <div style="height:1px; background:#eee; margin:15px 0;"></div>
     <h4 style="color:var(--primary); font-size:14px; margin-bottom:10px;"><i class="fas fa-times"></i> You CANNOT Donate If:</h4>
     <ul class="check-list fail-list">
       <li><i class="fas fa-times"></i> You have cold, flu, or fever.</li>
-      <li><i class="fas fa-times"></i> You have recently had a tattoo or piercing (within 6 months).</li>
       <li><i class="fas fa-times"></i> You are pregnant or breastfeeding.</li>
-      <li><i class="fas fa-times"></i> You have major diseases (HIV, Hepatitis, etc.).</li>
     </ul>
   </div>
 </div>
@@ -314,20 +328,10 @@ button.primary-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 25px r
       </thead>
       <tbody>
         <tr><td><span class="badge">A+</span></td><td>A+, AB+</td><td>A+, A-, O+, O-</td></tr>
-        <tr><td><span class="badge">B+</span></td><td>B+, AB+</td><td>B+, B-, O+, O-</td></tr>
-        <tr><td><span class="badge">O+</span></td><td>O+, A+, B+, AB+</td><td>O+, O-</td></tr>
+        <tr><td><span class="badge">O-</span></td><td>ALL GROUPS</td><td>O- ONLY</td></tr>
         <tr><td><span class="badge" style="background:#d71920; color:white">AB+</span></td><td>AB+ ONLY</td><td>ALL GROUPS</td></tr>
-        <tr><td><span class="badge">A-</span></td><td>A+, A-, AB+, AB-</td><td>A-, O-</td></tr>
-        <tr><td><span class="badge">B-</span></td><td>B+, B-, AB+, AB-</td><td>B-, O-</td></tr>
-        <tr><td><span class="badge" style="background:#ffc107; color:#333">O-</span></td><td>ALL GROUPS</td><td>O- ONLY</td></tr>
-        <tr><td><span class="badge">AB-</span></td><td>AB+, AB-</td><td>A-, B-, AB-, O-</td></tr>
       </tbody>
     </table>
-  </div>
-  <div class="card" style="background: #e7f5ff; border: none;">
-    <p style="font-size: 13px; color: #1e88e5; font-weight: 500;">
-      <i class="fas fa-info-circle"></i> <strong>O-</strong> is the Universal Donor. <strong>AB+</strong> is the Universal Recipient.
-    </p>
   </div>
 </div>
 
@@ -336,13 +340,12 @@ button.primary-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 25px r
   <div class="card">
     <div class="card-title"><i class="fas fa-users"></i> About Organization</div>
     <p style="color:#555; line-height:1.6; font-size: 13px;">
-      <strong>Sreenagar Rokter Bondhon</strong> is a voluntary blood donation organization based in Sreenagar. We are dedicated to ensuring safe blood transfusion and connecting generous donors with those in critical need.
+      <strong>Sreenagar Rokter Bondhon</strong> is a voluntary blood donation organization based in Sreenagar.
     </p>
   </div>
   <div class="card" style="background: var(--primary-light); border: none;">
     <div class="card-title" style="color: var(--primary);"><i class="fas fa-laptop-code"></i> Technical Partner</div>
     <p style="font-size: 14px; color: var(--text); font-weight: 600;">SRP SOFT LTD.</p>
-    <p style="font-size: 12px; color: var(--text-light);">A trusted software development company providing IT solutions.</p>
   </div>
 </div>
 
@@ -354,29 +357,24 @@ button.primary-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 25px r
     <span class="dev-comp">SRP SOFT LTD.</span>
   </div>
   <div class="footer-right">
-    <a href="tel:+8809697755193" class="hotline-link">
-      <i class="fas fa-phone-alt"></i> Hotline
-    </a>
+    <a href="tel:+8809697755193" class="hotline-link"><i class="fas fa-phone-alt"></i> Hotline</a>
   </div>
 </div>
 
 </div>
 
-<!-- SUPABASE SDK -->
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- EMAILJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
 /* ==========================================
-   CONFIGURATION AREA
+   CONFIGURATION - এখানে আপনার তথ্য দিন
    ========================================== */
    
-// ১. আপনার Supabase Project URL এবং anon key এখানে বসান
-const SUPABASE_URL = 'YOUR_SUPABASE_URL'; // Example: https://xyzcompany.supabase.co
-const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY'; // Example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+const SUPABASE_URL = 'YOUR_SUPABASE_URL'; // এখানে আপনার URL দিন
+const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY'; // এখানে আপনার Key দিন
 
-// ২. EmailJS Configuration (Blood Request এর জন্য)
 const ADMIN_EMAIL = "omorhosshin@gmail.com";
 const EMAILJS_PUBLIC_KEY = "tTDL_g9ChY2fiUl4t";
 const EMAILJS_SERVICE_ID = "service_rka3imy";
@@ -385,36 +383,28 @@ const EMAILJS_TEMPLATE_ID = "template_5j956tn";
 /* ==========================================
    INITIALIZATION
    ========================================== */
-
-// Initialize Supabase Client
 const supabase_client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-// Initialize EmailJS
 if(typeof emailjs !== 'undefined'){ emailjs.init(EMAILJS_PUBLIC_KEY); }
 
 /* ==========================================
    APP LOGIC
    ========================================== */
 
-// Splash Screen Logic
+// Splash Screen Logic - সময় ১ সেকেন্ড করা হয়েছে
 setTimeout(()=>{
   document.getElementById("splash").style.display="none";
   document.getElementById("app").classList.remove("hidden");
-  updateDonorCount(); // Load total donor count from DB
-}, 2500);
+  updateDonorCount(); 
+}, 1000); // আগে এটা ২৫০০ ছিল, এখন ১০০০ করা হয়েছে
 
-// Update Donor Count on Dashboard
 async function updateDonorCount() {
     try {
         const { count, error } = await supabase_client
             .from('donors')
-            .select('*', { count: 'exact', head: true }); // Only get count, no data
+            .select('*', { count: 'exact', head: true });
             
         const countElement = document.getElementById('statDonors');
-        if (error) {
-            console.error("Error fetching count:", error);
-            countElement.innerText = "Error";
-        } else {
+        if (!error && countElement) {
             countElement.innerText = count + '+';
         }
     } catch (e) {
@@ -439,13 +429,10 @@ function openPage(id){
   hidePages();
   document.getElementById(id).classList.remove("hidden");
   window.scrollTo(0, 0);
-  const menu = document.getElementById("menu");
-  if(menu.classList.contains("active")) toggleMenu();
+  if(document.getElementById("menu").classList.contains("active")) toggleMenu();
 }
 
-// ==========================================
-// FIND DONOR LOGIC (Supabase)
-// ==========================================
+// FIND DONOR LOGIC
 async function filterDonors() {
   const selectedBlood = document.getElementById("searchBlood").value;
   const container = document.getElementById("donorListContainer");
@@ -459,21 +446,19 @@ async function filterDonors() {
   container.innerHTML = `<div class="card" style="text-align: center;"><div class="loader" style="margin:10px auto;"></div><p>Searching...</p></div>`;
 
   try {
-      // Supabase Query
       const { data: donors, error } = await supabase_client
           .from('donors')
           .select('*')
           .eq('blood', selectedBlood);
 
       if (error) throw error;
-
-      container.innerHTML = ""; // Clear loading
+      container.innerHTML = "";
 
       if (donors.length === 0) {
           container.innerHTML = `<div class="card" style="text-align: center; color: #888;"><i class="fas fa-sad-tear" style="font-size: 30px;"></i><p style="margin-top:10px">No donors found for ${selectedBlood}.</p></div>`;
       } else {
           donors.forEach(donor => {
-              const html = `
+              container.innerHTML += `
                 <div class="donor-card">
                   <div class="donor-avatar">${donor.blood}</div>
                   <div class="donor-info">
@@ -481,20 +466,16 @@ async function filterDonors() {
                     <p><i class="fas fa-map-marker-alt"></i> ${donor.location}</p>
                   </div>
                   <a href="tel:${donor.phone}" class="donor-call-btn"><i class="fas fa-phone-alt"></i></a>
-                </div>
-              `;
-              container.innerHTML += html;
+                </div>`;
           });
       }
   } catch (err) {
       console.error(err);
-      container.innerHTML = `<div class="card" style="text-align: center; color: red;"><p>Error loading data. Check console.</p></div>`;
+      container.innerHTML = `<div class="card" style="text-align: center; color: red;"><p>Error loading data.</p></div>`;
   }
 }
 
-// ==========================================
-// REGISTER DONOR LOGIC (Supabase)
-// ==========================================
+// REGISTER DONOR LOGIC
 async function registerDonor() {
   const name = document.getElementById("donorName").value;
   const phone = document.getElementById("donorPhone").value;
@@ -508,76 +489,60 @@ async function registerDonor() {
   btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Saving...";
 
   try {
-      // Insert into Supabase
-      const { data, error } = await supabase_client
+      const { error } = await supabase_client
           .from('donors')
-          .insert([
-              { name: name, blood: blood, phone: phone, location: location }
-          ]);
+          .insert([{ name: name, blood: blood, phone: phone, location: location }]);
 
       if (error) throw error;
 
-      alert("Success! Registration Complete. You are now in the donor list.");
-      
-      // Clear Form
+      alert("Success! Registration Complete.");
       document.getElementById("donorName").value = "";
       document.getElementById("donorPhone").value = "";
       document.getElementById("donorLocation").value = "";
-      
-      updateDonorCount(); // Update dashboard stat
+      updateDonorCount(); 
       openPage('home');
 
   } catch (err) {
       console.error(err);
-      alert("Error saving data. Check console for details.");
+      alert("Error saving data. Check console.");
   } finally {
       btn.disabled = false;
       btn.innerHTML = "<i class='fas fa-user-plus'></i> Register Now";
   }
 }
 
-// ==========================================
-// BLOOD REQUEST LOGIC (EmailJS - Kept same)
-// ==========================================
+// EMAIL REQUEST LOGIC
 function sendEmailRequest(type) {
-  let templateParams = {};
-  let valid = false;
+  const patient = document.getElementById("patient").value;
+  const location = document.getElementById("location").value;
+  const contact = document.getElementById("reqContact").value;
+  const blood = document.getElementById("reqBlood").value;
  
-  if (type === 'request') {
-      const patient = document.getElementById("patient").value;
-      const location = document.getElementById("location").value;
-      const contact = document.getElementById("reqContact").value;
-      const blood = document.getElementById("reqBlood").value;
-     
-      if(!patient || !location || !contact) { alert("Please fill all fields!"); return; }
-      templateParams = { to_email: ADMIN_EMAIL, subject: "Blood Request", message: `Patient: ${patient}\nBlood: ${blood}\nLoc: ${location}\nContact: ${contact}` };
-      valid = true;
-  }
+  if(!patient || !location || !contact) { alert("Please fill all fields!"); return; }
+  
+  const btn = event.target;
+  btn.disabled = true;
+  btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Processing...";
 
-  if (valid) {
-      const btn = event.target;
-      btn.disabled = true;
-      btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Processing...";
+  const templateParams = { 
+      to_email: ADMIN_EMAIL, 
+      subject: "Blood Request", 
+      message: `Patient: ${patient}\nBlood: ${blood}\nLoc: ${location}\nContact: ${contact}` 
+  };
 
-      if(typeof emailjs !== 'undefined'){
-          emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
-            .then(() => {
-              alert("Request Sent Successfully!");
-              openPage('home');
-            })
-            .catch((e) => {
-               alert("Error sending request.");
-               console.error(e);
-            })
-            .finally(() => {
-               btn.disabled = false;
-               btn.innerHTML = "<i class='fas fa-paper-plane'></i> Submit Request";
-            });
-      } else {
-          alert("EmailJS connection error.");
-          btn.disabled = false;
-      }
-  }
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+    .then(() => {
+      alert("Request Sent Successfully!");
+      openPage('home');
+    })
+    .catch((e) => {
+       alert("Error sending request.");
+       console.error(e);
+    })
+    .finally(() => {
+       btn.disabled = false;
+       btn.innerHTML = "<i class='fas fa-paper-plane'></i> Submit Request";
+    });
 }
 </script>
 </body>
