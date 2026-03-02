@@ -15,7 +15,7 @@
 body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 @keyframes fadeIn { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.header{ background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color:white; padding:15px 20px; position:fixed; width: 100%; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between; box-shadow: 0 4px 20px rgba(215, 25, 32, 0.25); }
+.header{ background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color:white; padding:15px 20px; position:fixed; width: 100%; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between; }
 .header-left { display: flex; align-items: center; gap: 12px; }
 .menuBtn{ font-size:22px; cursor:pointer; }
 .header-logo{ width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); }
@@ -42,11 +42,24 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 input, select{ width:100%; padding:14px; border:2px solid #f0f0f0; border-radius:10px; background: #fafafa; font-size: 14px; }
 input:focus, select:focus { border-color: var(--primary); outline: none; }
 button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color:white; font-size:15px; font-weight: 700; cursor:pointer; box-shadow: 0 8px 20px rgba(215, 25, 32, 0.3); display: flex; align-items: center; justify-content: center; gap: 8px; }
+button.secondary-btn{ width:100%; padding:12px; border:1px solid var(--primary); border-radius:8px; background: white; color:var(--primary); font-size:14px; font-weight: 600; cursor:pointer; margin-top:5px; }
 .donor-card { display: flex; align-items: center; background: white; padding: 15px; border-radius: 12px; margin-bottom: 12px; border: 1px solid #eee; }
 .donor-avatar { width: 50px; height: 50px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 800; font-size: 16px; margin-right: 15px; }
 .donor-info h4 { font-size: 15px; margin-bottom: 4px; }
 .donor-info p { font-size: 12px; color: var(--text-light); }
 .donor-call-btn { margin-left: auto; background: #25D366; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; }
+
+/* Request Card Style */
+.request-card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px; border-left: 5px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.req-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.req-blood { font-size: 18px; font-weight: 800; color: var(--primary); }
+.req-date { font-size: 11px; color: #999; }
+.req-patient { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.req-loc { font-size: 12px; color: #666; margin-bottom: 10px; }
+.req-call-btn { background: #25D366; color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
+.status-pending { color: #e67e22; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.status-done { color: #27ae60; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+
 .footer{ position:fixed; bottom:0; left:0; width:100%; background: white; padding:12px 20px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; z-index: 99; }
 .dev-comp { font-size: 13px; color: var(--text); font-weight: 700; }
 .hotline-link { background: var(--primary); color: white; padding: 6px 12px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; }
@@ -58,13 +71,17 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .menu a i { margin-right: 15px; color: #aaa; width: 20px; }
 .menu a:hover { background: #fff5f5; color: var(--primary); }
 
-/* Splash Screen with Error Handling */
 #splash { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background: white; z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; }
 .splash-logo { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px; }
 .splash-text { font-size: 20px; color: var(--primary); font-weight: 800; }
-.error-box { background: #ffebee; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; color: #b71c1c; font-size: 14px; max-width: 300px; }
 .loader { width: 30px; height: 30px; border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-top: 20px; }
 .hidden {display:none}
+
+/* Admin Table Style */
+.admin-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+.admin-table th, .admin-table td { padding: 8px; border: 1px solid #eee; text-align: left; }
+.admin-table th { background: #f9f9f9; }
+.del-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
 </style>
 </head>
 <body>
@@ -73,7 +90,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 <div id="splash">
   <img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg" class="splash-logo" alt="Logo">
   <div class="splash-text">Sreenagar Rokter Bondhon</div>
-  <div id="splash-status" style="margin-top:10px; color:#666; font-size:12px;">Initializing...</div>
   <div id="splash-loader" class="loader"></div>
 </div>
 
@@ -91,22 +107,31 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
   <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
+  <!-- MENU -->
   <div class="menu" id="menu">
     <div class="menu-header"><h3>Menu</h3></div>
     <a onclick="openPage('home')"><i class="fas fa-home"></i> Dashboard</a>
     <a onclick="openPage('findDonor')"><i class="fas fa-search-location"></i> Find Donor</a>
+    <a onclick="openPage('bloodRequests')"><i class="fas fa-hand-holding-medical"></i> Blood Requests</a>
     <a onclick="openPage('beDonor')"><i class="fas fa-user-plus"></i> Register as Donor</a>
+    <a onclick="openPage('requestBlood')"><i class="fas fa-notes-medical"></i> Request Blood</a>
+    <a onclick="checkAdminLogin()"><i class="fas fa-user-shield"></i> Admin Panel</a>
   </div>
 
   <div class="main-container">
-    <!-- Home -->
+    
+    <!-- HOME -->
     <div id="home" class="container">
       <div class="card hero-card">
         <div class="card-title"><i class="fas fa-heartbeat"></i> Welcome</div>
         <div class="hero-stats">
           <div class="stat-item">
             <div class="stat-num" id="statDonors">-</div>
-            <div class="stat-label">Active Donors</div>
+            <div class="stat-label">Donors</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num" id="statRequests">-</div>
+            <div class="stat-label">Pending Requests</div>
           </div>
         </div>
       </div>
@@ -115,17 +140,22 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <div class="dash-icon"><i class="fas fa-search"></i></div>
           <div class="dash-title">Find Donor</div>
         </div>
+        <div class="dash-card" onclick="openPage('bloodRequests')">
+          <div class="dash-icon"><i class="fas fa-hand-holding-medical"></i></div>
+          <div class="dash-title">Requests</div>
+        </div>
         <div class="dash-card" onclick="openPage('beDonor')">
           <div class="dash-icon"><i class="fas fa-user-plus"></i></div>
           <div class="dash-title">Be a Donor</div>
         </div>
-      </div>
-      <div class="card" id="connStatus" style="display:none; border:1px dashed green; background:#e8f5e9;">
-         <p style="font-size:12px; color:green; text-align:center;"><i class="fas fa-check-circle"></i> Database Connected</p>
+        <div class="dash-card" onclick="openPage('requestBlood')">
+          <div class="dash-icon"><i class="fas fa-plus-circle"></i></div>
+          <div class="dash-title">Request Blood</div>
+        </div>
       </div>
     </div>
 
-    <!-- Find Donor -->
+    <!-- FIND DONOR -->
     <div id="findDonor" class="container hidden">
       <div class="card">
         <div class="card-title"><i class="fas fa-search"></i> Search Blood</div>
@@ -140,7 +170,47 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       <div id="donorListContainer"></div>
     </div>
 
-    <!-- Be Donor -->
+    <!-- PUBLIC BLOOD REQUESTS -->
+    <div id="bloodRequests" class="container hidden">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-hand-holding-medical"></i> Current Blood Needs</div>
+        <p style="font-size:12px; color:#666; margin-bottom:15px;">People who need blood urgently. Please contact them if you can help.</p>
+      </div>
+      <div id="publicRequestList">Loading...</div>
+    </div>
+
+    <!-- REQUEST BLOOD FORM -->
+    <div id="requestBlood" class="container hidden">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-notes-medical"></i> Post Request</div>
+        <div class="form-group">
+          <label class="form-label">Patient Name</label>
+          <input id="reqName" placeholder="Full Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Blood Group</label>
+          <select id="reqBlood">
+            <option>A+</option><option>B+</option><option>O+</option><option>AB+</option>
+            <option>A-</option><option>B-</option><option>O-</option><option>AB-</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location (Hospital/Area)</label>
+          <input id="reqLocation" placeholder="e.g., Dhaka Medical">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contact Number</label>
+          <input id="reqContact" type="tel" placeholder="01XXXXXXXXX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Required Date</label>
+          <input id="reqDate" type="date">
+        </div>
+        <button class="primary-btn" onclick="submitRequest()">Submit Request</button>
+      </div>
+    </div>
+
+    <!-- BE A DONOR -->
     <div id="beDonor" class="container hidden">
       <div class="card">
         <div class="card-title"><i class="fas fa-user-plus"></i> Register</div>
@@ -166,6 +236,49 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         <button class="primary-btn" onclick="registerDonor()">Register Now</button>
       </div>
     </div>
+
+    <!-- ADMIN LOGIN -->
+    <div id="adminLogin" class="container hidden">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-lock"></i> Admin Login</div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input id="adminEmail" type="email" placeholder="admin@srb.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input id="adminPass" type="password" placeholder="Password">
+        </div>
+        <button class="primary-btn" onclick="loginAdmin()">Login</button>
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" class="container hidden">
+      <div class="card">
+        <div class="card-title" style="justify-content:space-between;">
+          <span><i class="fas fa-user-shield"></i> Admin Panel</span>
+          <button onclick="logoutAdmin()" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Logout</button>
+        </div>
+        
+        <p style="font-size:14px; font-weight:600; margin-top:20px;">Manage Donors</p>
+        <div style="overflow-x:auto;">
+          <table class="admin-table" id="adminDonorTable">
+            <thead><tr><th>Name</th><th>Blood</th><th>Phone</th><th>Action</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <p style="font-size:14px; font-weight:600; margin-top:20px;">Manage Requests</p>
+        <div style="overflow-x:auto;">
+          <table class="admin-table" id="adminReqTable">
+            <thead><tr><th>Patient</th><th>Blood</th><th>Contact</th><th>Action</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="footer">
@@ -174,130 +287,213 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
   </div>
 </div>
 
-<!-- Load Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-    // ১. চেক করছি ফাইলটি কি কম্পিউটার থেকে খোলা হচ্ছে? 
-    if (window.location.protocol === 'file:') {
-        document.getElementById('splash-status').innerHTML = 
-        '<div class="error-box"><strong>Warning!</strong><br>File double-click kore run korle kaj korbe na.<br>Bitte GitHub Pages e upload koren.</div>';
-        document.getElementById('splash-loader').style.display = 'none';
-        throw new Error("Local file execution blocked."); // Script থামিয়ে দিলাম
-    }
-
-    // ২. Supabase Configuration
     const SUPABASE_URL = 'https://dphpmugfflconqerqgft.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRwaHBtdWdmZmxjb25xZXJxZ2Z0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0Mzc4MDEsImV4cCI6MjA4ODAxMzgwMX0.JwRqpO5wRoZXd6UCAuFYXDeOkwqOjdco60ilevkG8qM';
+    const supabase_client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    let supabase_client;
-    
-    // ৩. Library লোড হয়েছে কিনা চেক করা
-    try {
-        if (typeof supabase === 'undefined') throw new Error("Library load failed");
-        supabase_client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        document.getElementById('splash-status').innerText = "Connecting to database...";
-    } catch (e) {
-        document.getElementById('splash-status').innerHTML = '<div class="error-box">Internet Connection or Library Error</div>';
-        document.getElementById('splash-loader').style.display = 'none';
+    // Check if running locally
+    if (window.location.protocol === 'file:') {
+        document.getElementById('splash').innerHTML = '<h2 style="padding:20px; text-align:center; color:red;">Please upload to GitHub Pages to run.</h2>';
+        throw new Error("Local file blocked");
     }
 
-    // ৪. অ্যাপ শুরু করা
-    async function startApp() {
-        try {
-            // ডাটাবেস থেকে কাউন্ট আনার চেষ্টা (ডাটাবেস ঠিক আছে কিনা তা টেস্ট করা)
-            const { count, error } = await supabase_client.from('donors').select('*', { count: 'exact', head: true });
-            
-            if (error) {
-                // যদি SQL রান করা না থাকে
-                document.getElementById('splash-status').innerHTML = 
-                    `<div class="error-box">Database Table Not Found!<br>Please run SQL in Supabase.</div>`;
-                document.getElementById('splash-loader').style.display = 'none';
-                console.error(error);
-                return;
-            }
+    setTimeout(()=>{
+      document.getElementById("splash").style.display="none";
+      document.getElementById("app").classList.remove("hidden");
+      loadDashboardStats();
+      loadPublicRequests();
+    }, 1000);
 
-            // সব ঠিক থাকলে অ্যাপ ওপেন করা
-            document.getElementById('splash').style.display = 'none';
-            document.getElementById('app').classList.remove('hidden');
-            document.getElementById('connStatus').style.display = 'block';
-            document.getElementById('statDonors').innerText = count + '+';
-
-        } catch (err) {
-            document.getElementById('splash-status').innerHTML = 
-            `<div class="error-box">Connection Failed!<br>${err.message}</div>`;
-            document.getElementById('splash-loader').style.display = 'none';
-        }
-    }
-
-    // ১ সেকেন্ড পরে অ্যাপ শুরু হবে
-    setTimeout(startApp, 1000);
-
-    // Menu Functions
+    // --- GENERAL FUNCTIONS ---
     function toggleMenu(){
       document.getElementById("menu").classList.toggle("active");
       document.getElementById("overlay").style.display = document.getElementById("menu").classList.contains("active") ? "block" : "none";
     }
-    function hidePages(){ ["home", "findDonor", "beDonor"].forEach(id=> document.getElementById(id).classList.add("hidden")); }
-    function openPage(id){ hidePages(); document.getElementById(id).classList.remove("hidden"); if(document.getElementById("menu").classList.contains("active")) toggleMenu(); }
+    function hidePages(){ 
+        ["home", "findDonor", "beDonor", "bloodRequests", "requestBlood", "adminLogin", "adminPanel"].forEach(id=> document.getElementById(id).classList.add("hidden")); 
+    }
+    function openPage(id){ 
+        hidePages(); document.getElementById(id).classList.remove("hidden"); 
+        if(document.getElementById("menu").classList.contains("active")) toggleMenu(); 
+        window.scrollTo(0,0);
+    }
 
-    // Search Function
+    async function loadDashboardStats() {
+        const { count: dCount } = await supabase_client.from('donors').select('*', { count: 'exact', head: true });
+        const { count: rCount } = await supabase_client.from('requests').select('*', { count: 'exact', head: true }).eq('status', 'Pending');
+        document.getElementById('statDonors').innerText = (dCount || 0) + '+';
+        document.getElementById('statRequests').innerText = rCount || 0;
+    }
+
+    // --- DONOR LOGIC ---
     async function filterDonors() {
       const blood = document.getElementById("searchBlood").value;
       const container = document.getElementById("donorListContainer");
       if (!blood) return;
       container.innerHTML = "<div class='card' style='text-align:center; padding:20px;'>Searching...</div>";
       
-      const { data, error } = await supabase_client.from('donors').select('*').eq('blood', blood);
+      const { data } = await supabase_client.from('donors').select('*').eq('blood', blood);
       container.innerHTML = "";
-      if (error) {
-          container.innerHTML = "<div class='card' style='color:red;'>Error loading data</div>";
-          return;
-      }
-      if (data.length === 0) {
+      if (!data || data.length === 0) {
           container.innerHTML = "<div class='card' style='text-align:center;'>No donors found.</div>";
       } else {
           data.forEach(d => {
               container.innerHTML += `
                 <div class="donor-card">
                   <div class="donor-avatar">${d.blood}</div>
-                  <div class="donor-info">
-                    <h4>${d.name}</h4>
-                    <p>${d.location}</p>
-                  </div>
+                  <div class="donor-info"><h4>${d.name}</h4><p>${d.location}</p></div>
                   <a href="tel:${d.phone}" class="donor-call-btn"><i class="fas fa-phone-alt"></i></a>
                 </div>`;
           });
       }
     }
 
-    // Register Function
     async function registerDonor() {
       const name = document.getElementById("donorName").value;
       const phone = document.getElementById("donorPhone").value;
       const blood = document.getElementById("donorBlood").value;
       const location = document.getElementById("donorLocation").value;
-      if(!name || !phone || !location) { alert("Please fill all fields"); return; }
+      if(!name || !phone || !location) { alert("Fill all fields"); return; }
 
       const btn = event.target;
       btn.disabled = true; btn.innerHTML = "Saving...";
-
       const { error } = await supabase_client.from('donors').insert([{ name, blood, phone, location }]);
       
-      if(error) {
-          alert("Error saving data. Check console.");
-          console.error(error);
-          btn.disabled = false; btn.innerHTML = "Register Now";
-      } else {
-          alert("Success! You are now a donor.");
-          document.getElementById("donorName").value = "";
-          document.getElementById("donorPhone").value = "";
-          document.getElementById("donorLocation").value = "";
-          openPage('home');
-          // Update Count
-          const { count } = await supabase_client.from('donors').select('*', { count: 'exact', head: true });
-          document.getElementById('statDonors').innerText = count + '+';
-      }
+      if(error) { alert("Error!"); console.error(error); }
+      else { alert("Success!"); openPage('home'); loadDashboardStats(); }
+      btn.disabled = false; btn.innerHTML = "Register Now";
+    }
+
+    // --- REQUEST LOGIC ---
+    async function submitRequest() {
+        const patient_name = document.getElementById("reqName").value;
+        const blood_group = document.getElementById("reqBlood").value;
+        const location = document.getElementById("reqLocation").value;
+        const contact = document.getElementById("reqContact").value;
+        const required_date = document.getElementById("reqDate").value;
+        if(!patient_name || !contact || !location) { alert("Fill all fields"); return; }
+
+        const btn = event.target;
+        btn.disabled = true; btn.innerHTML = "Posting...";
+        
+        const { error } = await supabase_client.from('requests').insert([{ patient_name, blood_group, location, contact, required_date }]);
+        
+        if(error) { alert("Error!"); }
+        else { 
+            alert("Request Posted Successfully!"); 
+            openPage('bloodRequests'); 
+            loadPublicRequests(); 
+            loadDashboardStats();
+        }
+        btn.disabled = false; btn.innerHTML = "Submit Request";
+    }
+
+    async function loadPublicRequests() {
+        const container = document.getElementById("publicRequestList");
+        container.innerHTML = "Loading...";
+        // Show pending requests only, sorted by latest
+        const { data, error } = await supabase_client.from('requests').select('*').eq('status', 'Pending').order('created_at', { ascending: false });
+        
+        container.innerHTML = "";
+        if (!data || data.length === 0) {
+            container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No pending blood requests right now.</div>";
+        } else {
+            data.forEach(r => {
+                container.innerHTML += `
+                  <div class="request-card">
+                    <div class="req-header">
+                      <span class="req-blood">${r.blood_group} Needed</span>
+                      <span class="req-date">${r.required_date || 'ASAP'}</span>
+                    </div>
+                    <div class="req-patient">${r.patient_name}</div>
+                    <div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div>
+                    <a href="tel:${r.contact}" class="req-call-btn"><i class="fas fa-phone-alt"></i> Call Now</a>
+                  </div>`;
+            });
+        }
+    }
+
+    // --- ADMIN LOGIC ---
+    function checkAdminLogin() {
+        if(sessionStorage.getItem('isAdmin') === 'true') {
+            openPage('adminPanel');
+            loadAdminData();
+        } else {
+            openPage('adminLogin');
+        }
+    }
+
+    function loginAdmin() {
+        const email = document.getElementById('adminEmail').value;
+        const pass = document.getElementById('adminPass').value;
+
+        if(email === 'admin@srb.com' && pass === 'srb@admin') {
+            sessionStorage.setItem('isAdmin', 'true');
+            openPage('adminPanel');
+            loadAdminData();
+        } else {
+            alert('Invalid Credentials!');
+        }
+    }
+
+    function logoutAdmin() {
+        sessionStorage.removeItem('isAdmin');
+        openPage('home');
+    }
+
+    async function loadAdminData() {
+        // Load Donors Table
+        const dTable = document.querySelector('#adminDonorTable tbody');
+        dTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
+        const { data: donors } = await supabase_client.from('donors').select('*').order('created_at', { ascending: false });
+        dTable.innerHTML = "";
+        donors.forEach(d => {
+            dTable.innerHTML += `<tr>
+                <td>${d.name}</td><td>${d.blood}</td><td>${d.phone}</td>
+                <td><button class='del-btn' onclick="deleteDonor('${d.id}')">Delete</button></td>
+            </tr>`;
+        });
+
+        // Load Requests Table
+        const rTable = document.querySelector('#adminReqTable tbody');
+        rTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
+        const { data: requests } = await supabase_client.from('requests').select('*').order('created_at', { ascending: false });
+        rTable.innerHTML = "";
+        requests.forEach(r => {
+            rTable.innerHTML += `<tr>
+                <td>${r.patient_name}</td><td>${r.blood_group}</td><td>${r.contact}</td>
+                <td>
+                    <button class='del-btn' onclick="deleteRequest('${r.id}')" style="margin-bottom:5px;">Delete</button>
+                    <button onclick="markDone('${r.id}')" style="background:#27ae60; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Done</button>
+                </td>
+            </tr>`;
+        });
+    }
+
+    async function deleteDonor(id) {
+        if(confirm("Are you sure to delete this donor?")) {
+            await supabase_client.from('donors').delete().eq('id', id);
+            loadAdminData();
+            loadDashboardStats();
+        }
+    }
+
+    async function deleteRequest(id) {
+        if(confirm("Delete this request?")) {
+            await supabase_client.from('requests').delete().eq('id', id);
+            loadAdminData();
+            loadPublicRequests();
+            loadDashboardStats();
+        }
+    }
+
+    async function markDone(id) {
+        await supabase_client.from('requests').update({ status: 'Fulfilled' }).eq('id', id);
+        loadAdminData();
+        loadPublicRequests();
+        loadDashboardStats();
     }
 </script>
 </body>
