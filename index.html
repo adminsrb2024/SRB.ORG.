@@ -4,22 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sreenagar Rokter Bondhon</title>
-
-<!-- FAVICON -->
 <link rel="icon" type="image/jpeg" href="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
   --primary: #d71920; --primary-dark: #9b0d12; --primary-light: #ffebee;
   --text: #2c3e50; --text-light: #7f8c8d; --bg: #f4f6f9;
   --card-bg: #ffffff; --shadow: 0 10px 30px rgba(0,0,0,0.08);
-  
-  /* Brand Colors */
-  --fb-color: #1877f2;
-  --msg-color: #0084ff;
-  --bkash-color: #E2136E;
-  --nagad-color: #F58220;
+  --fb-color: #1877f2; --msg-color: #0084ff;
+  --bkash-color: #E2136E; --nagad-color: #F58220;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif}
 body{background:var(--bg);padding-bottom:90px; color: var(--text);}
@@ -38,9 +31,7 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 .card-title i { color: var(--primary); }
 
 .notice-card { background: #fff3cd; border-left: 5px solid #ff9800; }
-.notice-title { font-weight: 700; color: #856404; margin-bottom: 5px; display: flex; justify-content: space-between; }
 .notice-content { font-size: 14px; color: #856404; line-height: 1.5; }
-.notice-time { font-size: 10px; color: #b38f00; margin-top: 8px; text-align: right; }
 
 .hero-card { background: linear-gradient(135deg, #fff 0%, #fff5f5 100%); border-left: 5px solid var(--primary); }
 .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee; }
@@ -75,19 +66,12 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .req-loc { font-size: 12px; color: #666; margin-bottom: 10px; }
 .req-call-btn { background: #25D366; color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
 
-/* Footer Style */
-.footer{ position:fixed; bottom:0; left:0; width:100%; background: white; padding:10px 20px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; z-index: 99; box-shadow: 0 -2px 10px rgba(0,0,0,0.03); }
-.footer-left { display: flex; flex-direction: column; }
+.footer{ position:fixed; bottom:0; left:0; width:100%; background: white; padding:10px 20px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; z-index: 99; }
 .dev-comp { font-size: 12px; color: var(--text); font-weight: 700; }
-.dev-name { font-size: 9px; color: var(--text-light); }
-
-/* Social Icons */
 .footer-social { display: flex; gap: 15px; align-items: center; }
 .social-icon { font-size: 22px; transition: 0.3s; }
-.social-icon:hover { transform: scale(1.2); opacity: 0.8; }
 .fb-icon { color: var(--fb-color); }
 .msg-icon { color: var(--msg-color); }
-
 .hotline-link { background: var(--primary); color: white; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; }
 
 .overlay{ position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:998; display:none; }
@@ -109,26 +93,23 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .admin-table th { background: #f9f9f9; }
 .del-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
 .save-btn { background: #27ae60; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
-.login-logo { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; border: 3px solid var(--primary-light); box-shadow: 0 5px 15px rgba(0,0,0,0.1); object-fit: cover; }
 
-/* Payment Styles */
+/* Payment & Donation Styles */
 .payment-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid #eee; }
-.payment-logo { font-size: 32px; margin-bottom: 10px; font-weight: 800; }
-.payment-number { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
-.payment-type { font-size: 12px; color: #666; margin-bottom: 15px; }
+.payment-logo { font-size: 28px; margin-bottom: 5px; font-weight: 800; }
+.payment-number { font-size: 20px; font-weight: 700; margin-bottom: 15px; }
 .copy-btn { background: #f0f0f0; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 5px; font-size: 13px; }
-.copy-btn:hover { background: #e0e0e0; }
 
 .bkash-card { border-left: 5px solid var(--bkash-color); }
-.bkash-card .payment-logo { color: var(--bkash-color); }
-.bkash-card .payment-number { color: var(--bkash-color); }
+.bkash-card .payment-logo, .bkash-card .payment-number { color: var(--bkash-color); }
 
 .nagad-card { border-left: 5px solid var(--nagad-color); }
-.nagad-card .payment-logo { color: var(--nagad-color); }
-.nagad-card .payment-number { color: var(--nagad-color); }
+.nagad-card .payment-logo, .nagad-card .payment-number { color: var(--nagad-color); }
 
-.donation-info { background: #e8f5e9; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; border: 1px dashed #27ae60; }
-.donation-info p { font-size: 13px; color: #2e7d32; line-height: 1.5; }
+.donation-form-section { background: #f9fbfd; padding: 20px; border-radius: 12px; border: 1px dashed #bdc3c7; margin-top: 20px; }
+.donation-form-section h4 { margin-bottom: 15px; color: var(--text); text-align:center; }
+.invoice-box { background: #e8f5e9; padding: 15px; border-radius: 10px; text-align: center; margin-top: 15px; border: 1px solid #27ae60; }
+.invoice-id { font-size: 18px; font-weight: 800; color: #27ae60; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -165,7 +146,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <a onclick="openPage('donate')"><i class="fas fa-hand-holding-heart" style="color:#e91e63;"></i> Donate Us</a>
     <div style="border-top:1px solid #eee; margin:10px 0;"></div>
     <a href="https://www.facebook.com/groups/776274101742103/" target="_blank"><i class="fab fa-facebook fb-icon"></i> Facebook Group</a>
-    <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank"><i class="fab fa-facebook-messenger msg-icon"></i> Messenger Group</a>
+    <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank"><i class="fab fa-facebook-messenger msg-icon"></i> Messenger</a>
     <div style="border-top:1px solid #eee; margin:10px 0;"></div>
     <a onclick="checkAdminLogin()"><i class="fas fa-user-shield"></i> Admin Panel</a>
   </div>
@@ -175,12 +156,11 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <!-- HOME -->
     <div id="home" class="container">
       <div id="noticeDisplay" class="card notice-card" style="display:none;">
-        <div class="card-title" style="color:#856404; margin-bottom:10px;">
+        <div class="card-title" style="color:#856404;">
           <span><i class="fas fa-bullhorn"></i> Notice</span>
           <span id="noticeTitleHeader"></span>
         </div>
         <div id="noticeBodyContent" class="notice-content"></div>
-        <div id="noticeTime" class="notice-time"></div>
       </div>
 
       <div class="card hero-card">
@@ -200,62 +180,62 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           </div>
         </div>
       </div>
-
-      <!-- DASHBOARD GRID - Request Blood Restored Here -->
       <div class="dashboard-grid">
-        <div class="dash-card" onclick="openPage('findDonor')">
-          <div class="dash-icon"><i class="fas fa-search"></i></div>
-          <div class="dash-title">Find Donor</div>
-        </div>
-        <div class="dash-card" onclick="openPage('bloodRequests')">
-          <div class="dash-icon"><i class="fas fa-hand-holding-medical"></i></div>
-          <div class="dash-title">Requests</div>
-        </div>
-        <div class="dash-card" onclick="openPage('beDonor')">
-          <div class="dash-icon"><i class="fas fa-user-plus"></i></div>
-          <div class="dash-title">Be a Donor</div>
-        </div>
-        <!-- Request Blood Button Back in Grid -->
-        <div class="dash-card" onclick="openPage('requestBlood')">
-          <div class="dash-icon"><i class="fas fa-plus-circle"></i></div>
-          <div class="dash-title">Request Blood</div>
-        </div>
+        <div class="dash-card" onclick="openPage('findDonor')"><div class="dash-icon"><i class="fas fa-search"></i></div><div class="dash-title">Find Donor</div></div>
+        <div class="dash-card" onclick="openPage('bloodRequests')"><div class="dash-icon"><i class="fas fa-hand-holding-medical"></i></div><div class="dash-title">Requests</div></div>
+        <div class="dash-card" onclick="openPage('beDonor')"><div class="dash-icon"><i class="fas fa-user-plus"></i></div><div class="dash-title">Be a Donor</div></div>
+        <div class="dash-card" onclick="openPage('requestBlood')"><div class="dash-icon"><i class="fas fa-plus-circle"></i></div><div class="dash-title">Request Blood</div></div>
       </div>
-      
-      <!-- Donate Button as a separate small card below grid -->
-      <div onclick="openPage('donate')" class="card" style="cursor:pointer; border:1px dashed var(--bkash-color); text-align:center; margin-bottom:20px;">
-         <p style="color:var(--bkash-color); font-weight:600;"><i class="fas fa-heart"></i> স্বেচ্ছাসেবীদের সাহায্য করুন (Donate)</p>
+      <div onclick="openPage('donate')" class="card" style="cursor:pointer; border:1px dashed var(--bkash-color); text-align:center;">
+         <p style="color:var(--bkash-color); font-weight:600;"><i class="fas fa-heart"></i> স্বেচ্ছাসেবীদের সাহায্য করুন</p>
       </div>
-
     </div>
 
     <!-- DONATE PAGE -->
     <div id="donate" class="container hidden">
       <div class="card">
         <div class="card-title" style="justify-content:center; color:#e91e63;">
-          <i class="fas fa-hand-holding-heart"></i> Support Us
+          <i class="fas fa-hand-holding-heart"></i> Donation
         </div>
-        <div class="donation-info">
-          <p>আপনার সামান্য সাহায্য আমাদের কার্যক্রম সুন্দরভাবে পরিচালনা করতে সাহায্য করবে।</p>
-        </div>
-
+        
         <div class="payment-card bkash-card">
           <div class="payment-logo">bKash</div>
-          <div class="payment-type">Personal</div>
           <div class="payment-number">01707651946</div>
-          <button class="copy-btn" onclick="copyNumber('01707651946')">
-            <i class="fas fa-copy"></i> Copy Number
-          </button>
+          <button class="copy-btn" onclick="copyNumber('01707651946')"><i class="fas fa-copy"></i> Copy</button>
         </div>
 
         <div class="payment-card nagad-card">
           <div class="payment-logo">Nagad</div>
-          <div class="payment-type">Personal</div>
           <div class="payment-number">01842655193</div>
-          <button class="copy-btn" onclick="copyNumber('01842655193')">
-            <i class="fas fa-copy"></i> Copy Number
-          </button>
+          <button class="copy-btn" onclick="copyNumber('01842655193')"><i class="fas fa-copy"></i> Copy</button>
         </div>
+
+        <!-- Donation Form for Invoice -->
+        <div class="donation-form-section">
+          <h4><i class="fas fa-receipt"></i> Confirm Your Donation</h4>
+          <p style="font-size:12px; color:#666; margin-bottom:15px; text-align:center;">Send money first, then fill this form to get Invoice.</p>
+          
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input id="donationName" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Amount (TK)</label>
+            <input id="donationAmount" type="number" placeholder="e.g., 100">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Transaction ID (TrxID)</label>
+            <input id="donationTrx" placeholder="e.g., 8JH4ABCD5E">
+          </div>
+          <button class="primary-btn" onclick="submitDonation()" style="background:linear-gradient(135deg, #27ae60, #2ecc71);"><i class="fas fa-check-circle"></i> Submit & Get Invoice</button>
+          
+          <div id="invoiceDisplay" class="invoice-box hidden">
+            <p style="font-size:12px; color:#555;">Success! Your Invoice ID:</p>
+            <div class="invoice-id" id="generatedInvoiceId">INV-0000</div>
+            <p style="font-size:11px; color:#888; margin-top:5px;">Save this for future reference.</p>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -278,7 +258,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <div id="bloodRequests" class="container hidden">
       <div class="card">
         <div class="card-title"><i class="fas fa-hand-holding-medical"></i> Current Blood Needs</div>
-        <p style="font-size:12px; color:#666; margin-bottom:15px;">People who need blood urgently.</p>
       </div>
       <div id="publicRequestList">Loading...</div>
     </div>
@@ -297,7 +276,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         </div>
         <div class="form-group">
           <label class="form-label">Patient Problem</label>
-          <textarea id="reqProblem" rows="2" placeholder="e.g., Dengue, Accident"></textarea>
+          <textarea id="reqProblem" rows="2" placeholder="e.g., Dengue"></textarea>
         </div>
         <div class="form-group">
           <label class="form-label">Blood Group</label>
@@ -352,7 +331,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <!-- ADMIN LOGIN -->
     <div id="adminLogin" class="container hidden">
       <div class="card" style="text-align:center;">
-        <img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9" class="login-logo" alt="Logo">
+        <img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9" class="splash-logo" style="width:80px; height:80px; margin-bottom:15px;" alt="Logo">
         <h3 style="margin-bottom:20px; color:var(--text);">Admin Login</h3>
         <div class="form-group" style="text-align:left;">
           <label class="form-label">Email</label>
@@ -373,16 +352,28 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <span><i class="fas fa-user-shield"></i> Admin Panel</span>
           <button onclick="logoutAdmin()" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Logout</button>
         </div>
+        
+        <!-- Notice Section -->
         <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-bottom:20px;">
           <h4 style="margin-bottom:10px; font-size:14px;"><i class="fas fa-bullhorn"></i> Publish Notice</h4>
           <div class="form-group" style="margin-bottom:5px;">
             <input type="text" id="noticeTitle" placeholder="Notice Title" style="background:white;">
           </div>
           <div class="form-group">
-            <textarea id="noticeContent" rows="3" placeholder="Write notice details..." style="background:white;"></textarea>
+            <textarea id="noticeContent" rows="2" placeholder="Details..." style="background:white;"></textarea>
           </div>
-          <button class="primary-btn" style="padding:10px;" onclick="publishNotice()">Publish Notice</button>
+          <button class="primary-btn" style="padding:10px;" onclick="publishNotice()">Publish</button>
         </div>
+
+        <!-- Donation List Section -->
+        <p style="font-size:14px; font-weight:600; color:#27ae60;"><i class="fas fa-hand-holding-usd"></i> Donation Records</p>
+        <div style="overflow-x:auto; margin-bottom:20px;">
+          <table class="admin-table" id="adminDonationTable">
+            <thead><tr><th>Invoice</th><th>Name</th><th>Amount</th><th>TrxID</th><th>Action</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
         <p style="font-size:14px; font-weight:600;">Manage Donors</p>
         <div style="overflow-x:auto;">
           <table class="admin-table" id="adminDonorTable">
@@ -390,6 +381,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             <tbody></tbody>
           </table>
         </div>
+
         <p style="font-size:14px; font-weight:600; margin-top:20px;">Manage Requests</p>
         <div style="overflow-x:auto;">
           <table class="admin-table" id="adminReqTable">
@@ -402,21 +394,13 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
   </div>
 
-  <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-left">
-      <span class="dev-comp">SRP SOFT LTD.</span>
-      <span class="dev-name">Technical Partner</span>
-    </div>
-    
+    <div class="footer-left"><span class="dev-comp">SRP SOFT LTD.</span></div>
     <div class="footer-social">
       <a href="https://www.facebook.com/groups/776274101742103/" target="_blank" class="social-icon fb-icon"><i class="fab fa-facebook"></i></a>
       <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank" class="social-icon msg-icon"><i class="fab fa-facebook-messenger"></i></a>
     </div>
-
-    <div class="footer-right">
-      <a href="tel:+8809697755193" class="hotline-link"><i class="fas fa-phone-alt"></i> Hotline</a>
-    </div>
+    <div class="footer-right"><a href="tel:+8809697755193" class="hotline-link"><i class="fas fa-phone-alt"></i> Hotline</a></div>
   </div>
 </div>
 
@@ -427,7 +411,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     const supabase_client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     if (window.location.protocol === 'file:') {
-        document.getElementById('splash').innerHTML = '<h2 style="padding:20px; text-align:center; color:red;">Please upload to GitHub Pages to run.</h2>';
+        document.getElementById('splash').innerHTML = '<h2 style="padding:20px; text-align:center; color:red;">Upload to GitHub Pages.</h2>';
         throw new Error("Local file blocked");
     }
 
@@ -444,27 +428,39 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       document.getElementById("menu").classList.toggle("active");
       document.getElementById("overlay").style.display = document.getElementById("menu").classList.contains("active") ? "block" : "none";
     }
-    function hidePages(){ 
-        ["home", "findDonor", "beDonor", "bloodRequests", "requestBlood", "adminLogin", "adminPanel", "donate"].forEach(id=> document.getElementById(id).classList.add("hidden")); 
-    }
-    function openPage(id){ 
-        hidePages(); document.getElementById(id).classList.remove("hidden"); 
-        if(document.getElementById("menu").classList.contains("active")) toggleMenu(); 
-        window.scrollTo(0,0);
-    }
+    function hidePages(){ ["home", "findDonor", "beDonor", "bloodRequests", "requestBlood", "adminLogin", "adminPanel", "donate"].forEach(id=> document.getElementById(id).classList.add("hidden")); }
+    function openPage(id){ hidePages(); document.getElementById(id).classList.remove("hidden"); if(document.getElementById("menu").classList.contains("active")) toggleMenu(); window.scrollTo(0,0); }
 
-    function copyNumber(number) {
-        navigator.clipboard.writeText(number).then(() => {
-            alert("Number Copied: " + number);
-        }).catch(err => {
-            const textArea = document.createElement("textarea");
-            textArea.value = number;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            alert("Number Copied: " + number);
-        });
+    function copyNumber(number) { navigator.clipboard.writeText(number); alert("Copied: " + number); }
+
+    // --- DONATION & INVOICE LOGIC ---
+    async function submitDonation() {
+        const name = document.getElementById("donationName").value;
+        const amount = document.getElementById("donationAmount").value;
+        const trx_id = document.getElementById("donationTrx").value;
+        
+        if(!name || !amount || !trx_id) { alert("Fill all fields"); return; }
+
+        const btn = event.target;
+        btn.disabled = true; btn.innerHTML = "Processing...";
+
+        // Generate Invoice ID
+        const invoice_id = "INV-" + Date.now().toString().slice(-6);
+
+        const { error } = await supabase_client.from('donations').insert([{ 
+            invoice_id, name, amount, trx_id 
+        }]);
+
+        if(error) { alert("Error!"); console.error(error); }
+        else {
+            document.getElementById("generatedInvoiceId").innerText = invoice_id;
+            document.getElementById("invoiceDisplay").classList.remove("hidden");
+            // Clear form
+            document.getElementById("donationName").value = "";
+            document.getElementById("donationAmount").value = "";
+            document.getElementById("donationTrx").value = "";
+        }
+        btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit & Get Invoice";
     }
 
     async function loadDashboardStats() {
@@ -502,11 +498,9 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       const blood = document.getElementById("donorBlood").value;
       const location = document.getElementById("donorLocation").value;
       if(!name || !phone || !location) { alert("Fill all fields"); return; }
-      const btn = event.target;
-      btn.disabled = true; btn.innerHTML = "Saving...";
+      const btn = event.target; btn.disabled = true; btn.innerHTML = "Saving...";
       const { error } = await supabase_client.from('donors').insert([{ name, blood, phone, location }]);
-      if(error) { alert("Error!"); }
-      else { alert("Success!"); openPage('home'); loadDashboardStats(); }
+      if(error) { alert("Error!"); } else { alert("Success!"); openPage('home'); loadDashboardStats(); }
       btn.disabled = false; btn.innerHTML = "Register Now";
     }
 
@@ -519,11 +513,9 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         const hemoglobin = document.getElementById("reqHemoglobin").value;
         const problem = document.getElementById("reqProblem").value;
         if(!patient_name || !contact || !location) { alert("Fill all fields"); return; }
-        const btn = event.target;
-        btn.disabled = true; btn.innerHTML = "Posting...";
+        const btn = event.target; btn.disabled = true; btn.innerHTML = "Posting...";
         const { error } = await supabase_client.from('requests').insert([{ patient_name, blood_group, location, contact, required_date, hemoglobin, problem }]);
-        if(error) { alert("Error!"); }
-        else { alert("Request Posted!"); openPage('bloodRequests'); loadPublicRequests(); loadDashboardStats(); }
+        if(error) { alert("Error!"); } else { alert("Request Posted!"); openPage('bloodRequests'); loadPublicRequests(); loadDashboardStats(); }
         btn.disabled = false; btn.innerHTML = "Submit Request";
     }
 
@@ -550,7 +542,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             const notice = data[0];
             document.getElementById('noticeTitleHeader').innerText = notice.title;
             document.getElementById('noticeBodyContent').innerText = notice.content;
-            document.getElementById('noticeTime').innerText = new Date(notice.created_at).toLocaleString();
             document.getElementById('noticeDisplay').style.display = 'block';
         } else { document.getElementById('noticeDisplay').style.display = 'none'; }
     }
@@ -559,12 +550,10 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         const title = document.getElementById('noticeTitle').value;
         const content = document.getElementById('noticeContent').value;
         if(!title || !content) { alert("Write title and content"); return; }
-        const btn = event.target;
-        btn.disabled = true; btn.innerHTML = "Publishing...";
+        const btn = event.target; btn.disabled = true; btn.innerHTML = "Publishing...";
         const { error } = await supabase_client.from('notices').insert([{ title, content }]);
-        if(error) { alert("Error!"); }
-        else { alert("Notice Published!"); document.getElementById('noticeTitle').value = ""; document.getElementById('noticeContent').value = ""; loadNotices(); }
-        btn.disabled = false; btn.innerHTML = "Publish Notice";
+        if(error) { alert("Error!"); } else { alert("Notice Published!"); document.getElementById('noticeTitle').value = ""; document.getElementById('noticeContent').value = ""; loadNotices(); }
+        btn.disabled = false; btn.innerHTML = "Publish";
     }
 
     function checkAdminLogin() {
@@ -578,18 +567,27 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         if(email === 'admin@srb.com' && pass === 'srb@admin') {
             sessionStorage.setItem('isAdmin', 'true');
             openPage('adminPanel'); loadAdminData();
-        } else { alert('Invalid Credentials!'); }
+        } else { alert('Invalid!'); }
     }
 
     function logoutAdmin() { sessionStorage.removeItem('isAdmin'); openPage('home'); }
 
     async function loadAdminData() {
-        const dTable = document.querySelector('#adminDonorTable tbody');
-        dTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
-        const { data: donors } = await supabase_client.from('donors').select('*').order('created_at', { ascending: false });
+        // Load Donations
+        const dTable = document.querySelector('#adminDonationTable tbody');
+        dTable.innerHTML = "<tr><td colspan='5'>Loading...</td></tr>";
+        const { data: donations } = await supabase_client.from('donations').select('*').order('created_at', { ascending: false });
         dTable.innerHTML = "";
-        donors.forEach(d => { dTable.innerHTML += `<tr><td>${d.name}</td><td>${d.blood}</td><td>${d.phone}</td><td><button class='del-btn' onclick="deleteDonor('${d.id}')">Delete</button></td></tr>`; });
+        donations.forEach(d => { dTable.innerHTML += `<tr><td>${d.invoice_id}</td><td>${d.name}</td><td>${d.amount} Tk</td><td>${d.trx_id}</td><td><button class='del-btn' onclick="deleteDonation('${d.id}')">Del</button></td></tr>`; });
 
+        // Load Donors
+        const donorTable = document.querySelector('#adminDonorTable tbody');
+        donorTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
+        const { data: donors } = await supabase_client.from('donors').select('*').order('created_at', { ascending: false });
+        donorTable.innerHTML = "";
+        donors.forEach(d => { donorTable.innerHTML += `<tr><td>${d.name}</td><td>${d.blood}</td><td>${d.phone}</td><td><button class='del-btn' onclick="deleteDonor('${d.id}')">Delete</button></td></tr>`; });
+
+        // Load Requests
         const rTable = document.querySelector('#adminReqTable tbody');
         rTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
         const { data: requests } = await supabase_client.from('requests').select('*').order('created_at', { ascending: false });
@@ -600,6 +598,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     async function deleteDonor(id) { if(confirm("Delete donor?")) { await supabase_client.from('donors').delete().eq('id', id); loadAdminData(); loadDashboardStats(); } }
     async function deleteRequest(id) { if(confirm("Delete request?")) { await supabase_client.from('requests').delete().eq('id', id); loadAdminData(); loadPublicRequests(); loadDashboardStats(); } }
     async function markDone(id) { await supabase_client.from('requests').update({ status: 'Fulfilled' }).eq('id', id); loadAdminData(); loadPublicRequests(); loadDashboardStats(); }
+    async function deleteDonation(id) { if(confirm("Delete donation?")) { await supabase_client.from('donations').delete().eq('id', id); loadAdminData(); } }
 </script>
 </body>
 </html>
