@@ -14,6 +14,10 @@
   --primary: #d71920; --primary-dark: #9b0d12; --primary-light: #ffebee;
   --text: #2c3e50; --text-light: #7f8c8d; --bg: #f4f6f9;
   --card-bg: #ffffff; --shadow: 0 10px 30px rgba(0,0,0,0.08);
+  
+  /* Social Colors */
+  --fb-color: #1877f2;
+  --msg-color: #0084ff;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif}
 body{background:var(--bg);padding-bottom:90px; color: var(--text);}
@@ -31,7 +35,6 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 .card-title { font-size: 16px; color: var(--text); font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
 .card-title i { color: var(--primary); }
 
-/* Notice Board Style */
 .notice-card { background: #fff3cd; border-left: 5px solid #ff9800; }
 .notice-title { font-weight: 700; color: #856404; margin-bottom: 5px; display: flex; justify-content: space-between; }
 .notice-content { font-size: 14px; color: #856404; line-height: 1.5; }
@@ -70,15 +73,28 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .req-loc { font-size: 12px; color: #666; margin-bottom: 10px; }
 .req-call-btn { background: #25D366; color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
 
-.footer{ position:fixed; bottom:0; left:0; width:100%; background: white; padding:12px 20px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; z-index: 99; }
-.dev-comp { font-size: 13px; color: var(--text); font-weight: 700; }
-.hotline-link { background: var(--primary); color: white; padding: 6px 12px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; }
+/* Footer Style */
+.footer{ position:fixed; bottom:0; left:0; width:100%; background: white; padding:10px 20px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; z-index: 99; box-shadow: 0 -2px 10px rgba(0,0,0,0.03); }
+.footer-left { display: flex; flex-direction: column; }
+.dev-comp { font-size: 12px; color: var(--text); font-weight: 700; }
+.dev-name { font-size: 9px; color: var(--text-light); }
+
+/* Social Icons - Updated Colors */
+.footer-social { display: flex; gap: 15px; align-items: center; }
+.social-icon { font-size: 22px; transition: 0.3s; }
+.social-icon:hover { transform: scale(1.2); opacity: 0.8; }
+
+.fb-icon { color: var(--fb-color); } /* Facebook Blue */
+.msg-icon { color: var(--msg-color); } /* Messenger Blue */
+
+.hotline-link { background: var(--primary); color: white; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; }
+
 .overlay{ position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:998; display:none; }
 .menu{ position:fixed; left:-300px; top:0; width:280px; height:100%; background:white; transition:.3s; z-index:999; box-shadow: 5px 0 30px rgba(0,0,0,0.1); }
 .menu.active{left:0}
 .menu-header { background: var(--primary); color: white; padding: 30px 20px; }
 .menu a{ display:flex; align-items: center; padding:16px 25px; color:#444; text-decoration:none; font-weight: 500; font-size: 14px; }
-.menu a i { margin-right: 15px; color: #aaa; width: 20px; }
+.menu a i { margin-right: 15px; width: 20px; text-align: center; }
 .menu a:hover { background: #fff5f5; color: var(--primary); }
 
 #splash { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background: white; z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; }
@@ -126,6 +142,11 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <a onclick="openPage('bloodRequests')"><i class="fas fa-hand-holding-medical"></i> Blood Requests</a>
     <a onclick="openPage('beDonor')"><i class="fas fa-user-plus"></i> Register as Donor</a>
     <a onclick="openPage('requestBlood')"><i class="fas fa-notes-medical"></i> Request Blood</a>
+    <div style="border-top:1px solid #eee; margin:10px 0;"></div>
+    <!-- Social Links in Menu with Colors -->
+    <a href="https://www.facebook.com/groups/776274101742103/" target="_blank"><i class="fab fa-facebook fb-icon"></i> Facebook Group</a>
+    <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank"><i class="fab fa-facebook-messenger msg-icon"></i> Messenger Group</a>
+    <div style="border-top:1px solid #eee; margin:10px 0;"></div>
     <a onclick="checkAdminLogin()"><i class="fas fa-user-shield"></i> Admin Panel</a>
   </div>
 
@@ -144,8 +165,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
       <div class="card hero-card">
         <div class="card-title"><i class="fas fa-heartbeat"></i> Welcome</div>
-        
-        <!-- STATS SECTION WITH VISITOR COUNTER -->
         <div class="hero-stats">
           <div class="stat-item">
             <div class="stat-num" id="statDonors">-</div>
@@ -160,7 +179,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             <div class="stat-label">Visitors</div>
           </div>
         </div>
-
       </div>
       <div class="dashboard-grid">
         <div class="dash-card" onclick="openPage('findDonor')">
@@ -325,9 +343,22 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
   </div>
 
+  <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-left"><span class="dev-comp">SRP SOFT LTD.</span></div>
-    <div class="footer-right"><a href="tel:+8809697755193" class="hotline-link"><i class="fas fa-phone-alt"></i> Hotline</a></div>
+    <div class="footer-left">
+      <span class="dev-comp">SRP SOFT LTD.</span>
+      <span class="dev-name">Technical Partner</span>
+    </div>
+    
+    <!-- Social Icons with Colors -->
+    <div class="footer-social">
+      <a href="https://www.facebook.com/groups/776274101742103/" target="_blank" class="social-icon fb-icon" title="Join FB Group"><i class="fab fa-facebook"></i></a>
+      <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank" class="social-icon msg-icon" title="Messenger Group"><i class="fab fa-facebook-messenger"></i></a>
+    </div>
+
+    <div class="footer-right">
+      <a href="tel:+8809697755193" class="hotline-link"><i class="fas fa-phone-alt"></i> Hotline</a>
+    </div>
   </div>
 </div>
 
@@ -348,7 +379,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       loadDashboardStats();
       loadPublicRequests();
       loadNotices();
-      trackAndLoadVisitors(); // Start Visitor Tracking
+      trackAndLoadVisitors();
     }, 1000);
 
     function toggleMenu(){
@@ -371,16 +402,10 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         document.getElementById('statRequests').innerText = rCount || 0;
     }
 
-    // --- VISITOR LOGIC ---
     async function trackAndLoadVisitors() {
-        // 1. Increment count
         await supabase_client.rpc('increment_visitor');
-        
-        // 2. Get count
         const { data } = await supabase_client.from('visitor_stats').select('count').single();
-        if(data) {
-            document.getElementById('statVisitors').innerText = data.count;
-        }
+        if(data) { document.getElementById('statVisitors').innerText = data.count; }
     }
 
     async function filterDonors() {
