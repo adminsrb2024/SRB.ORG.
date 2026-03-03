@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sreenagar Rokter Bondhon</title>
 
-<!-- FAVICON (Tab Icon) - Full Link -->
+<!-- FAVICON -->
 <link rel="icon" type="image/jpeg" href="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,10 +38,11 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 .notice-time { font-size: 10px; color: #b38f00; margin-top: 8px; text-align: right; }
 
 .hero-card { background: linear-gradient(135deg, #fff 0%, #fff5f5 100%); border-left: 5px solid var(--primary); }
-.hero-stats { display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee; }
-.stat-item { text-align: center; width: 100%; }
-.stat-num { font-size: 24px; font-weight: 800; color: var(--primary); }
-.stat-label { font-size: 10px; color: var(--text-light); text-transform: uppercase; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee; }
+.stat-item { text-align: center; padding: 5px; background: #f9f9f9; border-radius: 8px; }
+.stat-num { font-size: 20px; font-weight: 800; color: var(--primary); }
+.stat-label { font-size: 9px; color: var(--text-light); text-transform: uppercase; margin-top: 2px; }
+
 .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
 .dash-card { background: white; padding: 18px 15px; border-radius: 16px; text-align: center; box-shadow: var(--shadow); cursor: pointer; transition: 0.3s; }
 .dash-card:hover { transform: translateY(-3px); }
@@ -80,7 +81,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .menu a i { margin-right: 15px; color: #aaa; width: 20px; }
 .menu a:hover { background: #fff5f5; color: var(--primary); }
 
-/* Splash Screen Logo Fix */
 #splash { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background: white; z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; }
 .splash-logo { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px; object-fit: cover; border: 3px solid var(--primary); box-shadow: 0 5px 15px rgba(215,25,32,0.3); }
 .splash-text { font-size: 20px; color: var(--primary); font-weight: 800; text-align: center; }
@@ -92,8 +92,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .admin-table th { background: #f9f9f9; }
 .del-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
 .save-btn { background: #27ae60; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
-
-/* Login Logo Style */
 .login-logo { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; border: 3px solid var(--primary-light); box-shadow: 0 5px 15px rgba(0,0,0,0.1); object-fit: cover; }
 </style>
 </head>
@@ -101,7 +99,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
 <!-- SPLASH SCREEN -->
 <div id="splash">
-  <!-- Corrected Logo URL with Auth Key -->
   <img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9" class="splash-logo" alt="Logo">
   <div class="splash-text">Sreenagar Rokter Bondhon</div>
   <div id="splash-loader" class="loader"></div>
@@ -147,6 +144,8 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
       <div class="card hero-card">
         <div class="card-title"><i class="fas fa-heartbeat"></i> Welcome</div>
+        
+        <!-- STATS SECTION WITH VISITOR COUNTER -->
         <div class="hero-stats">
           <div class="stat-item">
             <div class="stat-num" id="statDonors">-</div>
@@ -156,7 +155,12 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             <div class="stat-num" id="statRequests">-</div>
             <div class="stat-label">Pending</div>
           </div>
+          <div class="stat-item">
+            <div class="stat-num" id="statVisitors">-</div>
+            <div class="stat-label">Visitors</div>
+          </div>
         </div>
+
       </div>
       <div class="dashboard-grid">
         <div class="dash-card" onclick="openPage('findDonor')">
@@ -271,10 +275,8 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <!-- ADMIN LOGIN -->
     <div id="adminLogin" class="container hidden">
       <div class="card" style="text-align:center;">
-        <!-- Corrected Logo URL -->
         <img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9" class="login-logo" alt="Logo">
         <h3 style="margin-bottom:20px; color:var(--text);">Admin Login</h3>
-        
         <div class="form-group" style="text-align:left;">
           <label class="form-label">Email</label>
           <input id="adminEmail" type="email" placeholder="admin@srb.com">
@@ -294,8 +296,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <span><i class="fas fa-user-shield"></i> Admin Panel</span>
           <button onclick="logoutAdmin()" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Logout</button>
         </div>
-        
-        <!-- NOTICE POST SECTION -->
         <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-bottom:20px;">
           <h4 style="margin-bottom:10px; font-size:14px;"><i class="fas fa-bullhorn"></i> Publish Notice</h4>
           <div class="form-group" style="margin-bottom:5px;">
@@ -306,7 +306,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           </div>
           <button class="primary-btn" style="padding:10px;" onclick="publishNotice()">Publish Notice</button>
         </div>
-
         <p style="font-size:14px; font-weight:600;">Manage Donors</p>
         <div style="overflow-x:auto;">
           <table class="admin-table" id="adminDonorTable">
@@ -314,7 +313,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             <tbody></tbody>
           </table>
         </div>
-
         <p style="font-size:14px; font-weight:600; margin-top:20px;">Manage Requests</p>
         <div style="overflow-x:auto;">
           <table class="admin-table" id="adminReqTable">
@@ -350,6 +348,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       loadDashboardStats();
       loadPublicRequests();
       loadNotices();
+      trackAndLoadVisitors(); // Start Visitor Tracking
     }, 1000);
 
     function toggleMenu(){
@@ -370,6 +369,18 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         const { count: rCount } = await supabase_client.from('requests').select('*', { count: 'exact', head: true }).eq('status', 'Pending');
         document.getElementById('statDonors').innerText = (dCount || 0) + '+';
         document.getElementById('statRequests').innerText = rCount || 0;
+    }
+
+    // --- VISITOR LOGIC ---
+    async function trackAndLoadVisitors() {
+        // 1. Increment count
+        await supabase_client.rpc('increment_visitor');
+        
+        // 2. Get count
+        const { data } = await supabase_client.from('visitor_stats').select('count').single();
+        if(data) {
+            document.getElementById('statVisitors').innerText = data.count;
+        }
     }
 
     async function filterDonors() {
