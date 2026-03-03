@@ -88,13 +88,11 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .loader { width: 30px; height: 30px; border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-top: 20px; }
 .hidden {display:none}
 
-.admin-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
-.admin-table th, .admin-table td { padding: 8px; border: 1px solid #eee; text-align: left; }
-.admin-table th { background: #f9f9f9; }
-.del-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
-.save-btn { background: #27ae60; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 10px; }
+.admin-table th, .admin-table td { padding: 6px; border: 1px solid #eee; text-align: left; }
+.admin-table th { background: #f9f9f9; font-size:10px; }
+.del-btn { background: #e74c3c; color: white; border: none; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 10px; }
 
-/* Payment & Donation Styles */
 .payment-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid #eee; }
 .payment-logo { font-size: 28px; margin-bottom: 5px; font-weight: 800; }
 .payment-number { font-size: 20px; font-weight: 700; margin-bottom: 15px; }
@@ -146,7 +144,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <a onclick="openPage('donate')"><i class="fas fa-hand-holding-heart" style="color:#e91e63;"></i> Donate Us</a>
     <div style="border-top:1px solid #eee; margin:10px 0;"></div>
     <a href="https://www.facebook.com/groups/776274101742103/" target="_blank"><i class="fab fa-facebook fb-icon"></i> Facebook Group</a>
-    <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank"><i class="fab fa-facebook-messenger msg-icon"></i> Messenger</a>
+    <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank"><i class="fab fa-facebook-messenger msg-icon"></i> Messenger Group</a>
     <div style="border-top:1px solid #eee; margin:10px 0;"></div>
     <a onclick="checkAdminLogin()"><i class="fas fa-user-shield"></i> Admin Panel</a>
   </div>
@@ -210,10 +208,10 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <button class="copy-btn" onclick="copyNumber('01842655193')"><i class="fas fa-copy"></i> Copy</button>
         </div>
 
-        <!-- Donation Form for Invoice -->
+        <!-- Donation Form -->
         <div class="donation-form-section">
           <h4><i class="fas fa-receipt"></i> Confirm Your Donation</h4>
-          <p style="font-size:12px; color:#666; margin-bottom:15px; text-align:center;">Send money first, then fill this form to get Invoice.</p>
+          <p style="font-size:12px; color:#666; margin-bottom:15px; text-align:center;">Send money first, then fill this form.</p>
           
           <div class="form-group">
             <label class="form-label">Your Name</label>
@@ -223,6 +221,17 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             <label class="form-label">Amount (TK)</label>
             <input id="donationAmount" type="number" placeholder="e.g., 100">
           </div>
+          
+          <!-- NEW FIELD: Payment Method Selection -->
+          <div class="form-group">
+            <label class="form-label">Sent Money To</label>
+            <select id="donationMethod">
+              <option value="">Select Payment Method</option>
+              <option value="Bkash (01707651946)">Bkash (01707651946)</option>
+              <option value="Nagad (01842655193)">Nagad (01842655193)</option>
+            </select>
+          </div>
+
           <div class="form-group">
             <label class="form-label">Transaction ID (TrxID)</label>
             <input id="donationTrx" placeholder="e.g., 8JH4ABCD5E">
@@ -232,7 +241,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <div id="invoiceDisplay" class="invoice-box hidden">
             <p style="font-size:12px; color:#555;">Success! Your Invoice ID:</p>
             <div class="invoice-id" id="generatedInvoiceId">INV-0000</div>
-            <p style="font-size:11px; color:#888; margin-top:5px;">Save this for future reference.</p>
           </div>
         </div>
 
@@ -331,7 +339,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <!-- ADMIN LOGIN -->
     <div id="adminLogin" class="container hidden">
       <div class="card" style="text-align:center;">
-        <img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9" class="splash-logo" style="width:80px; height:80px; margin-bottom:15px;" alt="Logo">
+        <img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9" style="width:80px; height:80px; border-radius:50%; margin-bottom:15px;" alt="Logo">
         <h3 style="margin-bottom:20px; color:var(--text);">Admin Login</h3>
         <div class="form-group" style="text-align:left;">
           <label class="form-label">Email</label>
@@ -353,7 +361,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <button onclick="logoutAdmin()" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Logout</button>
         </div>
         
-        <!-- Notice Section -->
+        <!-- Notice -->
         <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-bottom:20px;">
           <h4 style="margin-bottom:10px; font-size:14px;"><i class="fas fa-bullhorn"></i> Publish Notice</h4>
           <div class="form-group" style="margin-bottom:5px;">
@@ -365,11 +373,11 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <button class="primary-btn" style="padding:10px;" onclick="publishNotice()">Publish</button>
         </div>
 
-        <!-- Donation List Section -->
+        <!-- Donation List -->
         <p style="font-size:14px; font-weight:600; color:#27ae60;"><i class="fas fa-hand-holding-usd"></i> Donation Records</p>
         <div style="overflow-x:auto; margin-bottom:20px;">
           <table class="admin-table" id="adminDonationTable">
-            <thead><tr><th>Invoice</th><th>Name</th><th>Amount</th><th>TrxID</th><th>Action</th></tr></thead>
+            <thead><tr><th>Invoice</th><th>Name</th><th>Amount</th><th>Method</th><th>TrxID</th><th>Action</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -433,32 +441,32 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
     function copyNumber(number) { navigator.clipboard.writeText(number); alert("Copied: " + number); }
 
-    // --- DONATION & INVOICE LOGIC ---
+    // --- DONATION LOGIC ---
     async function submitDonation() {
         const name = document.getElementById("donationName").value;
         const amount = document.getElementById("donationAmount").value;
         const trx_id = document.getElementById("donationTrx").value;
+        const payment_method = document.getElementById("donationMethod").value; // New Field
         
-        if(!name || !amount || !trx_id) { alert("Fill all fields"); return; }
+        if(!name || !amount || !trx_id || !payment_method) { alert("Fill all fields including Payment Method"); return; }
 
         const btn = event.target;
         btn.disabled = true; btn.innerHTML = "Processing...";
 
-        // Generate Invoice ID
         const invoice_id = "INV-" + Date.now().toString().slice(-6);
 
         const { error } = await supabase_client.from('donations').insert([{ 
-            invoice_id, name, amount, trx_id 
+            invoice_id, name, amount, trx_id, payment_method 
         }]);
 
         if(error) { alert("Error!"); console.error(error); }
         else {
             document.getElementById("generatedInvoiceId").innerText = invoice_id;
             document.getElementById("invoiceDisplay").classList.remove("hidden");
-            // Clear form
             document.getElementById("donationName").value = "";
             document.getElementById("donationAmount").value = "";
             document.getElementById("donationTrx").value = "";
+            document.getElementById("donationMethod").value = "";
         }
         btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit & Get Invoice";
     }
@@ -573,26 +581,26 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     function logoutAdmin() { sessionStorage.removeItem('isAdmin'); openPage('home'); }
 
     async function loadAdminData() {
-        // Load Donations
+        // Donations Table with Method
         const dTable = document.querySelector('#adminDonationTable tbody');
-        dTable.innerHTML = "<tr><td colspan='5'>Loading...</td></tr>";
+        dTable.innerHTML = "<tr><td colspan='6'>Loading...</td></tr>";
         const { data: donations } = await supabase_client.from('donations').select('*').order('created_at', { ascending: false });
         dTable.innerHTML = "";
-        donations.forEach(d => { dTable.innerHTML += `<tr><td>${d.invoice_id}</td><td>${d.name}</td><td>${d.amount} Tk</td><td>${d.trx_id}</td><td><button class='del-btn' onclick="deleteDonation('${d.id}')">Del</button></td></tr>`; });
+        donations.forEach(d => { dTable.innerHTML += `<tr><td>${d.invoice_id}</td><td>${d.name}</td><td>${d.amount} Tk</td><td>${d.payment_method || 'N/A'}</td><td>${d.trx_id}</td><td><button class='del-btn' onclick="deleteDonation('${d.id}')">Del</button></td></tr>`; });
 
-        // Load Donors
+        // Donors
         const donorTable = document.querySelector('#adminDonorTable tbody');
         donorTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
         const { data: donors } = await supabase_client.from('donors').select('*').order('created_at', { ascending: false });
         donorTable.innerHTML = "";
         donors.forEach(d => { donorTable.innerHTML += `<tr><td>${d.name}</td><td>${d.blood}</td><td>${d.phone}</td><td><button class='del-btn' onclick="deleteDonor('${d.id}')">Delete</button></td></tr>`; });
 
-        // Load Requests
+        // Requests
         const rTable = document.querySelector('#adminReqTable tbody');
         rTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
         const { data: requests } = await supabase_client.from('requests').select('*').order('created_at', { ascending: false });
         rTable.innerHTML = "";
-        requests.forEach(r => { rTable.innerHTML += `<tr><td>${r.patient_name}</td><td>${r.problem || '-'}</td><td>${r.contact}</td><td><button class='del-btn' onclick="deleteRequest('${r.id}')" style="margin-bottom:5px;">Delete</button><button class='save-btn' onclick="markDone('${r.id}')">Done</button></td></tr>`; });
+        requests.forEach(r => { rTable.innerHTML += `<tr><td>${r.patient_name}</td><td>${r.problem || '-'}</td><td>${r.contact}</td><td><button class='del-btn' onclick="deleteRequest('${r.id}')" style="margin-bottom:5px;">Delete</button><button onclick="markDone('${r.id}')" style="background:#27ae60; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;">Done</button></td></tr>`; });
     }
 
     async function deleteDonor(id) { if(confirm("Delete donor?")) { await supabase_client.from('donors').delete().eq('id', id); loadAdminData(); loadDashboardStats(); } }
