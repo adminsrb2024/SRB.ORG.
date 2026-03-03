@@ -15,9 +15,11 @@
   --text: #2c3e50; --text-light: #7f8c8d; --bg: #f4f6f9;
   --card-bg: #ffffff; --shadow: 0 10px 30px rgba(0,0,0,0.08);
   
-  /* Social Colors */
+  /* Brand Colors */
   --fb-color: #1877f2;
   --msg-color: #0084ff;
+  --bkash-color: #E2136E;
+  --nagad-color: #F58220;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif}
 body{background:var(--bg);padding-bottom:90px; color: var(--text);}
@@ -79,13 +81,12 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .dev-comp { font-size: 12px; color: var(--text); font-weight: 700; }
 .dev-name { font-size: 9px; color: var(--text-light); }
 
-/* Social Icons - Updated Colors */
+/* Social Icons */
 .footer-social { display: flex; gap: 15px; align-items: center; }
 .social-icon { font-size: 22px; transition: 0.3s; }
 .social-icon:hover { transform: scale(1.2); opacity: 0.8; }
-
-.fb-icon { color: var(--fb-color); } /* Facebook Blue */
-.msg-icon { color: var(--msg-color); } /* Messenger Blue */
+.fb-icon { color: var(--fb-color); }
+.msg-icon { color: var(--msg-color); }
 
 .hotline-link { background: var(--primary); color: white; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; }
 
@@ -109,6 +110,25 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .del-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
 .save-btn { background: #27ae60; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; }
 .login-logo { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; border: 3px solid var(--primary-light); box-shadow: 0 5px 15px rgba(0,0,0,0.1); object-fit: cover; }
+
+/* Payment Styles */
+.payment-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid #eee; }
+.payment-logo { font-size: 32px; margin-bottom: 10px; font-weight: 800; }
+.payment-number { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
+.payment-type { font-size: 12px; color: #666; margin-bottom: 15px; }
+.copy-btn { background: #f0f0f0; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 5px; font-size: 13px; }
+.copy-btn:hover { background: #e0e0e0; }
+
+.bkash-card { border-left: 5px solid var(--bkash-color); }
+.bkash-card .payment-logo { color: var(--bkash-color); }
+.bkash-card .payment-number { color: var(--bkash-color); }
+
+.nagad-card { border-left: 5px solid var(--nagad-color); }
+.nagad-card .payment-logo { color: var(--nagad-color); }
+.nagad-card .payment-number { color: var(--nagad-color); }
+
+.donation-info { background: #e8f5e9; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; border: 1px dashed #27ae60; }
+.donation-info p { font-size: 13px; color: #2e7d32; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -142,8 +162,8 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <a onclick="openPage('bloodRequests')"><i class="fas fa-hand-holding-medical"></i> Blood Requests</a>
     <a onclick="openPage('beDonor')"><i class="fas fa-user-plus"></i> Register as Donor</a>
     <a onclick="openPage('requestBlood')"><i class="fas fa-notes-medical"></i> Request Blood</a>
+    <a onclick="openPage('donate')"><i class="fas fa-hand-holding-heart" style="color:#e91e63;"></i> Donate Us</a>
     <div style="border-top:1px solid #eee; margin:10px 0;"></div>
-    <!-- Social Links in Menu with Colors -->
     <a href="https://www.facebook.com/groups/776274101742103/" target="_blank"><i class="fab fa-facebook fb-icon"></i> Facebook Group</a>
     <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank"><i class="fab fa-facebook-messenger msg-icon"></i> Messenger Group</a>
     <div style="border-top:1px solid #eee; margin:10px 0;"></div>
@@ -180,6 +200,8 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           </div>
         </div>
       </div>
+
+      <!-- DASHBOARD GRID - Request Blood Restored Here -->
       <div class="dashboard-grid">
         <div class="dash-card" onclick="openPage('findDonor')">
           <div class="dash-icon"><i class="fas fa-search"></i></div>
@@ -193,9 +215,46 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <div class="dash-icon"><i class="fas fa-user-plus"></i></div>
           <div class="dash-title">Be a Donor</div>
         </div>
+        <!-- Request Blood Button Back in Grid -->
         <div class="dash-card" onclick="openPage('requestBlood')">
           <div class="dash-icon"><i class="fas fa-plus-circle"></i></div>
           <div class="dash-title">Request Blood</div>
+        </div>
+      </div>
+      
+      <!-- Donate Button as a separate small card below grid -->
+      <div onclick="openPage('donate')" class="card" style="cursor:pointer; border:1px dashed var(--bkash-color); text-align:center; margin-bottom:20px;">
+         <p style="color:var(--bkash-color); font-weight:600;"><i class="fas fa-heart"></i> স্বেচ্ছাসেবীদের সাহায্য করুন (Donate)</p>
+      </div>
+
+    </div>
+
+    <!-- DONATE PAGE -->
+    <div id="donate" class="container hidden">
+      <div class="card">
+        <div class="card-title" style="justify-content:center; color:#e91e63;">
+          <i class="fas fa-hand-holding-heart"></i> Support Us
+        </div>
+        <div class="donation-info">
+          <p>আপনার সামান্য সাহায্য আমাদের কার্যক্রম সুন্দরভাবে পরিচালনা করতে সাহায্য করবে।</p>
+        </div>
+
+        <div class="payment-card bkash-card">
+          <div class="payment-logo">bKash</div>
+          <div class="payment-type">Personal</div>
+          <div class="payment-number">01707651946</div>
+          <button class="copy-btn" onclick="copyNumber('01707651946')">
+            <i class="fas fa-copy"></i> Copy Number
+          </button>
+        </div>
+
+        <div class="payment-card nagad-card">
+          <div class="payment-logo">Nagad</div>
+          <div class="payment-type">Personal</div>
+          <div class="payment-number">01842655193</div>
+          <button class="copy-btn" onclick="copyNumber('01842655193')">
+            <i class="fas fa-copy"></i> Copy Number
+          </button>
         </div>
       </div>
     </div>
@@ -350,10 +409,9 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       <span class="dev-name">Technical Partner</span>
     </div>
     
-    <!-- Social Icons with Colors -->
     <div class="footer-social">
-      <a href="https://www.facebook.com/groups/776274101742103/" target="_blank" class="social-icon fb-icon" title="Join FB Group"><i class="fab fa-facebook"></i></a>
-      <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank" class="social-icon msg-icon" title="Messenger Group"><i class="fab fa-facebook-messenger"></i></a>
+      <a href="https://www.facebook.com/groups/776274101742103/" target="_blank" class="social-icon fb-icon"><i class="fab fa-facebook"></i></a>
+      <a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank" class="social-icon msg-icon"><i class="fab fa-facebook-messenger"></i></a>
     </div>
 
     <div class="footer-right">
@@ -387,12 +445,26 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       document.getElementById("overlay").style.display = document.getElementById("menu").classList.contains("active") ? "block" : "none";
     }
     function hidePages(){ 
-        ["home", "findDonor", "beDonor", "bloodRequests", "requestBlood", "adminLogin", "adminPanel"].forEach(id=> document.getElementById(id).classList.add("hidden")); 
+        ["home", "findDonor", "beDonor", "bloodRequests", "requestBlood", "adminLogin", "adminPanel", "donate"].forEach(id=> document.getElementById(id).classList.add("hidden")); 
     }
     function openPage(id){ 
         hidePages(); document.getElementById(id).classList.remove("hidden"); 
         if(document.getElementById("menu").classList.contains("active")) toggleMenu(); 
         window.scrollTo(0,0);
+    }
+
+    function copyNumber(number) {
+        navigator.clipboard.writeText(number).then(() => {
+            alert("Number Copied: " + number);
+        }).catch(err => {
+            const textArea = document.createElement("textarea");
+            textArea.value = number;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert("Number Copied: " + number);
+        });
     }
 
     async function loadDashboardStats() {
