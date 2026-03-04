@@ -318,37 +318,13 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
     <div id="requestBlood" class="container hidden">
       <div class="card">
         <div class="card-title"><i class="fas fa-notes-medical"></i> Post Request</div>
-        <div class="form-group">
-          <label class="form-label">Patient Name</label>
-          <input id="reqName" placeholder="Full Name">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Hemoglobin Level</label>
-          <input id="reqHemoglobin" placeholder="e.g., 8.5 g/dL">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Patient Problem</label>
-          <textarea id="reqProblem" rows="2" placeholder="e.g., Dengue"></textarea>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Blood Group</label>
-          <select id="reqBlood">
-            <option>A+</option><option>B+</option><option>O+</option><option>AB+</option>
-            <option>A-</option><option>B-</option><option>O-</option><option>AB-</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Location</label>
-          <input id="reqLocation" placeholder="Hospital/Area">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Contact Number</label>
-          <input id="reqContact" type="tel" placeholder="01XXXXXXXXX">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Required Date</label>
-          <input id="reqDate" type="date">
-        </div>
+        <div class="form-group"><label class="form-label">Patient Name</label><input id="reqName"></div>
+        <div class="form-group"><label class="form-label">Hemoglobin Level</label><input id="reqHemoglobin"></div>
+        <div class="form-group"><label class="form-label">Patient Problem</label><textarea id="reqProblem" rows="2"></textarea></div>
+        <div class="form-group"><label class="form-label">Blood Group</label><select id="reqBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div>
+        <div class="form-group"><label class="form-label">Location</label><input id="reqLocation"></div>
+        <div class="form-group"><label class="form-label">Contact Number</label><input id="reqContact" type="tel"></div>
+        <div class="form-group"><label class="form-label">Required Date</label><input id="reqDate" type="date"></div>
         <button class="primary-btn" onclick="submitRequest()">Submit Request</button>
       </div>
     </div>
@@ -358,15 +334,10 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
       <div class="card">
         <div class="card-title"><i class="fas fa-user-edit"></i> Manage Your Requests</div>
         <p style="font-size:12px; color:#666; margin-bottom:15px;">Enter your contact number to view and edit your requests.</p>
-        
-        <div class="form-group">
-          <input id="myReqPhone" type="tel" placeholder="Your Contact Number">
-        </div>
+        <div class="form-group"><input id="myReqPhone" type="tel" placeholder="Your Contact Number"></div>
         <button class="primary-btn" onclick="searchMyRequests()">Find My Requests</button>
       </div>
-      
       <div id="myReqList"></div>
-
       <div id="editReqForm" class="card hidden" style="border:2px solid var(--primary);">
         <div class="card-title"><i class="fas fa-edit"></i> Edit Request</div>
         <input type="hidden" id="editReqId">
@@ -500,30 +471,24 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
       document.getElementById("splash").style.display="none";
       document.getElementById("app").classList.remove("hidden");
       loadInitialData();
-      loadAdBanner(); // Load Ad
+      loadAdBanner();
     }, 1000);
 
     // --- PULL TO REFRESH LOGIC ---
-    let touchStartY = 0;
-    let touchEndY = 0;
+    let touchStartY = 0; let touchEndY = 0;
     document.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, {passive: true});
     document.addEventListener('touchend', e => { touchEndY = e.changedTouches[0].clientY; handleSwipe(); }, {passive: true});
     function handleSwipe() { if (window.scrollY === 0) { if (touchEndY - touchStartY > 80) { manualRefresh(); } } }
     function manualRefresh() {
-        const indicator = document.getElementById('refreshIndicator');
-        const refreshBtn = document.getElementById('refreshBtn');
-        indicator.style.height = '50px';
-        if(refreshBtn) refreshBtn.classList.add('active');
+        const indicator = document.getElementById('refreshIndicator'); const refreshBtn = document.getElementById('refreshBtn');
+        indicator.style.height = '50px'; if(refreshBtn) refreshBtn.classList.add('active');
         loadDashboardStats(); loadPublicRequests(); loadNotices(); loadAdBanner();
         setTimeout(() => { indicator.style.height = '0px'; if(refreshBtn) refreshBtn.classList.remove('active'); }, 1000);
     }
 
     function loadInitialData() { loadDashboardStats(); loadPublicRequests(); loadNotices(); trackAndLoadVisitors(); }
 
-    function toggleMenu(){
-      document.getElementById("menu").classList.toggle("active");
-      document.getElementById("overlay").style.display = document.getElementById("menu").classList.contains("active") ? "block" : "none";
-    }
+    function toggleMenu(){ document.getElementById("menu").classList.toggle("active"); document.getElementById("overlay").style.display = document.getElementById("menu").classList.contains("active") ? "block" : "none"; }
     function hidePages(){ ["home", "findDonor", "beDonor", "bloodRequests", "requestBlood", "adminLogin", "adminPanel", "donate", "myRequests"].forEach(id=> document.getElementById(id).classList.add("hidden")); }
     function openPage(id){ hidePages(); document.getElementById(id).classList.remove("hidden"); if(document.getElementById("menu").classList.contains("active")) toggleMenu(); window.scrollTo(0,0); }
 
@@ -535,110 +500,74 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
         if(data) {
             if(data.image_url) document.getElementById('adBannerImg').src = data.image_url;
             if(data.link_url) document.getElementById('adLink').href = data.link_url;
-            
-            // Update admin inputs if visible
             if(document.getElementById('adminPanel').classList.contains('hidden') === false) {
                 document.getElementById('adImgInput').value = data.image_url || '';
                 document.getElementById('adLinkInput').value = data.link_url || '';
             }
         }
     }
-
     async function saveAdBanner() {
-        const img_url = document.getElementById('adImgInput').value;
-        const link_url = document.getElementById('adLinkInput').value;
-        
+        const img_url = document.getElementById('adImgInput').value; const link_url = document.getElementById('adLinkInput').value;
         const { error } = await supabase_client.from('ad_settings').update({ image_url: img_url, link_url: link_url }).eq('id', 1);
-        if(error) alert("Error saving banner!");
-        else { alert("Banner Updated!"); loadAdBanner(); }
+        if(error) alert("Error saving banner!"); else { alert("Banner Updated!"); loadAdBanner(); }
     }
 
     async function submitDonation() {
-        const name = document.getElementById("donationName").value;
-        const amount = document.getElementById("donationAmount").value;
-        const trx_id = document.getElementById("donationTrx").value;
-        const payment_method = document.getElementById("donationMethod").value;
-        
+        const name = document.getElementById("donationName").value; const amount = document.getElementById("donationAmount").value; const trx_id = document.getElementById("donationTrx").value; const payment_method = document.getElementById("donationMethod").value;
         if(!name || !amount || !trx_id || !payment_method) { alert("Fill all fields including Payment Method"); return; }
-
-        const btn = event.target;
-        btn.disabled = true; btn.innerHTML = "Processing...";
-
+        const btn = event.target; btn.disabled = true; btn.innerHTML = "Processing...";
         const invoice_id = "INV-" + Date.now().toString().slice(-6);
-
-        const { error } = await supabase_client.from('donations').insert([{ 
-            invoice_id, name, amount, trx_id, payment_method, status: 'Pending'
-        }]);
-
+        const { error } = await supabase_client.from('donations').insert([{ invoice_id, name, amount, trx_id, payment_method, status: 'Pending' }]);
         if(error) { alert("Error!"); console.error(error); btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit & Get Invoice"; }
         else {
             currentInvoiceData = { invoice_id, name, amount, payment_method, date: new Date().toLocaleDateString() };
-            document.getElementById("generatedInvoiceId").innerText = invoice_id;
-            document.getElementById("invoiceDisplay").classList.remove("hidden");
+            document.getElementById("generatedInvoiceId").innerText = invoice_id; document.getElementById("invoiceDisplay").classList.remove("hidden");
             document.getElementById("donationName").value = ""; document.getElementById("donationAmount").value = ""; document.getElementById("donationTrx").value = ""; document.getElementById("donationMethod").value = "";
             btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit & Get Invoice";
         }
     }
 
     function downloadUserInvoice() {
-        const { invoice_id, name, amount, payment_method, date } = currentInvoiceData;
-        const doc = new jsPDF();
-        doc.setFillColor(215, 25, 32); doc.rect(0, 0, 220, 40, 'F');
-        doc.setTextColor(255, 255, 255); doc.setFontSize(22); doc.setFont('helvetica', 'bold');
-        doc.text("Sreenagar Rokter Bondhon", 105, 20, {align: 'center'});
-        doc.setFontSize(10); doc.text("Donation Invoice", 105, 28, {align: 'center'});
+        const { invoice_id, name, amount, payment_method, date } = currentInvoiceData; const doc = new jsPDF();
+        doc.setFillColor(215, 25, 32); doc.rect(0, 0, 220, 40, 'F'); doc.setTextColor(255, 255, 255); doc.setFontSize(22); doc.setFont('helvetica', 'bold');
+        doc.text("Sreenagar Rokter Bondhon", 105, 20, {align: 'center'}); doc.setFontSize(10); doc.text("Donation Invoice", 105, 28, {align: 'center'});
         doc.setTextColor(44, 62, 80); doc.setFontSize(12);
         let y = 60; doc.setFont('helvetica', 'bold'); doc.text("Invoice ID:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(invoice_id, 70, y);
         y += 15; doc.setFont('helvetica', 'bold'); doc.text("Date:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(date, 70, y);
         y += 15; doc.setFont('helvetica', 'bold'); doc.text("Donor Name:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(name, 70, y);
         y += 15; doc.setFont('helvetica', 'bold'); doc.text("Amount:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(amount + " Taka", 70, y);
         y += 15; doc.setFont('helvetica', 'bold'); doc.text("Payment Method:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(payment_method, 70, y);
-        doc.setFillColor(245, 246, 249); doc.rect(0, 250, 220, 50, 'F');
-        doc.setFontSize(10); doc.setTextColor(127, 140, 141);
-        doc.text("Thank you for your donation.", 105, 260, {align: 'center'});
-        doc.text("Sreenagar Rokter Bondhon Team", 105, 270, {align: 'center'});
+        doc.setFillColor(245, 246, 249); doc.rect(0, 250, 220, 50, 'F'); doc.setFontSize(10); doc.setTextColor(127, 140, 141);
+        doc.text("Thank you for your donation.", 105, 260, {align: 'center'}); doc.text("Sreenagar Rokter Bondhon Team", 105, 270, {align: 'center'});
         doc.save('Invoice_' + invoice_id + '.pdf');
     }
 
     async function generateAdminPDF() {
         const { data } = await supabase_client.from('donations').select('*').order('created_at', { ascending: false });
-        if(!data) return;
-        const doc = new jsPDF();
+        if(!data) return; const doc = new jsPDF();
         doc.setTextColor(215, 25, 32); doc.setFontSize(20); doc.text("Donation Report", 105, 20, {align: 'center'});
         doc.setTextColor(100); doc.setFontSize(10); doc.text("Generated on: " + new Date().toLocaleDateString(), 105, 28, {align: 'center'});
-        const tableColumn = ["Invoice", "Name", "Amount", "Method", "Status"];
-        const tableRows = [];
+        const tableColumn = ["Invoice", "Name", "Amount", "Method", "Status"]; const tableRows = [];
         data.forEach(d => { const row = [ d.invoice_id, d.name, d.amount + " Tk", d.payment_method, d.status || 'Pending' ]; tableRows.push(row); });
-        doc.autoTable(tableColumn, tableRows, { startY: 35, theme: 'grid', styles: {fontSize: 8} });
-        doc.save('Donation_Report.pdf');
+        doc.autoTable(tableColumn, tableRows, { startY: 35, theme: 'grid', styles: {fontSize: 8} }); doc.save('Donation_Report.pdf');
     }
 
     async function loadDashboardStats() {
         const { count: dCount } = await supabase_client.from('donors').select('*', { count: 'exact', head: true });
         const { count: rCount } = await supabase_client.from('requests').select('*', { count: 'exact', head: true }).eq('status', 'Pending');
-        document.getElementById('statDonors').innerText = (dCount || 0) + '+';
-        document.getElementById('statRequests').innerText = rCount || 0;
+        document.getElementById('statDonors').innerText = (dCount || 0) + '+'; document.getElementById('statRequests').innerText = rCount || 0;
     }
 
-    async function trackAndLoadVisitors() {
-        await supabase_client.rpc('increment_visitor');
-        const { data } = await supabase_client.from('visitor_stats').select('count').single();
-        if(data) { document.getElementById('statVisitors').innerText = data.count; }
-    }
+    async function trackAndLoadVisitors() { await supabase_client.rpc('increment_visitor'); const { data } = await supabase_client.from('visitor_stats').select('count').single(); if(data) { document.getElementById('statVisitors').innerText = data.count; } }
 
     async function filterDonors() {
-      const blood = document.getElementById("searchBlood").value;
-      const container = document.getElementById("donorListContainer");
-      if (!blood) return;
-      container.innerHTML = "<div class='card' style='text-align:center; padding:20px;'>Searching...</div>";
-      const { data } = await supabase_client.from('donors').select('*').eq('blood', blood);
-      container.innerHTML = "";
-      if (!data || data.length === 0) {
-          container.innerHTML = "<div class='card' style='text-align:center;'>No donors found.</div>";
-      } else {
+      const blood = document.getElementById("searchBlood").value; const container = document.getElementById("donorListContainer");
+      if (!blood) return; container.innerHTML = "<div class='card' style='text-align:center; padding:20px;'>Searching...</div>";
+      const { data } = await supabase_client.from('donors').select('*').eq('blood', blood); container.innerHTML = "";
+      if (!data || data.length === 0) { container.innerHTML = "<div class='card' style='text-align:center;'>No donors found.</div>"; } 
+      else {
           data.forEach(d => {
-              let lastDateText = "Available";
-              if(d.last_donation) { const ld = new Date(d.last_donation); lastDateText = "Last: " + ld.toLocaleDateString(); }
+              let lastDateText = "Available"; if(d.last_donation) { const ld = new Date(d.last_donation); lastDateText = "Last: " + ld.toLocaleDateString(); }
               container.innerHTML += `<div class="donor-card"><div class="donor-avatar">${d.blood}</div><div class="donor-info"><h4>${d.name}</h4><p>${d.location} | ${lastDateText}</p></div><a href="tel:${d.phone}" class="donor-call-btn"><i class="fas fa-phone-alt"></i></a></div>`;
           });
       }
@@ -646,27 +575,22 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
 
     async function registerDonor() {
       const name = document.getElementById("donorName").value; const phone = document.getElementById("donorPhone").value; const blood = document.getElementById("donorBlood").value; const location = document.getElementById("donorLocation").value; const last_donation = document.getElementById("donorLastDate").value;
-      if(!name || !phone || !location) { alert("Fill all fields"); return; }
-      const btn = event.target; btn.disabled = true; btn.innerHTML = "Saving...";
+      if(!name || !phone || !location) { alert("Fill all fields"); return; } const btn = event.target; btn.disabled = true; btn.innerHTML = "Saving...";
       const { error } = await supabase_client.from('donors').insert([{ name, blood, phone, location, last_donation }]);
-      if(error) { alert("Error!"); } else { alert("Success!"); openPage('home'); loadDashboardStats(); }
-      btn.disabled = false; btn.innerHTML = "Register Now";
+      if(error) { alert("Error!"); } else { alert("Success!"); openPage('home'); loadDashboardStats(); } btn.disabled = false; btn.innerHTML = "Register Now";
     }
 
     async function submitRequest() {
         const patient_name = document.getElementById("reqName").value; const blood_group = document.getElementById("reqBlood").value; const location = document.getElementById("reqLocation").value; const contact = document.getElementById("reqContact").value; const required_date = document.getElementById("reqDate").value; const hemoglobin = document.getElementById("reqHemoglobin").value; const problem = document.getElementById("reqProblem").value;
-        if(!patient_name || !contact || !location) { alert("Fill all fields"); return; }
-        const btn = event.target; btn.disabled = true; btn.innerHTML = "Posting...";
+        if(!patient_name || !contact || !location) { alert("Fill all fields"); return; } const btn = event.target; btn.disabled = true; btn.innerHTML = "Posting...";
         const { error } = await supabase_client.from('requests').insert([{ patient_name, blood_group, location, contact, required_date, hemoglobin, problem }]);
         if(error) { alert("Error!"); } else { alert("Request Posted!"); openPage('bloodRequests'); loadPublicRequests(); loadDashboardStats(); }
         btn.disabled = false; btn.innerHTML = "Submit Request";
     }
 
     async function loadPublicRequests() {
-        const container = document.getElementById("publicRequestList");
-        container.innerHTML = "Loading...";
-        const { data } = await supabase_client.from('requests').select('*').eq('status', 'Pending').order('created_at', { ascending: false });
-        container.innerHTML = "";
+        const container = document.getElementById("publicRequestList"); container.innerHTML = "Loading...";
+        const { data } = await supabase_client.from('requests').select('*').eq('status', 'Pending').order('created_at', { ascending: false }); container.innerHTML = "";
         if (!data || data.length === 0) { container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No pending requests.</div>"; } 
         else {
             data.forEach(r => {
@@ -676,12 +600,9 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
         }
     }
 
-    // --- MY REQUESTS LOGIC ---
     async function searchMyRequests() {
-        const phone = document.getElementById("myReqPhone").value;
-        if(!phone) { alert("Enter your contact number"); return; }
-        const container = document.getElementById("myReqList");
-        container.innerHTML = "<div class='card' style='text-align:center;'>Searching...</div>";
+        const phone = document.getElementById("myReqPhone").value; if(!phone) { alert("Enter your contact number"); return; }
+        const container = document.getElementById("myReqList"); container.innerHTML = "<div class='card' style='text-align:center;'>Searching...</div>";
         const { data, error } = await supabase_client.from('requests').select('*').eq('contact', phone).order('created_at', { ascending: false });
         container.innerHTML = ""; document.getElementById('editReqForm').classList.add('hidden');
         if(error || !data || data.length === 0) { container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No requests found with this number.</div>"; } 
@@ -726,25 +647,33 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
 
     async function publishNotice() {
         const title = document.getElementById('noticeTitle').value; const content = document.getElementById('noticeContent').value;
-        if(!title || !content) { alert("Write title and content"); return; }
-        const btn = event.target; btn.disabled = true; btn.innerHTML = "Publishing...";
+        if(!title || !content) { alert("Write title and content"); return; } const btn = event.target; btn.disabled = true; btn.innerHTML = "Publishing...";
         const { error } = await supabase_client.from('notices').insert([{ title, content }]);
         if(error) { alert("Error!"); } else { alert("Notice Published!"); document.getElementById('noticeTitle').value = ""; document.getElementById('noticeContent').value = ""; loadNotices(); }
         btn.disabled = false; btn.innerHTML = "Publish";
     }
 
-    function checkAdminLogin() { if(sessionStorage.getItem('isAdmin') === 'true') { openPage('adminPanel'); loadAdminData(); } else { openPage('adminLogin'); } }
+    // --- ADMIN LOGIC WITH LOCAL STORAGE ---
+    function checkAdminLogin() { 
+        if(localStorage.getItem('isAdmin') === 'true') { openPage('adminPanel'); loadAdminData(); } 
+        else { openPage('adminLogin'); } 
+    }
 
     function loginAdmin() {
         const email = document.getElementById('adminEmail').value; const pass = document.getElementById('adminPass').value;
-        if(email === 'admin@srb.com' && pass === 'srb@admin') { sessionStorage.setItem('isAdmin', 'true'); openPage('adminPanel'); loadAdminData(); } else { alert('Invalid!'); }
+        if(email === 'admin@srb.com' && pass === 'srb@admin') { 
+            localStorage.setItem('isAdmin', 'true'); // Changed to localStorage
+            openPage('adminPanel'); loadAdminData(); 
+        } else { alert('Invalid!'); }
     }
 
-    function logoutAdmin() { sessionStorage.removeItem('isAdmin'); openPage('home'); }
+    function logoutAdmin() { 
+        localStorage.removeItem('isAdmin'); // Changed to localStorage
+        openPage('home'); 
+    }
 
     async function loadAdminData() {
-        loadAdBanner(); // Load banner settings
-        
+        loadAdBanner();
         const dTable = document.querySelector('#adminDonationTable tbody'); dTable.innerHTML = "<tr><td colspan='6'>Loading...</td></tr>";
         const { data: donations } = await supabase_client.from('donations').select('*').order('created_at', { ascending: false });
         dTable.innerHTML = "";
