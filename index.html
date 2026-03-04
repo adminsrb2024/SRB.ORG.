@@ -53,13 +53,14 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 input, select, textarea{ width:100%; padding:14px; border:2px solid #f0f0f0; border-radius:10px; background: #fafafa; font-size: 14px; }
 input:focus, select:focus, textarea:focus { border-color: var(--primary); outline: none; }
 button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color:white; font-size:15px; font-weight: 700; cursor:pointer; box-shadow: 0 8px 20px rgba(215, 25, 32, 0.3); display: flex; align-items: center; justify-content: center; gap: 8px; }
+button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px; background: #27ae60; color:white; font-size:14px; font-weight: 700; cursor:pointer; margin-top: 10px; }
 .donor-card { display: flex; align-items: center; background: white; padding: 15px; border-radius: 12px; margin-bottom: 12px; border: 1px solid #eee; }
 .donor-avatar { width: 50px; height: 50px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 800; font-size: 16px; margin-right: 15px; }
 .donor-info h4 { font-size: 15px; margin-bottom: 4px; }
 .donor-info p { font-size: 12px; color: var(--text-light); }
 .donor-call-btn { margin-left: auto; background: #25D366; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; }
 
-.request-card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px; border-left: 5px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.request-card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px; border-left: 5px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; }
 .req-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .req-blood { font-size: 18px; font-weight: 800; color: var(--primary); }
 .req-date { font-size: 11px; color: #999; }
@@ -96,6 +97,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .admin-table th, .admin-table td { padding: 6px; border: 1px solid #eee; text-align: left; }
 .admin-table th { background: #f9f9f9; font-size:10px; }
 .del-btn { background: #e74c3c; color: white; border: none; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 10px; }
+.edit-btn { background: #f39c12; color: white; border: none; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 10px; }
 .verify-btn { background: #27ae60; color: white; border: none; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 10px; }
 .pdf-btn { background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; margin-bottom: 10px; width: 100%; }
 
@@ -111,7 +113,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .nagad-card .payment-logo, .nagad-card .payment-number { color: var(--nagad-color); }
 
 .donation-form-section { background: #f9fbfd; padding: 20px; border-radius: 12px; border: 1px dashed #bdc3c7; margin-top: 20px; }
-.donation-form-section h4 { margin-bottom: 15px; color: var(--text); text-align:center; }
 .invoice-box { background: #e8f5e9; padding: 15px; border-radius: 10px; text-align: center; margin-top: 15px; border: 1px solid #27ae60; }
 .invoice-id { font-size: 18px; font-weight: 800; color: #27ae60; letter-spacing: 1px; }
 .download-invoice-btn { margin-top: 10px; background: var(--primary); color: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; border: none; cursor: pointer; }
@@ -148,6 +149,8 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <a onclick="openPage('bloodRequests')"><i class="fas fa-hand-holding-medical"></i> Blood Requests</a>
     <a onclick="openPage('beDonor')"><i class="fas fa-user-plus"></i> Register as Donor</a>
     <a onclick="openPage('requestBlood')"><i class="fas fa-notes-medical"></i> Request Blood</a>
+    <!-- NEW MENU ITEM -->
+    <a onclick="openPage('myRequests')"><i class="fas fa-user-edit"></i> My Requests</a>
     <a onclick="openPage('donate')"><i class="fas fa-hand-holding-heart" style="color:#e91e63;"></i> Donate Us</a>
     <div style="border-top:1px solid #eee; margin:10px 0;"></div>
     <a href="https://www.facebook.com/groups/776274101742103/" target="_blank"><i class="fab fa-facebook fb-icon"></i> Facebook Group</a>
@@ -314,7 +317,65 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       </div>
     </div>
 
-    <!-- BE A DONOR (UPDATED) -->
+    <!-- NEW: MY REQUESTS PAGE -->
+    <div id="myRequests" class="container hidden">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-user-edit"></i> Manage Your Requests</div>
+        <p style="font-size:12px; color:#666; margin-bottom:15px;">Enter your contact number to view and edit your requests.</p>
+        
+        <div class="form-group">
+          <input id="myReqPhone" type="tel" placeholder="Your Contact Number">
+        </div>
+        <button class="primary-btn" onclick="searchMyRequests()">Find My Requests</button>
+      </div>
+      
+      <!-- Results List -->
+      <div id="myReqList"></div>
+
+      <!-- Hidden Edit Form -->
+      <div id="editReqForm" class="card hidden" style="border:2px solid var(--primary);">
+        <div class="card-title"><i class="fas fa-edit"></i> Edit Request</div>
+        
+        <input type="hidden" id="editReqId">
+        
+        <div class="form-group">
+          <label class="form-label">Patient Name</label>
+          <input id="editReqName" placeholder="Full Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hemoglobin</label>
+          <input id="editReqHb" placeholder="e.g., 8.5">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Problem</label>
+          <textarea id="editReqProblem" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Blood Group</label>
+          <select id="editReqBlood">
+            <option>A+</option><option>B+</option><option>O+</option><option>AB+</option>
+            <option>A-</option><option>B-</option><option>O-</option><option>AB-</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input id="editReqLocation">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contact</label>
+          <input id="editReqContact" type="tel">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date</label>
+          <input id="editReqDate" type="date">
+        </div>
+
+        <button class="primary-btn" onclick="updateMyRequest()"><i class="fas fa-save"></i> Save Changes</button>
+        <button onclick="document.getElementById('editReqForm').classList.add('hidden')" style="width:100%; padding:10px; border:none; background:#eee; border-radius:10px; margin-top:5px; cursor:pointer;">Cancel</button>
+      </div>
+    </div>
+
+    <!-- BE A DONOR -->
     <div id="beDonor" class="container hidden">
       <div class="card">
         <div class="card-title"><i class="fas fa-user-plus"></i> Register</div>
@@ -337,7 +398,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <label class="form-label">Location</label>
           <input id="donorLocation" placeholder="Area">
         </div>
-        <!-- NEW FIELD -->
         <div class="form-group">
           <label class="form-label">Last Donation Date</label>
           <input id="donorLastDate" type="date">
@@ -371,7 +431,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <button onclick="logoutAdmin()" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Logout</button>
         </div>
         
-        <!-- Notice -->
         <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-bottom:20px;">
           <h4 style="margin-bottom:10px; font-size:14px;"><i class="fas fa-bullhorn"></i> Publish Notice</h4>
           <div class="form-group" style="margin-bottom:5px;">
@@ -397,7 +456,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
         <p style="font-size:14px; font-weight:600;">Manage Donors</p>
         <div style="overflow-x:auto;">
-          <!-- Updated Table Header -->
           <table class="admin-table" id="adminDonorTable">
             <thead><tr><th>Name</th><th>Blood</th><th>Last Donation</th><th>Phone</th><th>Action</th></tr></thead>
             <tbody></tbody>
@@ -457,7 +515,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       document.getElementById("menu").classList.toggle("active");
       document.getElementById("overlay").style.display = document.getElementById("menu").classList.contains("active") ? "block" : "none";
     }
-    function hidePages(){ ["home", "findDonor", "beDonor", "bloodRequests", "requestBlood", "adminLogin", "adminPanel", "donate"].forEach(id=> document.getElementById(id).classList.add("hidden")); }
+    function hidePages(){ ["home", "findDonor", "beDonor", "bloodRequests", "requestBlood", "adminLogin", "adminPanel", "donate", "myRequests"].forEach(id=> document.getElementById(id).classList.add("hidden")); }
     function openPage(id){ hidePages(); document.getElementById(id).classList.remove("hidden"); if(document.getElementById("menu").classList.contains("active")) toggleMenu(); window.scrollTo(0,0); }
 
     function copyNumber(number) { navigator.clipboard.writeText(number); alert("Copied: " + number); }
@@ -609,7 +667,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           container.innerHTML = "<div class='card' style='text-align:center;'>No donors found.</div>";
       } else {
           data.forEach(d => {
-              // Format Date
               let lastDateText = "Available";
               if(d.last_donation) {
                   const ld = new Date(d.last_donation);
@@ -633,12 +690,11 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       const phone = document.getElementById("donorPhone").value;
       const blood = document.getElementById("donorBlood").value;
       const location = document.getElementById("donorLocation").value;
-      const last_donation = document.getElementById("donorLastDate").value; // New Field
+      const last_donation = document.getElementById("donorLastDate").value;
       
       if(!name || !phone || !location) { alert("Fill all fields"); return; }
       const btn = event.target; btn.disabled = true; btn.innerHTML = "Saving...";
       
-      // Insert with last_donation
       const { error } = await supabase_client.from('donors').insert([{ name, blood, phone, location, last_donation }]);
       
       if(error) { alert("Error!"); } else { alert("Success!"); openPage('home'); loadDashboardStats(); }
@@ -674,6 +730,87 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
                 if(r.problem) detailsHtml += `<span>Problem: ${r.problem}</span>`;
                 container.innerHTML += `<div class="request-card"><div class="req-header"><span class="req-blood">${r.blood_group} Needed</span><span class="req-date">${r.required_date || 'ASAP'}</span></div><div class="req-patient">${r.patient_name}</div><div class="req-details">${detailsHtml}</div><div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div><a href="tel:${r.contact}" class="req-call-btn"><i class="fas fa-phone-alt"></i> Call Now</a></div>`;
             });
+        }
+    }
+
+    // --- MY REQUESTS LOGIC ---
+    async function searchMyRequests() {
+        const phone = document.getElementById("myReqPhone").value;
+        if(!phone) { alert("Enter your contact number"); return; }
+
+        const container = document.getElementById("myReqList");
+        container.innerHTML = "<div class='card' style='text-align:center;'>Searching...</div>";
+
+        const { data, error } = await supabase_client.from('requests').select('*').eq('contact', phone).order('created_at', { ascending: false });
+        
+        container.innerHTML = "";
+        document.getElementById('editReqForm').classList.add('hidden');
+
+        if(error || !data || data.length === 0) {
+            container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No requests found with this number.</div>";
+        } else {
+            data.forEach(r => {
+                container.innerHTML += `<div class="request-card" style="border-left-color: ${r.status === 'Pending' ? 'var(--primary)' : '#27ae60'};">
+                    <div class="req-header">
+                        <span class="req-blood">${r.blood_group} Needed</span>
+                        <span class="req-date" style="color:${r.status === 'Pending' ? 'red' : 'green'}; font-weight:bold;">${r.status || 'Pending'}</span>
+                    </div>
+                    <div class="req-patient">${r.patient_name}</div>
+                    <div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div>
+                    <div style="margin-top:10px; display:flex; gap:10px;">
+                        <button class="edit-btn" onclick="loadEditForm('${r.id}', '${r.patient_name}', '${r.blood_group}', '${r.location}', '${r.contact}', '${r.required_date || ''}', '${r.hemoglobin || ''}', '${r.problem || ''}')"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="del-btn" onclick="deleteMyRequest('${r.id}')"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </div>`;
+            });
+        }
+    }
+
+    function loadEditForm(id, name, blood, loc, contact, date, hb, prob) {
+        document.getElementById('editReqId').value = id;
+        document.getElementById('editReqName').value = name;
+        document.getElementById('editReqBlood').value = blood;
+        document.getElementById('editReqLocation').value = loc;
+        document.getElementById('editReqContact').value = contact;
+        document.getElementById('editReqDate').value = date;
+        document.getElementById('editReqHb').value = hb;
+        document.getElementById('editReqProblem').value = prob;
+
+        document.getElementById('editReqForm').classList.remove('hidden');
+        document.getElementById('editReqForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function updateMyRequest() {
+        const id = document.getElementById('editReqId').value;
+        const payload = {
+            patient_name: document.getElementById('editReqName').value,
+            blood_group: document.getElementById('editReqBlood').value,
+            location: document.getElementById('editReqLocation').value,
+            contact: document.getElementById('editReqContact').value,
+            required_date: document.getElementById('editReqDate').value,
+            hemoglobin: document.getElementById('editReqHb').value,
+            problem: document.getElementById('editReqProblem').value
+        };
+
+        const { error } = await supabase_client.from('requests').update(payload).eq('id', id);
+        if(error) { alert("Error updating!"); }
+        else { 
+            alert("Updated Successfully!"); 
+            document.getElementById('editReqForm').classList.add('hidden');
+            searchMyRequests(); 
+            loadPublicRequests();
+        }
+    }
+
+    async function deleteMyRequest(id) {
+        if(confirm("Are you sure you want to delete this request?")) {
+            const { error } = await supabase_client.from('requests').delete().eq('id', id);
+            if(!error) { 
+                alert("Deleted!"); 
+                searchMyRequests(); 
+                loadPublicRequests(); 
+                loadDashboardStats();
+            }
         }
     }
 
@@ -732,7 +869,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             </tr>`;
         });
 
-        // Donors Table Updated
         const donorTable = document.querySelector('#adminDonorTable tbody');
         donorTable.innerHTML = "<tr><td colspan='5'>Loading...</td></tr>";
         const { data: donors } = await supabase_client.from('donors').select('*').order('created_at', { ascending: false });
