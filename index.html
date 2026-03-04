@@ -44,6 +44,10 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text); overflow-x: h
 .stat-num { font-size: 20px; font-weight: 800; color: var(--primary); }
 .stat-label { font-size: 9px; color: var(--text-light); text-transform: uppercase; margin-top: 2px; }
 
+/* AD BANNER STYLE */
+.ad-banner-container { display: flex; justify-content: center; align-items: center; margin: 15px 0; }
+.ad-banner-img { width: 300px; height: 100px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; }
+
 .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
 .dash-card { background: white; padding: 18px 15px; border-radius: 16px; text-align: center; box-shadow: var(--shadow); cursor: pointer; transition: 0.3s; }
 .dash-card:hover { transform: translateY(-3px); }
@@ -103,7 +107,6 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
 .verify-btn { background: #27ae60; color: white; border: none; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 10px; }
 .pdf-btn { background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; margin-bottom: 10px; width: 100%; }
 
-/* Pull to Refresh Indicator */
 #refreshIndicator {
   position: fixed;
   top: 70px;
@@ -200,6 +203,15 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
             <i class="fas fa-heartbeat"></i> Welcome
             <i class="fas fa-sync-alt refresh-icon" id="refreshBtn" onclick="manualRefresh()"></i>
         </div>
+        
+        <!-- AD BANNER START -->
+        <div class="ad-banner-container">
+            <a id="adLink" href="#" target="_blank"> 
+                <img id="adBannerImg" src="https://via.placeholder.com/300x100/FF6B6B/FFFFFF?text=Ad+Banner" alt="Ad Banner" class="ad-banner-img">
+            </a>
+        </div>
+        <!-- AD BANNER END -->
+
         <div class="hero-stats">
           <div class="stat-item">
             <div class="stat-num" id="statDonors">-</div>
@@ -220,9 +232,6 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
         <div class="dash-card" onclick="openPage('bloodRequests')"><div class="dash-icon"><i class="fas fa-hand-holding-medical"></i></div><div class="dash-title">Requests</div></div>
         <div class="dash-card" onclick="openPage('beDonor')"><div class="dash-icon"><i class="fas fa-user-plus"></i></div><div class="dash-title">Be a Donor</div></div>
         <div class="dash-card" onclick="openPage('requestBlood')"><div class="dash-icon"><i class="fas fa-plus-circle"></i></div><div class="dash-title">Request Blood</div></div>
-      </div>
-      <div onclick="openPage('donate')" class="card" style="cursor:pointer; border:1px dashed var(--bkash-color); text-align:center;">
-         <p style="color:var(--bkash-color); font-weight:600;"><i class="fas fa-heart"></i> স্বেচ্ছাসেবীদের সাহায্য করুন</p>
       </div>
     </div>
 
@@ -360,41 +369,14 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
 
       <div id="editReqForm" class="card hidden" style="border:2px solid var(--primary);">
         <div class="card-title"><i class="fas fa-edit"></i> Edit Request</div>
-        
         <input type="hidden" id="editReqId">
-        
-        <div class="form-group">
-          <label class="form-label">Patient Name</label>
-          <input id="editReqName" placeholder="Full Name">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Hemoglobin</label>
-          <input id="editReqHb" placeholder="e.g., 8.5">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Problem</label>
-          <textarea id="editReqProblem" rows="2"></textarea>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Blood Group</label>
-          <select id="editReqBlood">
-            <option>A+</option><option>B+</option><option>O+</option><option>AB+</option>
-            <option>A-</option><option>B-</option><option>O-</option><option>AB-</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Location</label>
-          <input id="editReqLocation">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Contact</label>
-          <input id="editReqContact" type="tel">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Date</label>
-          <input id="editReqDate" type="date">
-        </div>
-
+        <div class="form-group"><label class="form-label">Patient Name</label><input id="editReqName"></div>
+        <div class="form-group"><label class="form-label">Hemoglobin</label><input id="editReqHb"></div>
+        <div class="form-group"><label class="form-label">Problem</label><textarea id="editReqProblem" rows="2"></textarea></div>
+        <div class="form-group"><label class="form-label">Blood Group</label><select id="editReqBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div>
+        <div class="form-group"><label class="form-label">Location</label><input id="editReqLocation"></div>
+        <div class="form-group"><label class="form-label">Contact</label><input id="editReqContact" type="tel"></div>
+        <div class="form-group"><label class="form-label">Date</label><input id="editReqDate" type="date"></div>
         <button class="primary-btn" onclick="updateMyRequest()"><i class="fas fa-save"></i> Save Changes</button>
         <button onclick="document.getElementById('editReqForm').classList.add('hidden')" style="width:100%; padding:10px; border:none; background:#eee; border-radius:10px; margin-top:5px; cursor:pointer;">Cancel</button>
       </div>
@@ -404,29 +386,11 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
     <div id="beDonor" class="container hidden">
       <div class="card">
         <div class="card-title"><i class="fas fa-user-plus"></i> Register</div>
-        <div class="form-group">
-          <label class="form-label">Name</label>
-          <input id="donorName" placeholder="Full Name">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Blood Group</label>
-          <select id="donorBlood">
-            <option>A+</option><option>B+</option><option>O+</option><option>AB+</option>
-            <option>A-</option><option>B-</option><option>O-</option><option>AB-</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Phone</label>
-          <input id="donorPhone" type="tel" placeholder="01XXXXXXXXX">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Location</label>
-          <input id="donorLocation" placeholder="Area">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Last Donation Date</label>
-          <input id="donorLastDate" type="date">
-        </div>
+        <div class="form-group"><label class="form-label">Name</label><input id="donorName"></div>
+        <div class="form-group"><label class="form-label">Blood Group</label><select id="donorBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div>
+        <div class="form-group"><label class="form-label">Phone</label><input id="donorPhone" type="tel"></div>
+        <div class="form-group"><label class="form-label">Location</label><input id="donorLocation"></div>
+        <div class="form-group"><label class="form-label">Last Donation Date</label><input id="donorLastDate" type="date"></div>
         <button class="primary-btn" onclick="registerDonor()">Register Now</button>
       </div>
     </div>
@@ -436,14 +400,8 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
       <div class="card" style="text-align:center;">
         <img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9" style="width:80px; height:80px; border-radius:50%; margin-bottom:15px;" alt="Logo">
         <h3 style="margin-bottom:20px; color:var(--text);">Admin Login</h3>
-        <div class="form-group" style="text-align:left;">
-          <label class="form-label">Email</label>
-          <input id="adminEmail" type="email" placeholder="admin@srb.com">
-        </div>
-        <div class="form-group" style="text-align:left;">
-          <label class="form-label">Password</label>
-          <input id="adminPass" type="password" placeholder="Password">
-        </div>
+        <div class="form-group" style="text-align:left;"><label class="form-label">Email</label><input id="adminEmail" type="email"></div>
+        <div class="form-group" style="text-align:left;"><label class="form-label">Password</label><input id="adminPass" type="password"></div>
         <button class="primary-btn" onclick="loginAdmin()">Login</button>
       </div>
     </div>
@@ -456,14 +414,25 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
           <button onclick="logoutAdmin()" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Logout</button>
         </div>
         
-        <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-bottom:20px;">
-          <h4 style="margin-bottom:10px; font-size:14px;"><i class="fas fa-bullhorn"></i> Publish Notice</h4>
+        <!-- AD BANNER SETTINGS -->
+        <div style="background:#e8f5e9; padding:15px; border-radius:10px; margin-bottom:20px; border:1px solid #27ae60;">
+          <h4 style="margin-bottom:10px; font-size:14px; color:#27ae60;"><i class="fas fa-ad"></i> Ad Banner Settings</h4>
           <div class="form-group" style="margin-bottom:5px;">
-            <input type="text" id="noticeTitle" placeholder="Notice Title" style="background:white;">
+            <label class="form-label">Image Link (300x100)</label>
+            <input type="text" id="adImgInput" placeholder="Paste Image URL here" style="background:white;">
           </div>
           <div class="form-group">
-            <textarea id="noticeContent" rows="2" placeholder="Details..." style="background:white;"></textarea>
+            <label class="form-label">Link (Website URL)</label>
+            <input type="text" id="adLinkInput" placeholder="https://example.com" style="background:white;">
           </div>
+          <button class="primary-btn" style="padding:10px; background:#27ae60;" onclick="saveAdBanner()">Save Banner</button>
+        </div>
+
+        <!-- NOTICE -->
+        <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-bottom:20px;">
+          <h4 style="margin-bottom:10px; font-size:14px;"><i class="fas fa-bullhorn"></i> Publish Notice</h4>
+          <div class="form-group" style="margin-bottom:5px;"><input type="text" id="noticeTitle" placeholder="Notice Title" style="background:white;"></div>
+          <div class="form-group"><textarea id="noticeContent" rows="2" placeholder="Details..." style="background:white;"></textarea></div>
           <button class="primary-btn" style="padding:10px;" onclick="publishNotice()">Publish</button>
         </div>
 
@@ -531,58 +500,25 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
       document.getElementById("splash").style.display="none";
       document.getElementById("app").classList.remove("hidden");
       loadInitialData();
+      loadAdBanner(); // Load Ad
     }, 1000);
 
     // --- PULL TO REFRESH LOGIC ---
     let touchStartY = 0;
     let touchEndY = 0;
-
-    document.addEventListener('touchstart', e => {
-        touchStartY = e.touches[0].clientY;
-    }, {passive: true});
-
-    document.addEventListener('touchend', e => {
-        touchEndY = e.changedTouches[0].clientY;
-        handleSwipe();
-    }, {passive: true});
-
-    function handleSwipe() {
-        // Check if user is at the top of the page
-        if (window.scrollY === 0) {
-            // Check if swipe was downward (positive difference)
-            if (touchEndY - touchStartY > 80) {
-                manualRefresh();
-            }
-        }
-    }
-
+    document.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, {passive: true});
+    document.addEventListener('touchend', e => { touchEndY = e.changedTouches[0].clientY; handleSwipe(); }, {passive: true});
+    function handleSwipe() { if (window.scrollY === 0) { if (touchEndY - touchStartY > 80) { manualRefresh(); } } }
     function manualRefresh() {
         const indicator = document.getElementById('refreshIndicator');
         const refreshBtn = document.getElementById('refreshBtn');
-        
-        // Show indicator
         indicator.style.height = '50px';
         if(refreshBtn) refreshBtn.classList.add('active');
-
-        // Reload Data
-        loadDashboardStats();
-        loadPublicRequests();
-        loadNotices();
-        // Visitor count usually doesn't need refresh on manual pull, but you can add trackAndLoadVisitors() if needed
-
-        // Hide indicator after 1 second
-        setTimeout(() => {
-            indicator.style.height = '0px';
-            if(refreshBtn) refreshBtn.classList.remove('active');
-        }, 1000);
+        loadDashboardStats(); loadPublicRequests(); loadNotices(); loadAdBanner();
+        setTimeout(() => { indicator.style.height = '0px'; if(refreshBtn) refreshBtn.classList.remove('active'); }, 1000);
     }
 
-    function loadInitialData() {
-        loadDashboardStats();
-        loadPublicRequests();
-        loadNotices();
-        trackAndLoadVisitors();
-    }
+    function loadInitialData() { loadDashboardStats(); loadPublicRequests(); loadNotices(); trackAndLoadVisitors(); }
 
     function toggleMenu(){
       document.getElementById("menu").classList.toggle("active");
@@ -592,6 +528,30 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
     function openPage(id){ hidePages(); document.getElementById(id).classList.remove("hidden"); if(document.getElementById("menu").classList.contains("active")) toggleMenu(); window.scrollTo(0,0); }
 
     function copyNumber(number) { navigator.clipboard.writeText(number); alert("Copied: " + number); }
+
+    // --- AD BANNER LOGIC ---
+    async function loadAdBanner() {
+        const { data } = await supabase_client.from('ad_settings').select('*').eq('id', 1).single();
+        if(data) {
+            if(data.image_url) document.getElementById('adBannerImg').src = data.image_url;
+            if(data.link_url) document.getElementById('adLink').href = data.link_url;
+            
+            // Update admin inputs if visible
+            if(document.getElementById('adminPanel').classList.contains('hidden') === false) {
+                document.getElementById('adImgInput').value = data.image_url || '';
+                document.getElementById('adLinkInput').value = data.link_url || '';
+            }
+        }
+    }
+
+    async function saveAdBanner() {
+        const img_url = document.getElementById('adImgInput').value;
+        const link_url = document.getElementById('adLinkInput').value;
+        
+        const { error } = await supabase_client.from('ad_settings').update({ image_url: img_url, link_url: link_url }).eq('id', 1);
+        if(error) alert("Error saving banner!");
+        else { alert("Banner Updated!"); loadAdBanner(); }
+    }
 
     async function submitDonation() {
         const name = document.getElementById("donationName").value;
@@ -613,105 +573,42 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
         if(error) { alert("Error!"); console.error(error); btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit & Get Invoice"; }
         else {
             currentInvoiceData = { invoice_id, name, amount, payment_method, date: new Date().toLocaleDateString() };
-            
             document.getElementById("generatedInvoiceId").innerText = invoice_id;
             document.getElementById("invoiceDisplay").classList.remove("hidden");
-            
-            document.getElementById("donationName").value = "";
-            document.getElementById("donationAmount").value = "";
-            document.getElementById("donationTrx").value = "";
-            document.getElementById("donationMethod").value = "";
-            
+            document.getElementById("donationName").value = ""; document.getElementById("donationAmount").value = ""; document.getElementById("donationTrx").value = ""; document.getElementById("donationMethod").value = "";
             btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit & Get Invoice";
         }
     }
 
     function downloadUserInvoice() {
         const { invoice_id, name, amount, payment_method, date } = currentInvoiceData;
-        
         const doc = new jsPDF();
-        
-        doc.setFillColor(215, 25, 32);
-        doc.rect(0, 0, 220, 40, 'F');
-        
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(22);
-        doc.setFont('helvetica', 'bold');
+        doc.setFillColor(215, 25, 32); doc.rect(0, 0, 220, 40, 'F');
+        doc.setTextColor(255, 255, 255); doc.setFontSize(22); doc.setFont('helvetica', 'bold');
         doc.text("Sreenagar Rokter Bondhon", 105, 20, {align: 'center'});
-        doc.setFontSize(10);
-        doc.text("Donation Invoice", 105, 28, {align: 'center'});
-
-        doc.setTextColor(44, 62, 80);
-        doc.setFontSize(12);
-        
-        let y = 60;
-        doc.setFont('helvetica', 'bold');
-        doc.text("Invoice ID:", 20, y);
-        doc.setFont('helvetica', 'normal');
-        doc.text(invoice_id, 70, y);
-        
-        y += 15;
-        doc.setFont('helvetica', 'bold');
-        doc.text("Date:", 20, y);
-        doc.setFont('helvetica', 'normal');
-        doc.text(date, 70, y);
-
-        y += 15;
-        doc.setFont('helvetica', 'bold');
-        doc.text("Donor Name:", 20, y);
-        doc.setFont('helvetica', 'normal');
-        doc.text(name, 70, y);
-
-        y += 15;
-        doc.setFont('helvetica', 'bold');
-        doc.text("Amount:", 20, y);
-        doc.setFont('helvetica', 'normal');
-        doc.text(amount + " Taka", 70, y);
-
-        y += 15;
-        doc.setFont('helvetica', 'bold');
-        doc.text("Payment Method:", 20, y);
-        doc.setFont('helvetica', 'normal');
-        doc.text(payment_method, 70, y);
-
-        doc.setFillColor(245, 246, 249);
-        doc.rect(0, 250, 220, 50, 'F');
-        doc.setFontSize(10);
-        doc.setTextColor(127, 140, 141);
+        doc.setFontSize(10); doc.text("Donation Invoice", 105, 28, {align: 'center'});
+        doc.setTextColor(44, 62, 80); doc.setFontSize(12);
+        let y = 60; doc.setFont('helvetica', 'bold'); doc.text("Invoice ID:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(invoice_id, 70, y);
+        y += 15; doc.setFont('helvetica', 'bold'); doc.text("Date:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(date, 70, y);
+        y += 15; doc.setFont('helvetica', 'bold'); doc.text("Donor Name:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(name, 70, y);
+        y += 15; doc.setFont('helvetica', 'bold'); doc.text("Amount:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(amount + " Taka", 70, y);
+        y += 15; doc.setFont('helvetica', 'bold'); doc.text("Payment Method:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(payment_method, 70, y);
+        doc.setFillColor(245, 246, 249); doc.rect(0, 250, 220, 50, 'F');
+        doc.setFontSize(10); doc.setTextColor(127, 140, 141);
         doc.text("Thank you for your donation.", 105, 260, {align: 'center'});
         doc.text("Sreenagar Rokter Bondhon Team", 105, 270, {align: 'center'});
-
         doc.save('Invoice_' + invoice_id + '.pdf');
     }
 
     async function generateAdminPDF() {
         const { data } = await supabase_client.from('donations').select('*').order('created_at', { ascending: false });
         if(!data) return;
-
         const doc = new jsPDF();
-        
-        doc.setTextColor(215, 25, 32);
-        doc.setFontSize(20);
-        doc.text("Donation Report", 105, 20, {align: 'center'});
-        
-        doc.setTextColor(100);
-        doc.setFontSize(10);
-        doc.text("Generated on: " + new Date().toLocaleDateString(), 105, 28, {align: 'center'});
-
+        doc.setTextColor(215, 25, 32); doc.setFontSize(20); doc.text("Donation Report", 105, 20, {align: 'center'});
+        doc.setTextColor(100); doc.setFontSize(10); doc.text("Generated on: " + new Date().toLocaleDateString(), 105, 28, {align: 'center'});
         const tableColumn = ["Invoice", "Name", "Amount", "Method", "Status"];
         const tableRows = [];
-
-        data.forEach(d => {
-            const row = [
-                d.invoice_id,
-                d.name,
-                d.amount + " Tk",
-                d.payment_method,
-                d.status || 'Pending'
-            ];
-            tableRows.push(row);
-        });
-
+        data.forEach(d => { const row = [ d.invoice_id, d.name, d.amount + " Tk", d.payment_method, d.status || 'Pending' ]; tableRows.push(row); });
         doc.autoTable(tableColumn, tableRows, { startY: 35, theme: 'grid', styles: {fontSize: 8} });
         doc.save('Donation_Report.pdf');
     }
@@ -741,47 +638,23 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
       } else {
           data.forEach(d => {
               let lastDateText = "Available";
-              if(d.last_donation) {
-                  const ld = new Date(d.last_donation);
-                  lastDateText = "Last: " + ld.toLocaleDateString();
-              }
-
-              container.innerHTML += `<div class="donor-card">
-                  <div class="donor-avatar">${d.blood}</div>
-                  <div class="donor-info">
-                      <h4>${d.name}</h4>
-                      <p>${d.location} | ${lastDateText}</p>
-                  </div>
-                  <a href="tel:${d.phone}" class="donor-call-btn"><i class="fas fa-phone-alt"></i></a>
-              </div>`;
+              if(d.last_donation) { const ld = new Date(d.last_donation); lastDateText = "Last: " + ld.toLocaleDateString(); }
+              container.innerHTML += `<div class="donor-card"><div class="donor-avatar">${d.blood}</div><div class="donor-info"><h4>${d.name}</h4><p>${d.location} | ${lastDateText}</p></div><a href="tel:${d.phone}" class="donor-call-btn"><i class="fas fa-phone-alt"></i></a></div>`;
           });
       }
     }
 
     async function registerDonor() {
-      const name = document.getElementById("donorName").value;
-      const phone = document.getElementById("donorPhone").value;
-      const blood = document.getElementById("donorBlood").value;
-      const location = document.getElementById("donorLocation").value;
-      const last_donation = document.getElementById("donorLastDate").value;
-      
+      const name = document.getElementById("donorName").value; const phone = document.getElementById("donorPhone").value; const blood = document.getElementById("donorBlood").value; const location = document.getElementById("donorLocation").value; const last_donation = document.getElementById("donorLastDate").value;
       if(!name || !phone || !location) { alert("Fill all fields"); return; }
       const btn = event.target; btn.disabled = true; btn.innerHTML = "Saving...";
-      
       const { error } = await supabase_client.from('donors').insert([{ name, blood, phone, location, last_donation }]);
-      
       if(error) { alert("Error!"); } else { alert("Success!"); openPage('home'); loadDashboardStats(); }
       btn.disabled = false; btn.innerHTML = "Register Now";
     }
 
     async function submitRequest() {
-        const patient_name = document.getElementById("reqName").value;
-        const blood_group = document.getElementById("reqBlood").value;
-        const location = document.getElementById("reqLocation").value;
-        const contact = document.getElementById("reqContact").value;
-        const required_date = document.getElementById("reqDate").value;
-        const hemoglobin = document.getElementById("reqHemoglobin").value;
-        const problem = document.getElementById("reqProblem").value;
+        const patient_name = document.getElementById("reqName").value; const blood_group = document.getElementById("reqBlood").value; const location = document.getElementById("reqLocation").value; const contact = document.getElementById("reqContact").value; const required_date = document.getElementById("reqDate").value; const hemoglobin = document.getElementById("reqHemoglobin").value; const problem = document.getElementById("reqProblem").value;
         if(!patient_name || !contact || !location) { alert("Fill all fields"); return; }
         const btn = event.target; btn.disabled = true; btn.innerHTML = "Posting...";
         const { error } = await supabase_client.from('requests').insert([{ patient_name, blood_group, location, contact, required_date, hemoglobin, problem }]);
@@ -794,13 +667,10 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
         container.innerHTML = "Loading...";
         const { data } = await supabase_client.from('requests').select('*').eq('status', 'Pending').order('created_at', { ascending: false });
         container.innerHTML = "";
-        if (!data || data.length === 0) {
-            container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No pending requests.</div>";
-        } else {
+        if (!data || data.length === 0) { container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No pending requests.</div>"; } 
+        else {
             data.forEach(r => {
-                let detailsHtml = '';
-                if(r.hemoglobin) detailsHtml += `<span>Hb: ${r.hemoglobin}</span>`;
-                if(r.problem) detailsHtml += `<span>Problem: ${r.problem}</span>`;
+                let detailsHtml = ''; if(r.hemoglobin) detailsHtml += `<span>Hb: ${r.hemoglobin}</span>`; if(r.problem) detailsHtml += `<span>Problem: ${r.problem}</span>`;
                 container.innerHTML += `<div class="request-card"><div class="req-header"><span class="req-blood">${r.blood_group} Needed</span><span class="req-date">${r.required_date || 'ASAP'}</span></div><div class="req-patient">${r.patient_name}</div><div class="req-details">${detailsHtml}</div><div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div><a href="tel:${r.contact}" class="req-call-btn"><i class="fas fa-phone-alt"></i> Call Now</a></div>`;
             });
         }
@@ -810,26 +680,16 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
     async function searchMyRequests() {
         const phone = document.getElementById("myReqPhone").value;
         if(!phone) { alert("Enter your contact number"); return; }
-
         const container = document.getElementById("myReqList");
         container.innerHTML = "<div class='card' style='text-align:center;'>Searching...</div>";
-
         const { data, error } = await supabase_client.from('requests').select('*').eq('contact', phone).order('created_at', { ascending: false });
-        
-        container.innerHTML = "";
-        document.getElementById('editReqForm').classList.add('hidden');
-
-        if(error || !data || data.length === 0) {
-            container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No requests found with this number.</div>";
-        } else {
+        container.innerHTML = ""; document.getElementById('editReqForm').classList.add('hidden');
+        if(error || !data || data.length === 0) { container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No requests found with this number.</div>"; } 
+        else {
             data.forEach(r => {
                 container.innerHTML += `<div class="request-card" style="border-left-color: ${r.status === 'Pending' ? 'var(--primary)' : '#27ae60'};">
-                    <div class="req-header">
-                        <span class="req-blood">${r.blood_group} Needed</span>
-                        <span class="req-date" style="color:${r.status === 'Pending' ? 'red' : 'green'}; font-weight:bold;">${r.status || 'Pending'}</span>
-                    </div>
-                    <div class="req-patient">${r.patient_name}</div>
-                    <div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div>
+                    <div class="req-header"><span class="req-blood">${r.blood_group} Needed</span><span class="req-date" style="color:${r.status === 'Pending' ? 'red' : 'green'}; font-weight:bold;">${r.status || 'Pending'}</span></div>
+                    <div class="req-patient">${r.patient_name}</div><div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div>
                     <div style="margin-top:10px; display:flex; gap:10px;">
                         <button class="edit-btn" onclick="loadEditForm('${r.id}', '${r.patient_name}', '${r.blood_group}', '${r.location}', '${r.contact}', '${r.required_date || ''}', '${r.hemoglobin || ''}', '${r.problem || ''}')"><i class="fas fa-edit"></i> Edit</button>
                         <button class="del-btn" onclick="deleteMyRequest('${r.id}')"><i class="fas fa-trash"></i> Delete</button>
@@ -840,66 +700,32 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
     }
 
     function loadEditForm(id, name, blood, loc, contact, date, hb, prob) {
-        document.getElementById('editReqId').value = id;
-        document.getElementById('editReqName').value = name;
-        document.getElementById('editReqBlood').value = blood;
-        document.getElementById('editReqLocation').value = loc;
-        document.getElementById('editReqContact').value = contact;
-        document.getElementById('editReqDate').value = date;
-        document.getElementById('editReqHb').value = hb;
-        document.getElementById('editReqProblem').value = prob;
-
-        document.getElementById('editReqForm').classList.remove('hidden');
-        document.getElementById('editReqForm').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('editReqId').value = id; document.getElementById('editReqName').value = name; document.getElementById('editReqBlood').value = blood; document.getElementById('editReqLocation').value = loc; document.getElementById('editReqContact').value = contact; document.getElementById('editReqDate').value = date; document.getElementById('editReqHb').value = hb; document.getElementById('editReqProblem').value = prob;
+        document.getElementById('editReqForm').classList.remove('hidden'); document.getElementById('editReqForm').scrollIntoView({ behavior: 'smooth' });
     }
 
     async function updateMyRequest() {
         const id = document.getElementById('editReqId').value;
-        const payload = {
-            patient_name: document.getElementById('editReqName').value,
-            blood_group: document.getElementById('editReqBlood').value,
-            location: document.getElementById('editReqLocation').value,
-            contact: document.getElementById('editReqContact').value,
-            required_date: document.getElementById('editReqDate').value,
-            hemoglobin: document.getElementById('editReqHb').value,
-            problem: document.getElementById('editReqProblem').value
-        };
-
+        const payload = { patient_name: document.getElementById('editReqName').value, blood_group: document.getElementById('editReqBlood').value, location: document.getElementById('editReqLocation').value, contact: document.getElementById('editReqContact').value, required_date: document.getElementById('editReqDate').value, hemoglobin: document.getElementById('editReqHb').value, problem: document.getElementById('editReqProblem').value };
         const { error } = await supabase_client.from('requests').update(payload).eq('id', id);
-        if(error) { alert("Error updating!"); }
-        else { 
-            alert("Updated Successfully!"); 
-            document.getElementById('editReqForm').classList.add('hidden');
-            searchMyRequests(); 
-            loadPublicRequests();
-        }
+        if(error) { alert("Error updating!"); } else { alert("Updated Successfully!"); document.getElementById('editReqForm').classList.add('hidden'); searchMyRequests(); loadPublicRequests(); }
     }
 
     async function deleteMyRequest(id) {
         if(confirm("Are you sure you want to delete this request?")) {
             const { error } = await supabase_client.from('requests').delete().eq('id', id);
-            if(!error) { 
-                alert("Deleted!"); 
-                searchMyRequests(); 
-                loadPublicRequests(); 
-                loadDashboardStats();
-            }
+            if(!error) { alert("Deleted!"); searchMyRequests(); loadPublicRequests(); loadDashboardStats(); }
         }
     }
 
     async function loadNotices() {
         const { data } = await supabase_client.from('notices').select('*').order('created_at', { ascending: false }).limit(1);
-        if (data && data.length > 0) {
-            const notice = data[0];
-            document.getElementById('noticeTitleHeader').innerText = notice.title;
-            document.getElementById('noticeBodyContent').innerText = notice.content;
-            document.getElementById('noticeDisplay').style.display = 'block';
-        } else { document.getElementById('noticeDisplay').style.display = 'none'; }
+        if (data && data.length > 0) { const notice = data[0]; document.getElementById('noticeTitleHeader').innerText = notice.title; document.getElementById('noticeBodyContent').innerText = notice.content; document.getElementById('noticeDisplay').style.display = 'block'; } 
+        else { document.getElementById('noticeDisplay').style.display = 'none'; }
     }
 
     async function publishNotice() {
-        const title = document.getElementById('noticeTitle').value;
-        const content = document.getElementById('noticeContent').value;
+        const title = document.getElementById('noticeTitle').value; const content = document.getElementById('noticeContent').value;
         if(!title || !content) { alert("Write title and content"); return; }
         const btn = event.target; btn.disabled = true; btn.innerHTML = "Publishing...";
         const { error } = await supabase_client.from('notices').insert([{ title, content }]);
@@ -907,65 +733,39 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
         btn.disabled = false; btn.innerHTML = "Publish";
     }
 
-    function checkAdminLogin() {
-        if(sessionStorage.getItem('isAdmin') === 'true') { openPage('adminPanel'); loadAdminData(); }
-        else { openPage('adminLogin'); }
-    }
+    function checkAdminLogin() { if(sessionStorage.getItem('isAdmin') === 'true') { openPage('adminPanel'); loadAdminData(); } else { openPage('adminLogin'); } }
 
     function loginAdmin() {
-        const email = document.getElementById('adminEmail').value;
-        const pass = document.getElementById('adminPass').value;
-        if(email === 'admin@srb.com' && pass === 'srb@admin') {
-            sessionStorage.setItem('isAdmin', 'true');
-            openPage('adminPanel'); loadAdminData();
-        } else { alert('Invalid!'); }
+        const email = document.getElementById('adminEmail').value; const pass = document.getElementById('adminPass').value;
+        if(email === 'admin@srb.com' && pass === 'srb@admin') { sessionStorage.setItem('isAdmin', 'true'); openPage('adminPanel'); loadAdminData(); } else { alert('Invalid!'); }
     }
 
     function logoutAdmin() { sessionStorage.removeItem('isAdmin'); openPage('home'); }
 
     async function loadAdminData() {
-        const dTable = document.querySelector('#adminDonationTable tbody');
-        dTable.innerHTML = "<tr><td colspan='6'>Loading...</td></tr>";
+        loadAdBanner(); // Load banner settings
+        
+        const dTable = document.querySelector('#adminDonationTable tbody'); dTable.innerHTML = "<tr><td colspan='6'>Loading...</td></tr>";
         const { data: donations } = await supabase_client.from('donations').select('*').order('created_at', { ascending: false });
         dTable.innerHTML = "";
         donations.forEach(d => {
-            const statusText = d.status || 'Pending';
-            const statusColor = statusText === 'Verified' ? 'green' : 'orange';
+            const statusText = d.status || 'Pending'; const statusColor = statusText === 'Verified' ? 'green' : 'orange';
             const verifyBtn = statusText === 'Pending' ? `<button class='verify-btn' onclick="verifyDonation('${d.id}')">Verify</button>` : '';
-            dTable.innerHTML += `<tr>
-                <td>${d.invoice_id}</td>
-                <td>${d.name}</td>
-                <td>${d.amount} Tk</td>
-                <td>${d.payment_method || 'N/A'}</td>
-                <td style='color:${statusColor}; font-weight:bold;'>${statusText}</td>
-                <td>${verifyBtn} <button class='del-btn' onclick="deleteDonation('${d.id}')">Del</button></td>
-            </tr>`;
+            dTable.innerHTML += `<tr><td>${d.invoice_id}</td><td>${d.name}</td><td>${d.amount} Tk</td><td>${d.payment_method || 'N/A'}</td><td style='color:${statusColor}; font-weight:bold;'>${statusText}</td><td>${verifyBtn} <button class='del-btn' onclick="deleteDonation('${d.id}')">Del</button></td></tr>`;
         });
 
-        const donorTable = document.querySelector('#adminDonorTable tbody');
-        donorTable.innerHTML = "<tr><td colspan='5'>Loading...</td></tr>";
+        const donorTable = document.querySelector('#adminDonorTable tbody'); donorTable.innerHTML = "<tr><td colspan='5'>Loading...</td></tr>";
         const { data: donors } = await supabase_client.from('donors').select('*').order('created_at', { ascending: false });
         donorTable.innerHTML = "";
-        donors.forEach(d => { 
-            const lastDate = d.last_donation ? new Date(d.last_donation).toLocaleDateString() : 'N/A';
-            donorTable.innerHTML += `<tr><td>${d.name}</td><td>${d.blood}</td><td>${lastDate}</td><td>${d.phone}</td><td><button class='del-btn' onclick="deleteDonor('${d.id}')">Delete</button></td></tr>`; 
-        });
+        donors.forEach(d => { const lastDate = d.last_donation ? new Date(d.last_donation).toLocaleDateString() : 'N/A'; donorTable.innerHTML += `<tr><td>${d.name}</td><td>${d.blood}</td><td>${lastDate}</td><td>${d.phone}</td><td><button class='del-btn' onclick="deleteDonor('${d.id}')">Delete</button></td></tr>`; });
 
-        const rTable = document.querySelector('#adminReqTable tbody');
-        rTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
+        const rTable = document.querySelector('#adminReqTable tbody'); rTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
         const { data: requests } = await supabase_client.from('requests').select('*').order('created_at', { ascending: false });
         rTable.innerHTML = "";
         requests.forEach(r => { rTable.innerHTML += `<tr><td>${r.patient_name}</td><td>${r.problem || '-'}</td><td>${r.contact}</td><td><button class='del-btn' onclick="deleteRequest('${r.id}')" style="margin-bottom:5px;">Delete</button><button onclick="markDone('${r.id}')" style="background:#27ae60; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;">Done</button></td></tr>`; });
     }
 
-    async function verifyDonation(id) {
-        if(confirm("Mark this donation as Verified?")) {
-            const { error } = await supabase_client.from('donations').update({ status: 'Verified' }).eq('id', id);
-            if(!error) loadAdminData();
-            else alert("Error verifying");
-        }
-    }
-
+    async function verifyDonation(id) { if(confirm("Mark this donation as Verified?")) { const { error } = await supabase_client.from('donations').update({ status: 'Verified' }).eq('id', id); if(!error) loadAdminData(); else alert("Error verifying"); } }
     async function deleteDonor(id) { if(confirm("Delete donor?")) { await supabase_client.from('donors').delete().eq('id', id); loadAdminData(); loadDashboardStats(); } }
     async function deleteRequest(id) { if(confirm("Delete request?")) { await supabase_client.from('requests').delete().eq('id', id); loadAdminData(); loadPublicRequests(); loadDashboardStats(); } }
     async function markDone(id) { await supabase_client.from('requests').update({ status: 'Fulfilled' }).eq('id', id); loadAdminData(); loadPublicRequests(); loadDashboardStats(); }
