@@ -18,7 +18,7 @@
   --bkash-color: #E2136E; --nagad-color: #F58220;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif}
-body{background:var(--bg);padding-bottom:90px; color: var(--text);}
+body{background:var(--bg);padding-bottom:90px; color: var(--text); overflow-x: hidden;}
 @keyframes fadeIn { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 .header{ background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color:white; padding:15px 20px; position:fixed; width: 100%; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between; }
@@ -32,6 +32,8 @@ body{background:var(--bg);padding-bottom:90px; color: var(--text);}
 .card{ background:var(--card-bg); border-radius:16px; padding:20px; box-shadow: var(--shadow); margin-bottom:20px; }
 .card-title { font-size: 16px; color: var(--text); font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
 .card-title i { color: var(--primary); }
+.refresh-icon { margin-left: auto; cursor: pointer; font-size: 14px; color: var(--text-light); animation: spin 1s linear infinite; display: none; }
+.refresh-icon.active { display: block; }
 
 .notice-card { background: #fff3cd; border-left: 5px solid #ff9800; }
 .notice-content { font-size: 14px; color: #856404; line-height: 1.5; }
@@ -101,6 +103,26 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
 .verify-btn { background: #27ae60; color: white; border: none; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 10px; }
 .pdf-btn { background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; margin-bottom: 10px; width: 100%; }
 
+/* Pull to Refresh Indicator */
+#refreshIndicator {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: 0px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 14px;
+  overflow: hidden;
+  transition: height 0.2s;
+  z-index: 99;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
 .payment-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid #eee; }
 .payment-logo { font-size: 28px; margin-bottom: 5px; font-weight: 800; }
 .payment-number { font-size: 20px; font-weight: 700; margin-bottom: 15px; }
@@ -127,6 +149,9 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
   <div id="splash-loader" class="loader"></div>
 </div>
 
+<!-- REFRESH INDICATOR -->
+<div id="refreshIndicator"><i class="fas fa-sync-alt fa-spin" style="margin-right:10px;"></i> Refreshing...</div>
+
 <!-- APP CONTAINER -->
 <div id="app" class="hidden">
   <div class="header">
@@ -149,7 +174,6 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
     <a onclick="openPage('bloodRequests')"><i class="fas fa-hand-holding-medical"></i> Blood Requests</a>
     <a onclick="openPage('beDonor')"><i class="fas fa-user-plus"></i> Register as Donor</a>
     <a onclick="openPage('requestBlood')"><i class="fas fa-notes-medical"></i> Request Blood</a>
-    <!-- NEW MENU ITEM -->
     <a onclick="openPage('myRequests')"><i class="fas fa-user-edit"></i> My Requests</a>
     <a onclick="openPage('donate')"><i class="fas fa-hand-holding-heart" style="color:#e91e63;"></i> Donate Us</a>
     <div style="border-top:1px solid #eee; margin:10px 0;"></div>
@@ -159,7 +183,7 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
     <a onclick="checkAdminLogin()"><i class="fas fa-user-shield"></i> Admin Panel</a>
   </div>
 
-  <div class="main-container">
+  <div class="main-container" id="mainContainer">
     
     <!-- HOME -->
     <div id="home" class="container">
@@ -172,7 +196,10 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
       </div>
 
       <div class="card hero-card">
-        <div class="card-title"><i class="fas fa-heartbeat"></i> Welcome</div>
+        <div class="card-title">
+            <i class="fas fa-heartbeat"></i> Welcome
+            <i class="fas fa-sync-alt refresh-icon" id="refreshBtn" onclick="manualRefresh()"></i>
+        </div>
         <div class="hero-stats">
           <div class="stat-item">
             <div class="stat-num" id="statDonors">-</div>
@@ -317,7 +344,7 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
       </div>
     </div>
 
-    <!-- NEW: MY REQUESTS PAGE -->
+    <!-- MY REQUESTS PAGE -->
     <div id="myRequests" class="container hidden">
       <div class="card">
         <div class="card-title"><i class="fas fa-user-edit"></i> Manage Your Requests</div>
@@ -329,10 +356,8 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
         <button class="primary-btn" onclick="searchMyRequests()">Find My Requests</button>
       </div>
       
-      <!-- Results List -->
       <div id="myReqList"></div>
 
-      <!-- Hidden Edit Form -->
       <div id="editReqForm" class="card hidden" style="border:2px solid var(--primary);">
         <div class="card-title"><i class="fas fa-edit"></i> Edit Request</div>
         
@@ -505,11 +530,59 @@ button.secondary-btn{ width:100%; padding:12px; border:none; border-radius:10px;
     setTimeout(()=>{
       document.getElementById("splash").style.display="none";
       document.getElementById("app").classList.remove("hidden");
-      loadDashboardStats();
-      loadPublicRequests();
-      loadNotices();
-      trackAndLoadVisitors();
+      loadInitialData();
     }, 1000);
+
+    // --- PULL TO REFRESH LOGIC ---
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    document.addEventListener('touchstart', e => {
+        touchStartY = e.touches[0].clientY;
+    }, {passive: true});
+
+    document.addEventListener('touchend', e => {
+        touchEndY = e.changedTouches[0].clientY;
+        handleSwipe();
+    }, {passive: true});
+
+    function handleSwipe() {
+        // Check if user is at the top of the page
+        if (window.scrollY === 0) {
+            // Check if swipe was downward (positive difference)
+            if (touchEndY - touchStartY > 80) {
+                manualRefresh();
+            }
+        }
+    }
+
+    function manualRefresh() {
+        const indicator = document.getElementById('refreshIndicator');
+        const refreshBtn = document.getElementById('refreshBtn');
+        
+        // Show indicator
+        indicator.style.height = '50px';
+        if(refreshBtn) refreshBtn.classList.add('active');
+
+        // Reload Data
+        loadDashboardStats();
+        loadPublicRequests();
+        loadNotices();
+        // Visitor count usually doesn't need refresh on manual pull, but you can add trackAndLoadVisitors() if needed
+
+        // Hide indicator after 1 second
+        setTimeout(() => {
+            indicator.style.height = '0px';
+            if(refreshBtn) refreshBtn.classList.remove('active');
+        }, 1000);
+    }
+
+    function loadInitialData() {
+        loadDashboardStats();
+        loadPublicRequests();
+        loadNotices();
+        trackAndLoadVisitors();
+    }
 
     function toggleMenu(){
       document.getElementById("menu").classList.toggle("active");
