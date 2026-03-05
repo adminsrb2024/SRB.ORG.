@@ -180,7 +180,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         <div class="card-title" style="color:#856404;"><span><i class="fas fa-bullhorn"></i> Notice</span><span id="noticeTitleHeader"></span></div>
         <div id="noticeBodyContent" class="notice-content"></div>
       </div>
-
       <div class="card hero-card">
         <div class="card-title"><i class="fas fa-heartbeat"></i> Welcome <i class="fas fa-sync-alt refresh-icon" id="refreshBtn" onclick="manualRefresh()"></i></div>
         <div class="ad-banner-container"><a id="adLink" href="#" target="_blank"><img id="adBannerImg" src="https://via.placeholder.com/300x100/FF6B6B/FFFFFF?text=Ad+Banner" alt="Ad Banner" class="ad-banner-img"></a></div>
@@ -301,8 +300,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     
     let currentInvoiceData = {};
     const LOGO_URL = 'https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9';
-    
-    // --- IMAGE CACHE FOR PDF ---
     let cachedLogoData = null;
 
     function cacheLogoForPdf() {
@@ -314,11 +311,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
             canvas.height = this.naturalHeight;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(this, 0, 0);
-            try {
-                cachedLogoData = canvas.toDataURL('image/jpeg');
-            } catch(e) {
-                console.error("CORS error caching image", e);
-            }
+            try { cachedLogoData = canvas.toDataURL('image/jpeg'); } catch(e) { console.error("CORS error caching image", e); }
         };
         img.src = LOGO_URL;
     }
@@ -355,39 +348,74 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     function generateMemberPDF(data) {
         const doc = new jsPDF();
         
-        // Header Design
-        doc.setFillColor(215, 25, 32); doc.rect(0, 0, 220, 40, 'F');
+        // Border Box around entire page
+        doc.setDrawColor(150); doc.setLineWidth(0.5); doc.rect(5, 5, 200, 287);
+
+        // Header Section with Border
+        doc.setDrawColor(150); doc.rect(10, 10, 190, 35);
         
-        // Add Cached Image
-        if (cachedLogoData) {
-            try { doc.addImage(cachedLogoData, 'JPEG', 15, 10, 20, 20); } catch(e) { console.log("Image add failed"); }
+        // Logo
+        if (cachedLogoData) { try { doc.addImage(cachedLogoData, 'JPEG', 15, 13, 30, 30); } catch(e) {} }
+        
+        // Organization Name and Form Title
+        doc.setTextColor(215, 25, 32); doc.setFontSize(22); doc.setFont('helvetica', 'bold');
+        doc.text("Sreenagar Rokter Bondhon", 105, 22, {align: 'center'});
+        doc.setTextColor(44, 62, 80); doc.setFontSize(12); doc.setFont('helvetica', 'normal');
+        doc.text("MEMBERSHIP APPLICATION FORM", 105, 32, {align: 'center'});
+        doc.setFontSize(9);
+        doc.text("Mobile: 01707651946 | Hotline: 09697755193", 105, 40, {align: 'center'});
+
+        // Body Content
+        let y = 55;
+        doc.setFontSize(12);
+        doc.setTextColor(44, 62, 80);
+
+        // Helper function to print lines with labels
+        function printLine(label, value) {
+            doc.setFont('helvetica', 'bold'); doc.text(label, 20, y);
+            doc.setFont('helvetica', 'normal'); 
+            doc.setDrawColor(200); doc.line(70, y+1, 190, y+1); // Underline
+            doc.text(value || "N/A", 72, y);
+            y += 15;
         }
 
-        doc.setTextColor(255, 255, 255); doc.setFontSize(22); doc.setFont('helvetica', 'bold');
-        doc.text("Sreenagar Rokter Bondhon", 105, 18, {align: 'center'});
-        doc.setFontSize(12); doc.text("Membership Application Form", 105, 30, {align: 'center'});
-
-        // Body
-        doc.setTextColor(44, 62, 80); doc.setFontSize(12);
+        printLine("1. Application ID:", data.id.substring(0, 8).toUpperCase());
+        printLine("2. Date:", new Date().toLocaleDateString());
+        y += 5; // Space
         
-        let y = 55;
-        doc.setFont('helvetica', 'bold'); doc.text("Application ID:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.id.substring(0, 8).toUpperCase(), 70, y);
-        y += 15; doc.setFont('helvetica', 'bold'); doc.text("Date:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(new Date().toLocaleDateString(), 70, y);
-        y += 15; doc.setDrawColor(200); doc.line(20, y, 190, y); 
-        y += 10; doc.setFont('helvetica', 'bold'); doc.text("Applicant Details", 20, y);
-        y += 10; doc.setFont('helvetica', 'bold'); doc.text("Name:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.name, 70, y);
-        y += 12; doc.setFont('helvetica', 'bold'); doc.text("Father/Husband:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.father_name, 70, y);
-        y += 12; doc.setFont('helvetica', 'bold'); doc.text("Address:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.address, 70, y);
-        y += 12; doc.setFont('helvetica', 'bold'); doc.text("Mobile:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.phone, 70, y);
-        y += 12; doc.setFont('helvetica', 'bold'); doc.text("Blood Group:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.blood_group, 70, y);
+        // Applicant Details Box
+        doc.setDrawColor(150); doc.rect(10, y-5, 190, 75);
+        doc.setFontSize(14); doc.setFont('helvetica', 'bold'); 
+        doc.text("Applicant Details", 15, y+5);
+        y += 15;
+
+        printLine("3. Name:", data.name);
+        printLine("4. Father's/Husband's Name:", data.father_name);
+        printLine("5. Address:", data.address);
+        printLine("6. Mobile Number:", data.phone);
+        printLine("7. Blood Group:", data.blood_group);
+
+        // Declaration
+        y += 10;
+        doc.setFontSize(10);
+        doc.text("I hereby declare that the information provided above is true and correct to the best of my knowledge.", 20, y, {maxWidth: 170});
+        
+        // Signature Section
+        y += 30;
+        doc.setDrawColor(150); doc.line(20, y, 80, y); doc.line(130, y, 190, y);
+        doc.setFontSize(10);
+        doc.text("Applicant's Signature", 50, y+5, {align: 'center'});
+        doc.text("Date", 160, y+5, {align: 'center'});
 
         // Footer
-        y += 30; doc.setDrawColor(200); doc.line(20, y, 190, y);
-        y += 10; doc.setFontSize(10); doc.setTextColor(127, 140, 141);
-        doc.text("Thank you for joining our mission.", 105, y, {align: 'center'});
-        doc.text("Sreenagar Rokter Bondhon Team", 105, y+7, {align: 'center'});
+        y += 20;
+        doc.setFontSize(8); doc.setTextColor(127, 140, 141);
+        doc.text("Office Use Only", 105, y, {align: 'center'});
+        doc.setDrawColor(150); doc.rect(15, y+2, 180, 20);
+        doc.setFontSize(8);
+        doc.text("Verified By: ______________   Signature: ______________   Seal:", 20, y+15);
 
-        doc.save('Membership_' + data.name.replace(/ /g, '_') + '.pdf');
+        doc.save('Membership_Form_' + data.name.replace(/ /g, '_') + '.pdf');
     }
 
     // --- AD BANNER LOGIC ---
