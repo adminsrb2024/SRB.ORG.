@@ -124,7 +124,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 .invoice-id { font-size: 18px; font-weight: 800; color: #27ae60; letter-spacing: 1px; }
 .download-invoice-btn { margin-top: 10px; background: var(--primary); color: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; border: none; cursor: pointer; }
 
-/* Member Form Style */
 .member-form-card { border: 2px solid var(--primary); }
 .member-form-card h3 { text-align: center; color: var(--primary); margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 </style>
@@ -164,7 +163,6 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <a onclick="openPage('beDonor')"><i class="fas fa-user-plus"></i> Register as Donor</a>
     <a onclick="openPage('requestBlood')"><i class="fas fa-notes-medical"></i> Request Blood</a>
     <a onclick="openPage('myRequests')"><i class="fas fa-user-edit"></i> My Requests</a>
-    <!-- NEW MENU ITEM -->
     <a onclick="openPage('membership')"><i class="fas fa-id-card"></i> Membership Form</a>
     <a onclick="openPage('donate')"><i class="fas fa-hand-holding-heart" style="color:#e91e63;"></i> Donate Us</a>
     <div style="border-top:1px solid #eee; margin:10px 0;"></div>
@@ -179,38 +177,17 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <!-- HOME -->
     <div id="home" class="container">
       <div id="noticeDisplay" class="card notice-card" style="display:none;">
-        <div class="card-title" style="color:#856404;">
-          <span><i class="fas fa-bullhorn"></i> Notice</span>
-          <span id="noticeTitleHeader"></span>
-        </div>
+        <div class="card-title" style="color:#856404;"><span><i class="fas fa-bullhorn"></i> Notice</span><span id="noticeTitleHeader"></span></div>
         <div id="noticeBodyContent" class="notice-content"></div>
       </div>
 
       <div class="card hero-card">
-        <div class="card-title">
-            <i class="fas fa-heartbeat"></i> Welcome
-            <i class="fas fa-sync-alt refresh-icon" id="refreshBtn" onclick="manualRefresh()"></i>
-        </div>
-        
-        <div class="ad-banner-container">
-            <a id="adLink" href="#" target="_blank"> 
-                <img id="adBannerImg" src="https://via.placeholder.com/300x100/FF6B6B/FFFFFF?text=Ad+Banner" alt="Ad Banner" class="ad-banner-img">
-            </a>
-        </div>
-
+        <div class="card-title"><i class="fas fa-heartbeat"></i> Welcome <i class="fas fa-sync-alt refresh-icon" id="refreshBtn" onclick="manualRefresh()"></i></div>
+        <div class="ad-banner-container"><a id="adLink" href="#" target="_blank"><img id="adBannerImg" src="https://via.placeholder.com/300x100/FF6B6B/FFFFFF?text=Ad+Banner" alt="Ad Banner" class="ad-banner-img"></a></div>
         <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-num" id="statDonors">-</div>
-            <div class="stat-label">Donors</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num" id="statRequests">-</div>
-            <div class="stat-label">Pending</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num" id="statVisitors">-</div>
-            <div class="stat-label">Visitors</div>
-          </div>
+          <div class="stat-item"><div class="stat-num" id="statDonors">-</div><div class="stat-label">Donors</div></div>
+          <div class="stat-item"><div class="stat-num" id="statRequests">-</div><div class="stat-label">Pending</div></div>
+          <div class="stat-item"><div class="stat-num" id="statVisitors">-</div><div class="stat-label">Visitors</div></div>
         </div>
       </div>
       <div class="dashboard-grid">
@@ -221,42 +198,19 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
       </div>
     </div>
 
-    <!-- MEMBERSHIP PAGE (NEW) -->
+    <!-- MEMBERSHIP PAGE -->
     <div id="membership" class="container hidden">
       <div class="card member-form-card">
         <h3><i class="fas fa-id-card"></i> Membership Registration</h3>
-        
-        <div class="form-group">
-          <label class="form-label">Name (নাম)</label>
-          <input id="memName" placeholder="আপনার পুরো নাম লিখুন">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Father's/Husband's Name (পিতা/স্বামীর নাম)</label>
-          <input id="memFather" placeholder="পিতা বা স্বামীর নাম">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Address (ঠিকানা)</label>
-          <textarea id="memAddress" rows="2" placeholder="বর্তমান ঠিকানা"></textarea>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Mobile Number (মোবাইল)</label>
-          <input id="memPhone" type="tel" placeholder="01XXXXXXXXX">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Blood Group (রক্তের গ্রুপ)</label>
-          <select id="memBlood">
-            <option>A+</option><option>B+</option><option>O+</option><option>AB+</option>
-            <option>A-</option><option>B-</option><option>O-</option><option>AB-</option>
-          </select>
-        </div>
-
+        <div class="form-group"><label class="form-label">Name (নাম)</label><input id="memName"></div>
+        <div class="form-group"><label class="form-label">Father's/Husband's Name</label><input id="memFather"></div>
+        <div class="form-group"><label class="form-label">Address</label><textarea id="memAddress" rows="2"></textarea></div>
+        <div class="form-group"><label class="form-label">Mobile Number</label><input id="memPhone" type="tel"></div>
+        <div class="form-group"><label class="form-label">Blood Group</label><select id="memBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div>
         <button class="primary-btn" onclick="submitMembership()"><i class="fas fa-save"></i> Submit & Download Form</button>
       </div>
     </div>
 
-    <!-- OTHER PAGES (DONATE, FIND DONOR, ETC...) -->
-    <!-- To keep code short, I am grouping them, but in real file they exist -->
-    
     <!-- DONATE PAGE -->
     <div id="donate" class="container hidden">
       <div class="card">
@@ -268,9 +222,9 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
           <div class="form-group"><label class="form-label">Your Name</label><input id="donationName"></div>
           <div class="form-group"><label class="form-label">Amount (TK)</label><input id="donationAmount" type="number"></div>
           <div class="form-group"><label class="form-label">Sent Money To</label><select id="donationMethod"><option value="">Select Payment Method</option><option value="Bkash">Bkash</option><option value="Nagad">Nagad</option></select></div>
-          <div class="form-group"><label class="form-label">Transaction ID (TrxID)</label><input id="donationTrx"></div>
+          <div class="form-group"><label class="form-label">Transaction ID</label><input id="donationTrx"></div>
           <button class="primary-btn" onclick="submitDonation()" style="background:linear-gradient(135deg, #27ae60, #2ecc71);"><i class="fas fa-check-circle"></i> Submit & Get Invoice</button>
-          <div id="invoiceDisplay" class="invoice-box hidden"><p style="font-size:12px; color:#555;">Success! Your Invoice ID:</p><div class="invoice-id" id="generatedInvoiceId">INV-0000</div><button class="download-invoice-btn" onclick="downloadUserInvoice()"><i class="fas fa-download"></i> Download Invoice</button></div>
+          <div id="invoiceDisplay" class="invoice-box hidden"><p style="font-size:12px; color:#555;">Success!</p><div class="invoice-id" id="generatedInvoiceId">INV-0000</div><button class="download-invoice-btn" onclick="downloadUserInvoice()"><i class="fas fa-download"></i> Download Invoice</button></div>
         </div>
       </div>
     </div>
@@ -282,55 +236,49 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     <div id="bloodRequests" class="container hidden"><div class="card"><div class="card-title"><i class="fas fa-hand-holding-medical"></i> Current Blood Needs</div></div><div id="publicRequestList">Loading...</div></div>
 
     <!-- REQUEST BLOOD FORM -->
-    <div id="requestBlood" class="container hidden"><div class="card"><div class="card-title"><i class="fas fa-notes-medical"></i> Post Request</div><div class="form-group"><label class="form-label">Patient Name</label><input id="reqName"></div><div class="form-group"><label class="form-label">Hemoglobin Level</label><input id="reqHemoglobin"></div><div class="form-group"><label class="form-label">Patient Problem</label><textarea id="reqProblem" rows="2"></textarea></div><div class="form-group"><label class="form-label">Blood Group</label><select id="reqBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div><div class="form-group"><label class="form-label">Location</label><input id="reqLocation"></div><div class="form-group"><label class="form-label">Contact Number</label><input id="reqContact" type="tel"></div><div class="form-group"><label class="form-label">Required Date</label><input id="reqDate" type="date"></div><button class="primary-btn" onclick="submitRequest()">Submit Request</button></div></div>
+    <div id="requestBlood" class="container hidden"><div class="card"><div class="card-title"><i class="fas fa-notes-medical"></i> Post Request</div><div class="form-group"><label class="form-label">Patient Name</label><input id="reqName"></div><div class="form-group"><label class="form-label">Hemoglobin</label><input id="reqHemoglobin"></div><div class="form-group"><label class="form-label">Problem</label><textarea id="reqProblem" rows="2"></textarea></div><div class="form-group"><label class="form-label">Blood Group</label><select id="reqBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div><div class="form-group"><label class="form-label">Location</label><input id="reqLocation"></div><div class="form-group"><label class="form-label">Contact</label><input id="reqContact" type="tel"></div><div class="form-group"><label class="form-label">Date</label><input id="reqDate" type="date"></div><button class="primary-btn" onclick="submitRequest()">Submit Request</button></div></div>
 
     <!-- MY REQUESTS PAGE -->
-    <div id="myRequests" class="container hidden"><div class="card"><div class="card-title"><i class="fas fa-user-edit"></i> Manage Your Requests</div><p style="font-size:12px; color:#666; margin-bottom:15px;">Enter your contact number to view and edit your requests.</p><div class="form-group"><input id="myReqPhone" type="tel" placeholder="Your Contact Number"></div><button class="primary-btn" onclick="searchMyRequests()">Find My Requests</button></div><div id="myReqList"></div><div id="editReqForm" class="card hidden" style="border:2px solid var(--primary);"><div class="card-title"><i class="fas fa-edit"></i> Edit Request</div><input type="hidden" id="editReqId"><div class="form-group"><label class="form-label">Patient Name</label><input id="editReqName"></div><div class="form-group"><label class="form-label">Hemoglobin</label><input id="editReqHb"></div><div class="form-group"><label class="form-label">Problem</label><textarea id="editReqProblem" rows="2"></textarea></div><div class="form-group"><label class="form-label">Blood Group</label><select id="editReqBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div><div class="form-group"><label class="form-label">Location</label><input id="editReqLocation"></div><div class="form-group"><label class="form-label">Contact</label><input id="editReqContact" type="tel"></div><div class="form-group"><label class="form-label">Date</label><input id="editReqDate" type="date"></div><button class="primary-btn" onclick="updateMyRequest()"><i class="fas fa-save"></i> Save Changes</button><button onclick="document.getElementById('editReqForm').classList.add('hidden')" style="width:100%; padding:10px; border:none; background:#eee; border-radius:10px; margin-top:5px; cursor:pointer;">Cancel</button></div></div>
+    <div id="myRequests" class="container hidden"><div class="card"><div class="card-title"><i class="fas fa-user-edit"></i> Manage Requests</div><div class="form-group"><input id="myReqPhone" type="tel" placeholder="Contact Number"></div><button class="primary-btn" onclick="searchMyRequests()">Find</button></div><div id="myReqList"></div><div id="editReqForm" class="card hidden" style="border:2px solid var(--primary);"><div class="card-title"><i class="fas fa-edit"></i> Edit</div><input type="hidden" id="editReqId"><div class="form-group"><input id="editReqName"></div><div class="form-group"><input id="editReqHb"></div><div class="form-group"><textarea id="editReqProblem" rows="2"></textarea></div><div class="form-group"><select id="editReqBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div><div class="form-group"><input id="editReqLocation"></div><div class="form-group"><input id="editReqContact" type="tel"></div><div class="form-group"><input id="editReqDate" type="date"></div><button class="primary-btn" onclick="updateMyRequest()"><i class="fas fa-save"></i> Save</button><button onclick="document.getElementById('editReqForm').classList.add('hidden')" style="width:100%; padding:10px; border:none; background:#eee; border-radius:10px; margin-top:5px; cursor:pointer;">Cancel</button></div></div>
 
     <!-- BE A DONOR -->
-    <div id="beDonor" class="container hidden"><div class="card"><div class="card-title"><i class="fas fa-user-plus"></i> Register</div><div class="form-group"><label class="form-label">Name</label><input id="donorName"></div><div class="form-group"><label class="form-label">Blood Group</label><select id="donorBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div><div class="form-group"><label class="form-label">Phone</label><input id="donorPhone" type="tel"></div><div class="form-group"><label class="form-label">Location</label><input id="donorLocation"></div><div class="form-group"><label class="form-label">Last Donation Date</label><input id="donorLastDate" type="date"></div><button class="primary-btn" onclick="registerDonor()">Register Now</button></div></div>
+    <div id="beDonor" class="container hidden"><div class="card"><div class="card-title"><i class="fas fa-user-plus"></i> Register</div><div class="form-group"><label class="form-label">Name</label><input id="donorName"></div><div class="form-group"><label class="form-label">Blood Group</label><select id="donorBlood"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>B-</option><option>O-</option><option>AB-</option></select></div><div class="form-group"><label class="form-label">Phone</label><input id="donorPhone" type="tel"></div><div class="form-group"><label class="form-label">Location</label><input id="donorLocation"></div><div class="form-group"><label class="form-label">Last Donation</label><input id="donorLastDate" type="date"></div><button class="primary-btn" onclick="registerDonor()">Register Now</button></div></div>
 
     <!-- ADMIN LOGIN -->
-    <div id="adminLogin" class="container hidden"><div class="card" style="text-align:center;"><img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9" style="width:80px; height:80px; border-radius:50%; margin-bottom:15px;" alt="Logo"><h3 style="margin-bottom:20px; color:var(--text);">Admin Login</h3><div class="form-group" style="text-align:left;"><label class="form-label">Email</label><input id="adminEmail" type="email"></div><div class="form-group" style="text-align:left;"><label class="form-label">Password</label><input id="adminPass" type="password"></div><button class="primary-btn" onclick="loginAdmin()">Login</button></div></div>
+    <div id="adminLogin" class="container hidden"><div class="card" style="text-align:center;"><img src="https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9" style="width:80px; height:80px; border-radius:50%; margin-bottom:15px;" alt="Logo"><h3 style="margin-bottom:20px;">Admin Login</h3><div class="form-group" style="text-align:left;"><input id="adminEmail" type="email" placeholder="Email"></div><div class="form-group" style="text-align:left;"><input id="adminPass" type="password" placeholder="Password"></div><button class="primary-btn" onclick="loginAdmin()">Login</button></div></div>
 
     <!-- ADMIN PANEL -->
     <div id="adminPanel" class="container hidden">
       <div class="card">
         <div class="card-title" style="justify-content:space-between;"><span><i class="fas fa-user-shield"></i> Admin Panel</span><button onclick="logoutAdmin()" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Logout</button></div>
         
-        <!-- AD BANNER SETTINGS -->
         <div style="background:#e8f5e9; padding:15px; border-radius:10px; margin-bottom:20px; border:1px solid #27ae60;">
-          <h4 style="margin-bottom:10px; font-size:14px; color:#27ae60;"><i class="fas fa-ad"></i> Ad Banner Settings</h4>
-          <div class="form-group" style="margin-bottom:5px;"><label class="form-label">Image Link (300x100)</label><input type="text" id="adImgInput" placeholder="Paste Image URL here" style="background:white;"></div>
-          <div class="form-group"><label class="form-label">Link (Website URL)</label><input type="text" id="adLinkInput" placeholder="https://example.com" style="background:white;"></div>
-          <button class="primary-btn" style="padding:10px; background:#27ae60;" onclick="saveAdBanner()">Save Banner</button>
+          <h4 style="margin-bottom:10px; font-size:14px; color:#27ae60;"><i class="fas fa-ad"></i> Ad Banner</h4>
+          <div class="form-group"><input type="text" id="adImgInput" placeholder="Image URL" style="background:white;"></div>
+          <div class="form-group"><input type="text" id="adLinkInput" placeholder="Link URL" style="background:white;"></div>
+          <button class="primary-btn" style="padding:10px; background:#27ae60;" onclick="saveAdBanner()">Save</button>
         </div>
 
-        <!-- NOTICE -->
         <div style="background:#f9f9f9; padding:15px; border-radius:10px; margin-bottom:20px;">
-          <h4 style="margin-bottom:10px; font-size:14px;"><i class="fas fa-bullhorn"></i> Publish Notice</h4>
-          <div class="form-group" style="margin-bottom:5px;"><input type="text" id="noticeTitle" placeholder="Notice Title" style="background:white;"></div>
-          <div class="form-group"><textarea id="noticeContent" rows="2" placeholder="Details..." style="background:white;"></textarea></div>
+          <h4 style="margin-bottom:10px; font-size:14px;"><i class="fas fa-bullhorn"></i> Notice</h4>
+          <div class="form-group"><input type="text" id="noticeTitle" placeholder="Title" style="background:white;"></div>
+          <div class="form-group"><textarea id="noticeContent" rows="2" placeholder="Details" style="background:white;"></textarea></div>
           <button class="primary-btn" style="padding:10px;" onclick="publishNotice()">Publish</button>
         </div>
 
-        <!-- MEMBERS LIST (NEW) -->
-        <p style="font-size:14px; font-weight:600; color:#8e44ad;"><i class="fas fa-users"></i> Membership List</p>
+        <p style="font-size:14px; font-weight:600; color:#8e44ad;"><i class="fas fa-users"></i> Members</p>
         <div style="overflow-x:auto; margin-bottom:20px;">
-          <table class="admin-table" id="adminMemberTable">
-            <thead><tr><th>Name</th><th>Phone</th><th>Action</th></tr></thead>
-            <tbody></tbody>
-          </table>
+          <table class="admin-table" id="adminMemberTable"><thead><tr><th>Name</th><th>Phone</th><th>Action</th></tr></thead><tbody></tbody></table>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;"><p style="font-size:14px; font-weight:600; color:#27ae60;"><i class="fas fa-hand-holding-usd"></i> Donation Records</p></div>
-        <button class="pdf-btn" onclick="generateAdminPDF()"><i class="fas fa-file-pdf"></i> Download PDF Report</button>
+        <p style="font-size:14px; font-weight:600; color:#27ae60;"><i class="fas fa-hand-holding-usd"></i> Donations</p>
+        <button class="pdf-btn" onclick="generateAdminPDF()"><i class="fas fa-file-pdf"></i> Download Report</button>
         <div style="overflow-x:auto; margin-bottom:20px;"><table class="admin-table" id="adminDonationTable"><thead><tr><th>Invoice</th><th>Name</th><th>Amount</th><th>Method</th><th>Status</th><th>Action</th></tr></thead><tbody></tbody></table></div>
 
-        <p style="font-size:14px; font-weight:600;">Manage Donors</p>
-        <div style="overflow-x:auto;"><table class="admin-table" id="adminDonorTable"><thead><tr><th>Name</th><th>Blood</th><th>Last Donation</th><th>Phone</th><th>Action</th></tr></thead><tbody></tbody></table></div>
+        <p style="font-size:14px; font-weight:600;">Donors</p>
+        <div style="overflow-x:auto;"><table class="admin-table" id="adminDonorTable"><thead><tr><th>Name</th><th>Blood</th><th>Last</th><th>Phone</th><th>Action</th></tr></thead><tbody></tbody></table></div>
 
-        <p style="font-size:14px; font-weight:600; margin-top:20px;">Manage Requests</p>
+        <p style="font-size:14px; font-weight:600; margin-top:20px;">Requests</p>
         <div style="overflow-x:auto;"><table class="admin-table" id="adminReqTable"><thead><tr><th>Patient</th><th>Problem</th><th>Action</th></tr></thead><tbody></tbody></table></div>
       </div>
     </div>
@@ -339,7 +287,7 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
   <div class="footer">
     <div class="footer-left"><span class="dev-comp">SRP SOFT LTD.</span><span class="tech-partner">Technical Partner</span></div>
-    <div class="footer-social"><a href="https://www.facebook.com/groups/776274101742103/" target="_blank" class="social-icon fb-icon"><i class="fab fa-facebook"></i></a><a href="https://m.me/j/Abb3ufkdcr4Hm-7Z/" target="_blank" class="social-icon msg-icon"><i class="fab fa-facebook-messenger"></i></a></div>
+    <div class="footer-social"><a href="#" class="social-icon fb-icon"><i class="fab fa-facebook"></i></a><a href="#" class="social-icon msg-icon"><i class="fab fa-facebook-messenger"></i></a></div>
     <div class="footer-right"><a href="tel:+8809697755193" class="hotline-link"><i class="fas fa-phone-alt"></i> Hotline</a></div>
   </div>
 </div>
@@ -353,10 +301,31 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     
     let currentInvoiceData = {};
     const LOGO_URL = 'https://z-cdn-media.chatglm.cn/files/3bd2ac78-e146-4d71-b99d-ac64f35f4bf9.jpg?auth_key=1871394197-effa948b636c4ab781ba1fcfe3fa18d2-0-dba95b4ab61b5cf4ea7d439516b245d9';
+    
+    // --- IMAGE CACHE FOR PDF ---
+    let cachedLogoData = null;
+
+    function cacheLogoForPdf() {
+        const img = new Image();
+        img.setAttribute('crossOrigin', 'anonymous');
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = this.naturalWidth;
+            canvas.height = this.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(this, 0, 0);
+            try {
+                cachedLogoData = canvas.toDataURL('image/jpeg');
+            } catch(e) {
+                console.error("CORS error caching image", e);
+            }
+        };
+        img.src = LOGO_URL;
+    }
 
     if (window.location.protocol === 'file:') { document.getElementById('splash').innerHTML = '<h2 style="padding:20px; text-align:center; color:red;">Upload to GitHub Pages.</h2>'; throw new Error("Local file blocked"); }
 
-    setTimeout(()=>{ document.getElementById("splash").style.display="none"; document.getElementById("app").classList.remove("hidden"); loadInitialData(); loadAdBanner(); }, 1000);
+    setTimeout(()=>{ document.getElementById("splash").style.display="none"; document.getElementById("app").classList.remove("hidden"); loadInitialData(); loadAdBanner(); cacheLogoForPdf(); }, 1000);
 
     // --- PULL TO REFRESH ---
     let touchStartY = 0; let touchEndY = 0;
@@ -375,27 +344,12 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
     // --- MEMBERSHIP LOGIC ---
     async function submitMembership() {
-        const name = document.getElementById("memName").value;
-        const father_name = document.getElementById("memFather").value;
-        const address = document.getElementById("memAddress").value;
-        const phone = document.getElementById("memPhone").value;
-        const blood_group = document.getElementById("memBlood").value;
-
+        const name = document.getElementById("memName").value; const father_name = document.getElementById("memFather").value; const address = document.getElementById("memAddress").value; const phone = document.getElementById("memPhone").value; const blood_group = document.getElementById("memBlood").value;
         if(!name || !phone || !father_name) { alert("Please fill all required fields"); return; }
-
         const btn = event.target; btn.disabled = true; btn.innerHTML = "Processing...";
-
-        // Save to DB
         const { data, error } = await supabase_client.from('members').insert([{ name, father_name, address, phone, blood_group }]).select().single();
-        
         if(error) { alert("Error saving data!"); btn.disabled = false; btn.innerHTML = "<i class='fas fa-save'></i> Submit & Download Form"; }
-        else {
-            // Generate PDF
-            generateMemberPDF(data);
-            btn.disabled = false; btn.innerHTML = "<i class='fas fa-save'></i> Submit & Download Form";
-            // Clear form
-            document.getElementById("memName").value = ""; document.getElementById("memFather").value = ""; document.getElementById("memAddress").value = ""; document.getElementById("memPhone").value = "";
-        }
+        else { generateMemberPDF(data); btn.disabled = false; btn.innerHTML = "<i class='fas fa-save'></i> Submit & Download Form"; document.getElementById("memName").value = ""; document.getElementById("memFather").value = ""; document.getElementById("memAddress").value = ""; document.getElementById("memPhone").value = ""; }
     }
 
     function generateMemberPDF(data) {
@@ -403,26 +357,24 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         
         // Header Design
         doc.setFillColor(215, 25, 32); doc.rect(0, 0, 220, 40, 'F');
+        
+        // Add Cached Image
+        if (cachedLogoData) {
+            try { doc.addImage(cachedLogoData, 'JPEG', 15, 10, 20, 20); } catch(e) { console.log("Image add failed"); }
+        }
+
         doc.setTextColor(255, 255, 255); doc.setFontSize(22); doc.setFont('helvetica', 'bold');
         doc.text("Sreenagar Rokter Bondhon", 105, 18, {align: 'center'});
         doc.setFontSize(12); doc.text("Membership Application Form", 105, 30, {align: 'center'});
-
-        // Logo attempt (might not show due to cors, but structure is there)
-        // doc.addImage(LOGO_URL, 'JPEG', 15, 5, 20, 20); 
 
         // Body
         doc.setTextColor(44, 62, 80); doc.setFontSize(12);
         
         let y = 55;
         doc.setFont('helvetica', 'bold'); doc.text("Application ID:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.id.substring(0, 8).toUpperCase(), 70, y);
-        
         y += 15; doc.setFont('helvetica', 'bold'); doc.text("Date:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(new Date().toLocaleDateString(), 70, y);
-
-        y += 20;
-        doc.setDrawColor(200); doc.line(20, y, 190, y); // Line separator
-
-        y += 15; doc.setFont('helvetica', 'bold'); doc.text("Applicant Details", 20, y);
-        
+        y += 15; doc.setDrawColor(200); doc.line(20, y, 190, y); 
+        y += 10; doc.setFont('helvetica', 'bold'); doc.text("Applicant Details", 20, y);
         y += 10; doc.setFont('helvetica', 'bold'); doc.text("Name:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.name, 70, y);
         y += 12; doc.setFont('helvetica', 'bold'); doc.text("Father/Husband:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.father_name, 70, y);
         y += 12; doc.setFont('helvetica', 'bold'); doc.text("Address:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.address, 70, y);
@@ -430,10 +382,8 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
         y += 12; doc.setFont('helvetica', 'bold'); doc.text("Blood Group:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(data.blood_group, 70, y);
 
         // Footer
-        y += 30;
-        doc.setDrawColor(200); doc.line(20, y, 190, y);
-        y += 10;
-        doc.setFontSize(10); doc.setTextColor(127, 140, 141);
+        y += 30; doc.setDrawColor(200); doc.line(20, y, 190, y);
+        y += 10; doc.setFontSize(10); doc.setTextColor(127, 140, 141);
         doc.text("Thank you for joining our mission.", 105, y, {align: 'center'});
         doc.text("Sreenagar Rokter Bondhon Team", 105, y+7, {align: 'center'});
 
@@ -441,20 +391,13 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     }
 
     // --- AD BANNER LOGIC ---
-    async function loadAdBanner() {
-        const { data } = await supabase_client.from('ad_settings').select('*').eq('id', 1).single();
-        if(data) {
-            if(data.image_url) document.getElementById('adBannerImg').src = data.image_url;
-            if(data.link_url) document.getElementById('adLink').href = data.link_url;
-            if(document.getElementById('adminPanel').classList.contains('hidden') === false) { document.getElementById('adImgInput').value = data.image_url || ''; document.getElementById('adLinkInput').value = data.link_url || ''; }
-        }
-    }
-    async function saveAdBanner() { const img_url = document.getElementById('adImgInput').value; const link_url = document.getElementById('adLinkInput').value; const { error } = await supabase_client.from('ad_settings').update({ image_url: img_url, link_url: link_url }).eq('id', 1); if(error) alert("Error saving banner!"); else { alert("Banner Updated!"); loadAdBanner(); } }
+    async function loadAdBanner() { const { data } = await supabase_client.from('ad_settings').select('*').eq('id', 1).single(); if(data) { if(data.image_url) document.getElementById('adBannerImg').src = data.image_url; if(data.link_url) document.getElementById('adLink').href = data.link_url; if(document.getElementById('adminPanel').classList.contains('hidden') === false) { document.getElementById('adImgInput').value = data.image_url || ''; document.getElementById('adLinkInput').value = data.link_url || ''; } } }
+    async function saveAdBanner() { const img_url = document.getElementById('adImgInput').value; const link_url = document.getElementById('adLinkInput').value; const { error } = await supabase_client.from('ad_settings').update({ image_url: img_url, link_url: link_url }).eq('id', 1); if(error) alert("Error!"); else { alert("Updated!"); loadAdBanner(); } }
 
-    async function submitDonation() { const name = document.getElementById("donationName").value; const amount = document.getElementById("donationAmount").value; const trx_id = document.getElementById("donationTrx").value; const payment_method = document.getElementById("donationMethod").value; if(!name || !amount || !trx_id || !payment_method) { alert("Fill all fields including Payment Method"); return; } const btn = event.target; btn.disabled = true; btn.innerHTML = "Processing..."; const invoice_id = "INV-" + Date.now().toString().slice(-6); const { error } = await supabase_client.from('donations').insert([{ invoice_id, name, amount, trx_id, payment_method, status: 'Pending' }]); if(error) { alert("Error!"); console.error(error); btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit & Get Invoice"; } else { currentInvoiceData = { invoice_id, name, amount, payment_method, date: new Date().toLocaleDateString() }; document.getElementById("generatedInvoiceId").innerText = invoice_id; document.getElementById("invoiceDisplay").classList.remove("hidden"); document.getElementById("donationName").value = ""; document.getElementById("donationAmount").value = ""; document.getElementById("donationTrx").value = ""; document.getElementById("donationMethod").value = ""; btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit & Get Invoice"; } }
-    function downloadUserInvoice() { const { invoice_id, name, amount, payment_method, date } = currentInvoiceData; const doc = new jsPDF(); doc.setFillColor(215, 25, 32); doc.rect(0, 0, 220, 40, 'F'); doc.setTextColor(255, 255, 255); doc.setFontSize(22); doc.setFont('helvetica', 'bold'); doc.text("Sreenagar Rokter Bondhon", 105, 20, {align: 'center'}); doc.setFontSize(10); doc.text("Donation Invoice", 105, 28, {align: 'center'}); doc.setTextColor(44, 62, 80); doc.setFontSize(12); let y = 60; doc.setFont('helvetica', 'bold'); doc.text("Invoice ID:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(invoice_id, 70, y); y += 15; doc.setFont('helvetica', 'bold'); doc.text("Date:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(date, 70, y); y += 15; doc.setFont('helvetica', 'bold'); doc.text("Donor Name:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(name, 70, y); y += 15; doc.setFont('helvetica', 'bold'); doc.text("Amount:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(amount + " Taka", 70, y); y += 15; doc.setFont('helvetica', 'bold'); doc.text("Payment Method:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(payment_method, 70, y); doc.setFillColor(245, 246, 249); doc.rect(0, 250, 220, 50, 'F'); doc.setFontSize(10); doc.setTextColor(127, 140, 141); doc.text("Thank you for your donation.", 105, 260, {align: 'center'}); doc.text("Sreenagar Rokter Bondhon Team", 105, 270, {align: 'center'}); doc.save('Invoice_' + invoice_id + '.pdf'); }
+    async function submitDonation() { const name = document.getElementById("donationName").value; const amount = document.getElementById("donationAmount").value; const trx_id = document.getElementById("donationTrx").value; const payment_method = document.getElementById("donationMethod").value; if(!name || !amount || !trx_id || !payment_method) { alert("Fill all fields"); return; } const btn = event.target; btn.disabled = true; btn.innerHTML = "Processing..."; const invoice_id = "INV-" + Date.now().toString().slice(-6); const { error } = await supabase_client.from('donations').insert([{ invoice_id, name, amount, trx_id, payment_method, status: 'Pending' }]); if(error) { alert("Error!"); btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit"; } else { currentInvoiceData = { invoice_id, name, amount, payment_method, date: new Date().toLocaleDateString() }; document.getElementById("generatedInvoiceId").innerText = invoice_id; document.getElementById("invoiceDisplay").classList.remove("hidden"); btn.disabled = false; btn.innerHTML = "<i class='fas fa-check-circle'></i> Submit"; } }
+    function downloadUserInvoice() { const { invoice_id, name, amount, payment_method, date } = currentInvoiceData; const doc = new jsPDF(); doc.setFillColor(215, 25, 32); doc.rect(0, 0, 220, 40, 'F'); if (cachedLogoData) { try { doc.addImage(cachedLogoData, 'JPEG', 15, 10, 20, 20); } catch(e) {} } doc.setTextColor(255, 255, 255); doc.setFontSize(22); doc.setFont('helvetica', 'bold'); doc.text("Sreenagar Rokter Bondhon", 105, 20, {align: 'center'}); doc.setFontSize(10); doc.text("Donation Invoice", 105, 28, {align: 'center'}); doc.setTextColor(44, 62, 80); doc.setFontSize(12); let y = 60; doc.setFont('helvetica', 'bold'); doc.text("Invoice ID:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(invoice_id, 70, y); y += 15; doc.setFont('helvetica', 'bold'); doc.text("Date:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(date, 70, y); y += 15; doc.setFont('helvetica', 'bold'); doc.text("Donor Name:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(name, 70, y); y += 15; doc.setFont('helvetica', 'bold'); doc.text("Amount:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(amount + " Taka", 70, y); y += 15; doc.setFont('helvetica', 'bold'); doc.text("Payment Method:", 20, y); doc.setFont('helvetica', 'normal'); doc.text(payment_method, 70, y); doc.setFillColor(245, 246, 249); doc.rect(0, 250, 220, 50, 'F'); doc.setFontSize(10); doc.setTextColor(127, 140, 141); doc.text("Thank you.", 105, 260, {align: 'center'}); doc.save('Invoice_' + invoice_id + '.pdf'); }
 
-    async function generateAdminPDF() { const { data } = await supabase_client.from('donations').select('*').order('created_at', { ascending: false }); if(!data) return; const doc = new jsPDF(); doc.setTextColor(215, 25, 32); doc.setFontSize(20); doc.text("Donation Report", 105, 20, {align: 'center'}); doc.setTextColor(100); doc.setFontSize(10); doc.text("Generated on: " + new Date().toLocaleDateString(), 105, 28, {align: 'center'}); const tableColumn = ["Invoice", "Name", "Amount", "Method", "Status"]; const tableRows = []; data.forEach(d => { const row = [ d.invoice_id, d.name, d.amount + " Tk", d.payment_method, d.status || 'Pending' ]; tableRows.push(row); }); doc.autoTable(tableColumn, tableRows, { startY: 35, theme: 'grid', styles: {fontSize: 8} }); doc.save('Donation_Report.pdf'); }
+    async function generateAdminPDF() { const { data } = await supabase_client.from('donations').select('*').order('created_at', { ascending: false }); if(!data) return; const doc = new jsPDF(); if (cachedLogoData) { try { doc.addImage(cachedLogoData, 'JPEG', 15, 5, 20, 20); } catch(e) {} } doc.setTextColor(215, 25, 32); doc.setFontSize(20); doc.text("Donation Report", 105, 20, {align: 'center'}); doc.setTextColor(100); doc.setFontSize(10); doc.text("Generated: " + new Date().toLocaleDateString(), 105, 28, {align: 'center'}); const tableColumn = ["Invoice", "Name", "Amount", "Method", "Status"]; const tableRows = []; data.forEach(d => { tableRows.push([ d.invoice_id, d.name, d.amount + " Tk", d.payment_method, d.status || 'Pending' ]); }); doc.autoTable(tableColumn, tableRows, { startY: 35, theme: 'grid', styles: {fontSize: 8} }); doc.save('Donation_Report.pdf'); }
 
     async function loadDashboardStats() { const { count: dCount } = await supabase_client.from('donors').select('*', { count: 'exact', head: true }); const { count: rCount } = await supabase_client.from('requests').select('*', { count: 'exact', head: true }).eq('status', 'Pending'); document.getElementById('statDonors').innerText = (dCount || 0) + '+'; document.getElementById('statRequests').innerText = rCount || 0; }
     async function trackAndLoadVisitors() { await supabase_client.rpc('increment_visitor'); const { data } = await supabase_client.from('visitor_stats').select('count').single(); if(data) { document.getElementById('statVisitors').innerText = data.count; } }
@@ -463,12 +406,12 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
     async function registerDonor() { const name = document.getElementById("donorName").value; const phone = document.getElementById("donorPhone").value; const blood = document.getElementById("donorBlood").value; const location = document.getElementById("donorLocation").value; const last_donation = document.getElementById("donorLastDate").value; if(!name || !phone || !location) { alert("Fill all fields"); return; } const btn = event.target; btn.disabled = true; btn.innerHTML = "Saving..."; const { error } = await supabase_client.from('donors').insert([{ name, blood, phone, location, last_donation }]); if(error) { alert("Error!"); } else { alert("Success!"); openPage('home'); loadDashboardStats(); } btn.disabled = false; btn.innerHTML = "Register Now"; }
     async function submitRequest() { const patient_name = document.getElementById("reqName").value; const blood_group = document.getElementById("reqBlood").value; const location = document.getElementById("reqLocation").value; const contact = document.getElementById("reqContact").value; const required_date = document.getElementById("reqDate").value; const hemoglobin = document.getElementById("reqHemoglobin").value; const problem = document.getElementById("reqProblem").value; if(!patient_name || !contact || !location) { alert("Fill all fields"); return; } const btn = event.target; btn.disabled = true; btn.innerHTML = "Posting..."; const { error } = await supabase_client.from('requests').insert([{ patient_name, blood_group, location, contact, required_date, hemoglobin, problem }]); if(error) { alert("Error!"); } else { alert("Request Posted!"); openPage('bloodRequests'); loadPublicRequests(); loadDashboardStats(); } btn.disabled = false; btn.innerHTML = "Submit Request"; }
 
-    async function loadPublicRequests() { const container = document.getElementById("publicRequestList"); container.innerHTML = "Loading..."; const { data } = await supabase_client.from('requests').select('*').eq('status', 'Pending').order('created_at', { ascending: false }); container.innerHTML = ""; if (!data || data.length === 0) { container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No pending requests.</div>"; } else { data.forEach(r => { let detailsHtml = ''; if(r.hemoglobin) detailsHtml += `<span>Hb: ${r.hemoglobin}</span>`; if(r.problem) detailsHtml += `<span>Problem: ${r.problem}</span>`; container.innerHTML += `<div class="request-card"><div class="req-header"><span class="req-blood">${r.blood_group} Needed</span><span class="req-date">${r.required_date || 'ASAP'}</span></div><div class="req-patient">${r.patient_name}</div><div class="req-details">${detailsHtml}</div><div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div><a href="tel:${r.contact}" class="req-call-btn"><i class="fas fa-phone-alt"></i> Call Now</a></div>`; }); } }
+    async function loadPublicRequests() { const container = document.getElementById("publicRequestList"); container.innerHTML = "Loading..."; const { data } = await supabase_client.from('requests').select('*').eq('status', 'Pending').order('created_at', { ascending: false }); container.innerHTML = ""; if (!data || data.length === 0) { container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No pending requests.</div>"; } else { data.forEach(r => { let detailsHtml = ''; if(r.hemoglobin) detailsHtml += `<span>Hb: ${r.hemoglobin}</span>`; if(r.problem) detailsHtml += `<span>Problem: ${r.problem}</span>`; container.innerHTML += `<div class="request-card"><div class="req-header"><span class="req-blood">${r.blood_group} Needed</span><span class="req-date">${r.required_date || 'ASAP'}</span></div><div class="req-patient">${r.patient_name}</div><div class="req-details">${detailsHtml}</div><div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div><a href="tel:${r.contact}" class="req-call-btn"><i class="fas fa-phone-alt"></i> Call</a></div>`; }); } }
 
-    async function searchMyRequests() { const phone = document.getElementById("myReqPhone").value; if(!phone) { alert("Enter your contact number"); return; } const container = document.getElementById("myReqList"); container.innerHTML = "<div class='card' style='text-align:center;'>Searching...</div>"; const { data, error } = await supabase_client.from('requests').select('*').eq('contact', phone).order('created_at', { ascending: false }); container.innerHTML = ""; document.getElementById('editReqForm').classList.add('hidden'); if(error || !data || data.length === 0) { container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No requests found with this number.</div>"; } else { data.forEach(r => { container.innerHTML += `<div class="request-card" style="border-left-color: ${r.status === 'Pending' ? 'var(--primary)' : '#27ae60'};"><div class="req-header"><span class="req-blood">${r.blood_group} Needed</span><span class="req-date" style="color:${r.status === 'Pending' ? 'red' : 'green'}; font-weight:bold;">${r.status || 'Pending'}</span></div><div class="req-patient">${r.patient_name}</div><div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div><div style="margin-top:10px; display:flex; gap:10px;"><button class="edit-btn" onclick="loadEditForm('${r.id}', '${r.patient_name}', '${r.blood_group}', '${r.location}', '${r.contact}', '${r.required_date || ''}', '${r.hemoglobin || ''}', '${r.problem || ''}')"><i class="fas fa-edit"></i> Edit</button><button class="del-btn" onclick="deleteMyRequest('${r.id}')"><i class="fas fa-trash"></i> Delete</button></div></div>`; }); } }
+    async function searchMyRequests() { const phone = document.getElementById("myReqPhone").value; if(!phone) { alert("Enter number"); return; } const container = document.getElementById("myReqList"); container.innerHTML = "Searching..."; const { data, error } = await supabase_client.from('requests').select('*').eq('contact', phone).order('created_at', { ascending: false }); container.innerHTML = ""; document.getElementById('editReqForm').classList.add('hidden'); if(error || !data || data.length === 0) { container.innerHTML = "<div class='card' style='text-align:center; color:#888;'>No requests found.</div>"; } else { data.forEach(r => { container.innerHTML += `<div class="request-card" style="border-left-color: ${r.status === 'Pending' ? 'var(--primary)' : '#27ae60'};"><div class="req-header"><span class="req-blood">${r.blood_group} Needed</span><span class="req-date" style="color:${r.status === 'Pending' ? 'red' : 'green'}; font-weight:bold;">${r.status || 'Pending'}</span></div><div class="req-patient">${r.patient_name}</div><div class="req-loc"><i class="fas fa-map-marker-alt"></i> ${r.location}</div><div style="margin-top:10px; display:flex; gap:10px;"><button class="edit-btn" onclick="loadEditForm('${r.id}', '${r.patient_name}', '${r.blood_group}', '${r.location}', '${r.contact}', '${r.required_date || ''}', '${r.hemoglobin || ''}', '${r.problem || ''}')"><i class="fas fa-edit"></i> Edit</button><button class="del-btn" onclick="deleteMyRequest('${r.id}')"><i class="fas fa-trash"></i> Delete</button></div></div>`; }); } }
     function loadEditForm(id, name, blood, loc, contact, date, hb, prob) { document.getElementById('editReqId').value = id; document.getElementById('editReqName').value = name; document.getElementById('editReqBlood').value = blood; document.getElementById('editReqLocation').value = loc; document.getElementById('editReqContact').value = contact; document.getElementById('editReqDate').value = date; document.getElementById('editReqHb').value = hb; document.getElementById('editReqProblem').value = prob; document.getElementById('editReqForm').classList.remove('hidden'); document.getElementById('editReqForm').scrollIntoView({ behavior: 'smooth' }); }
-    async function updateMyRequest() { const id = document.getElementById('editReqId').value; const payload = { patient_name: document.getElementById('editReqName').value, blood_group: document.getElementById('editReqBlood').value, location: document.getElementById('editReqLocation').value, contact: document.getElementById('editReqContact').value, required_date: document.getElementById('editReqDate').value, hemoglobin: document.getElementById('editReqHb').value, problem: document.getElementById('editReqProblem').value }; const { error } = await supabase_client.from('requests').update(payload).eq('id', id); if(error) { alert("Error updating!"); } else { alert("Updated Successfully!"); document.getElementById('editReqForm').classList.add('hidden'); searchMyRequests(); loadPublicRequests(); } }
-    async function deleteMyRequest(id) { if(confirm("Are you sure you want to delete this request?")) { const { error } = await supabase_client.from('requests').delete().eq('id', id); if(!error) { alert("Deleted!"); searchMyRequests(); loadPublicRequests(); loadDashboardStats(); } } }
+    async function updateMyRequest() { const id = document.getElementById('editReqId').value; const payload = { patient_name: document.getElementById('editReqName').value, blood_group: document.getElementById('editReqBlood').value, location: document.getElementById('editReqLocation').value, contact: document.getElementById('editReqContact').value, required_date: document.getElementById('editReqDate').value, hemoglobin: document.getElementById('editReqHb').value, problem: document.getElementById('editReqProblem').value }; const { error } = await supabase_client.from('requests').update(payload).eq('id', id); if(error) { alert("Error!"); } else { alert("Updated!"); document.getElementById('editReqForm').classList.add('hidden'); searchMyRequests(); loadPublicRequests(); } }
+    async function deleteMyRequest(id) { if(confirm("Delete?")) { const { error } = await supabase_client.from('requests').delete().eq('id', id); if(!error) { alert("Deleted!"); searchMyRequests(); loadPublicRequests(); loadDashboardStats(); } } }
     async function loadNotices() { const { data } = await supabase_client.from('notices').select('*').order('created_at', { ascending: false }).limit(1); if (data && data.length > 0) { const notice = data[0]; document.getElementById('noticeTitleHeader').innerText = notice.title; document.getElementById('noticeBodyContent').innerText = notice.content; document.getElementById('noticeDisplay').style.display = 'block'; } else { document.getElementById('noticeDisplay').style.display = 'none'; } }
     async function publishNotice() { const title = document.getElementById('noticeTitle').value; const content = document.getElementById('noticeContent').value; if(!title || !content) { alert("Write title and content"); return; } const btn = event.target; btn.disabled = true; btn.innerHTML = "Publishing..."; const { error } = await supabase_client.from('notices').insert([{ title, content }]); if(error) { alert("Error!"); } else { alert("Notice Published!"); document.getElementById('noticeTitle').value = ""; document.getElementById('noticeContent').value = ""; loadNotices(); } btn.disabled = false; btn.innerHTML = "Publish"; }
 
@@ -478,37 +421,30 @@ button.primary-btn{ width:100%; padding:15px; border:none; border-radius:12px; b
 
     async function loadAdminData() {
         loadAdBanner();
-        
-        // Load Members
         const mTable = document.querySelector('#adminMemberTable tbody'); mTable.innerHTML = "<tr><td colspan='3'>Loading...</td></tr>";
         const { data: members } = await supabase_client.from('members').select('*').order('created_at', { ascending: false });
         mTable.innerHTML = "";
-        members.forEach(m => {
-            mTable.innerHTML += `<tr><td>${m.name}</td><td>${m.phone}</td><td><span class="download-link" onclick="generateMemberPDF({id:'${m.id}', name:'${m.name}', father_name:'${m.father_name || ''}', address:'${m.address || ''}', phone:'${m.phone}', blood_group:'${m.blood_group}'})"><i class="fas fa-file-pdf"></i> PDF</span> | <button class='del-btn' onclick="deleteMember('${m.id}')">Del</button></td></tr>`;
-        });
+        members.forEach(m => { mTable.innerHTML += `<tr><td>${m.name}</td><td>${m.phone}</td><td><span class="download-link" onclick="generateMemberPDF({id:'${m.id}', name:'${m.name}', father_name:'${m.father_name || ''}', address:'${m.address || ''}', phone:'${m.phone}', blood_group:'${m.blood_group}'})"><i class="fas fa-file-pdf"></i> PDF</span> | <button class='del-btn' onclick="deleteMember('${m.id}')">Del</button></td></tr>`; });
 
-        // Load Donations
         const dTable = document.querySelector('#adminDonationTable tbody'); dTable.innerHTML = "<tr><td colspan='6'>Loading...</td></tr>";
         const { data: donations } = await supabase_client.from('donations').select('*').order('created_at', { ascending: false });
         dTable.innerHTML = ""; donations.forEach(d => { const statusText = d.status || 'Pending'; const statusColor = statusText === 'Verified' ? 'green' : 'orange'; const verifyBtn = statusText === 'Pending' ? `<button class='verify-btn' onclick="verifyDonation('${d.id}')">Verify</button>` : ''; dTable.innerHTML += `<tr><td>${d.invoice_id}</td><td>${d.name}</td><td>${d.amount} Tk</td><td>${d.payment_method || 'N/A'}</td><td style='color:${statusColor}; font-weight:bold;'>${statusText}</td><td>${verifyBtn} <button class='del-btn' onclick="deleteDonation('${d.id}')">Del</button></td></tr>`; });
 
-        // Load Donors
         const donorTable = document.querySelector('#adminDonorTable tbody'); donorTable.innerHTML = "<tr><td colspan='5'>Loading...</td></tr>";
         const { data: donors } = await supabase_client.from('donors').select('*').order('created_at', { ascending: false });
         donorTable.innerHTML = ""; donors.forEach(d => { const lastDate = d.last_donation ? new Date(d.last_donation).toLocaleDateString() : 'N/A'; donorTable.innerHTML += `<tr><td>${d.name}</td><td>${d.blood}</td><td>${lastDate}</td><td>${d.phone}</td><td><button class='del-btn' onclick="deleteDonor('${d.id}')">Delete</button></td></tr>`; });
 
-        // Load Requests
         const rTable = document.querySelector('#adminReqTable tbody'); rTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
         const { data: requests } = await supabase_client.from('requests').select('*').order('created_at', { ascending: false });
         rTable.innerHTML = ""; requests.forEach(r => { rTable.innerHTML += `<tr><td>${r.patient_name}</td><td>${r.problem || '-'}</td><td>${r.contact}</td><td><button class='del-btn' onclick="deleteRequest('${r.id}')" style="margin-bottom:5px;">Delete</button><button onclick="markDone('${r.id}')" style="background:#27ae60; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;">Done</button></td></tr>`; });
     }
 
-    async function verifyDonation(id) { if(confirm("Mark this donation as Verified?")) { const { error } = await supabase_client.from('donations').update({ status: 'Verified' }).eq('id', id); if(!error) loadAdminData(); else alert("Error verifying"); } }
-    async function deleteDonor(id) { if(confirm("Delete donor?")) { await supabase_client.from('donors').delete().eq('id', id); loadAdminData(); loadDashboardStats(); } }
-    async function deleteRequest(id) { if(confirm("Delete request?")) { await supabase_client.from('requests').delete().eq('id', id); loadAdminData(); loadPublicRequests(); loadDashboardStats(); } }
+    async function verifyDonation(id) { if(confirm("Verify?")) { const { error } = await supabase_client.from('donations').update({ status: 'Verified' }).eq('id', id); if(!error) loadAdminData(); else alert("Error"); } }
+    async function deleteDonor(id) { if(confirm("Delete?")) { await supabase_client.from('donors').delete().eq('id', id); loadAdminData(); loadDashboardStats(); } }
+    async function deleteRequest(id) { if(confirm("Delete?")) { await supabase_client.from('requests').delete().eq('id', id); loadAdminData(); loadPublicRequests(); loadDashboardStats(); } }
     async function markDone(id) { await supabase_client.from('requests').update({ status: 'Fulfilled' }).eq('id', id); loadAdminData(); loadPublicRequests(); loadDashboardStats(); }
-    async function deleteDonation(id) { if(confirm("Delete donation?")) { await supabase_client.from('donations').delete().eq('id', id); loadAdminData(); } }
-    async function deleteMember(id) { if(confirm("Delete member?")) { await supabase_client.from('members').delete().eq('id', id); loadAdminData(); } }
+    async function deleteDonation(id) { if(confirm("Delete?")) { await supabase_client.from('donations').delete().eq('id', id); loadAdminData(); } }
+    async function deleteMember(id) { if(confirm("Delete?")) { await supabase_client.from('members').delete().eq('id', id); loadAdminData(); } }
 </script>
 </body>
 </html>
